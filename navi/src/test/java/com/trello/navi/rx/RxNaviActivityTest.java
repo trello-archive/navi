@@ -1,0 +1,185 @@
+package com.trello.navi.rx;
+
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import com.trello.navi.internal.BaseNaviActivity;
+import com.trello.navi.model.BundleBundle;
+import org.junit.Test;
+import rx.Subscription;
+import rx.observers.TestSubscriber;
+
+import static org.mockito.Mockito.mock;
+
+public final class RxNaviActivityTest {
+
+  private final BaseNaviActivity naviActivity = new BaseNaviActivity();
+
+  @Test public void creating() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.creating(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    naviActivity.onCreate(bundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void creatingPersistable() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.creating(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    naviActivity.onCreate(bundle, persistableBundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void starting() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.starting(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onStart();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void resuming() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.resuming(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onResume();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void pausing() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.pausing(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onPause();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void stopping() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.stopping(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onStop();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void destroying() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.destroying(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onDestroy();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void restarting() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.restarting(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onRestart();
+    subscription.unsubscribe();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void savingInstanceState() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.savingInstanceState(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    naviActivity.onSaveInstanceState(bundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void savingInstanceStatePersistable() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.savingInstanceState(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    naviActivity.onSaveInstanceState(bundle, persistableBundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void restoringInstanceState() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.restoringInstanceState(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    naviActivity.onRestoreInstanceState(bundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void restoringInstanceStatePersistable() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.restoringInstanceState(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    naviActivity.onRestoreInstanceState(bundle, persistableBundle);
+    subscription.unsubscribe();
+
+    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+}

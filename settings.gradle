@@ -1,1 +1,2 @@
 include ':navi'
+include ':sample'
