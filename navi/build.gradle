@@ -1,23 +1,27 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.1"
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 15
-    targetSdkVersion 23
-    versionCode 1
-    versionName "1.0"
+    minSdkVersion rootProject.ext.minSdkVersion
   }
 }
 
-dependencies {
-  compile 'com.android.support:support-annotations:23.0.1'
-  compile 'com.android.support:appcompat-v7:23.0.1'
-  compile 'io.reactivex:rxjava:1.0.14'
+repositories {
+  jcenter()
+}
 
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.mockito:mockito-core:1.10.19'
-  testCompile 'com.google.truth:truth:0.27'
+dependencies {
+  compile rootProject.ext.supportAnnotations
+
+  // TODO: Should be optional someday, but we're using Action0/Action1 all over the place right now
+  compile rootProject.ext.rxJava
+
+  // Optional dependencies, depending on if your project uses them
+  provided rootProject.ext.supportAppCompat
+
+  testCompile rootProject.ext.junit
+  testCompile rootProject.ext.mockito
 }

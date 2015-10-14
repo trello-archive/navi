@@ -47,11 +47,6 @@ RxNaviActivity.creating(naviActivity)
 - Gather feedback
 - Implement more listeners
 - Remove reliance on RxJava for base lib
-- Split up lib into components:
-    - Base listener activities/fragments
-    - AppCompat listener activities/fragments
-    - Rx support
-
 
 ## Installation
 

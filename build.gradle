@@ -7,8 +7,22 @@ buildscript {
   }
 }
 
-allprojects {
-  repositories {
-    jcenter()
-  }
+ext {
+  minSdkVersion = 14
+  compileSdkVersion = 23
+  targetSdkVersion = compileSdkVersion
+  buildToolsVersion = '23.0.1'
+
+  // Define all dependencies in the base project, to unify & make it easy to update
+  supportVersion = '23.0.1'
+  supportAnnotations = "com.android.support:support-annotations:$supportVersion"
+  supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
+
+  rxJava = 'io.reactivex:rxjava:1.0.14'
+  rxAndroid = 'io.reactivex:rxandroid:1.0.1'
+
+  junit = 'junit:junit:4.12'
+  mockito = 'org.mockito:mockito-core:1.10.19'
+
+  butterknife = 'com.jakewharton:butterknife:7.0.1'
 }
