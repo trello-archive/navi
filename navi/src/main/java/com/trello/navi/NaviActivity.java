@@ -1,5 +1,6 @@
 package com.trello.navi;
 
+import com.trello.navi.internal.NaviActivityDelegate;
 import com.trello.navi.model.BundleBundle;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -40,4 +41,6 @@ public interface NaviActivity {
   void addRestoreInstanceStateListener(Action1<BundleBundle> listener);
 
   void removeRestoreInstanceStateListener(Action1<BundleBundle> listener);
+
+  void addDelegate(NaviActivityDelegate delegate);
 }
