@@ -32,6 +32,8 @@ public final class BaseNaviActivity implements NaviActivity {
   private List<Action1<BundleBundle>> restoreInstanceStateListeners;
   private List<Action1<BundleBundle>> saveInstanceStateListeners;
 
+  private List<NaviActivityDelegate> activityDelegates;
+
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
@@ -53,11 +55,21 @@ public final class BaseNaviActivity implements NaviActivity {
     if (createListeners != null) {
       emitAction1(createListeners, new BundleBundle(savedInstanceState));
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onCreate(new BundleBundle(savedInstanceState));
+      }
+    }
   }
 
   public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
     if (createListeners != null) {
       emitAction1(createListeners, new BundleBundle(savedInstanceState, persistentState));
+    }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onCreate(new BundleBundle(savedInstanceState, persistentState));
+      }
     }
   }
 
@@ -82,6 +94,11 @@ public final class BaseNaviActivity implements NaviActivity {
     if (startListeners != null) {
       emitAction0(startListeners);
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onStart();
+      }
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -104,6 +121,11 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onResume() {
     if (resumeListeners != null) {
       emitAction0(resumeListeners);
+    }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onResume();
+      }
     }
   }
 
@@ -128,6 +150,11 @@ public final class BaseNaviActivity implements NaviActivity {
     if (pauseListeners != null) {
       emitAction0(pauseListeners);
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onPause();
+      }
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -150,6 +177,11 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onStop() {
     if (stopListeners != null) {
       emitAction0(stopListeners);
+    }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onStop();
+      }
     }
   }
 
@@ -174,6 +206,11 @@ public final class BaseNaviActivity implements NaviActivity {
     if (destroyListeners != null) {
       emitAction0(destroyListeners);
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onDestroy();
+      }
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -196,6 +233,11 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onRestart() {
     if (restartListeners != null) {
       emitAction0(restartListeners);
+    }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onRestart();
+      }
     }
   }
 
@@ -220,11 +262,22 @@ public final class BaseNaviActivity implements NaviActivity {
     if (saveInstanceStateListeners != null) {
       emitAction1(saveInstanceStateListeners, new BundleBundle(outState));
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onSaveInstanceState(new BundleBundle(outState));
+      }
+    }
   }
 
   public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
     if (saveInstanceStateListeners != null) {
       emitAction1(saveInstanceStateListeners, new BundleBundle(outState, outPersistentState));
+    }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i)
+            .onSaveInstanceState(new BundleBundle(outState, outPersistentState));
+      }
     }
   }
 
@@ -249,6 +302,11 @@ public final class BaseNaviActivity implements NaviActivity {
     if (restoreInstanceStateListeners != null) {
       emitAction1(restoreInstanceStateListeners, new BundleBundle(savedInstanceState));
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i).onRestoreInstanceState(new BundleBundle(savedInstanceState));
+      }
+    }
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -256,5 +314,18 @@ public final class BaseNaviActivity implements NaviActivity {
       emitAction1(restoreInstanceStateListeners,
           new BundleBundle(savedInstanceState, persistentState));
     }
+    if (activityDelegates != null) {
+      for (int i = 0; i < activityDelegates.size(); i++) {
+        activityDelegates.get(i)
+            .onRestoreInstanceState(new BundleBundle(savedInstanceState, persistentState));
+      }
+    }
+  }
+
+  public void addDelegate(NaviActivityDelegate delegate) {
+    if (activityDelegates == null) {
+      activityDelegates = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+    activityDelegates.add(delegate);
   }
 }

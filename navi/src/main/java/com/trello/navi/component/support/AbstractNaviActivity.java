@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import com.trello.navi.NaviActivity;
+import com.trello.navi.internal.NaviActivityDelegate;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.BundleBundle;
 import rx.functions.Action0;
@@ -160,6 +161,10 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
 
   @Override public void removeRestoreInstanceStateListener(Action1<BundleBundle> listener) {
     base.removeRestoreInstanceStateListener(listener);
+  }
+
+  @Override public void addDelegate(NaviActivityDelegate delegate) {
+    base.addDelegate(delegate);
   }
 
   @Override protected void onRestoreInstanceState(Bundle savedInstanceState) {
