@@ -1,5 +1,6 @@
 package com.trello.navi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -164,6 +165,19 @@ public final class NaviActivityTest {
 
     naviActivity.removeRestoreInstanceStateListener(listener);
     naviActivity.onRestoreInstanceState(bundle, persistableBundle);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void newIntentListener() {
+    Listener1<Intent> listener = mock(Listener1.class);
+    naviActivity.addNewIntentListener(listener);
+
+    Intent intent = new Intent();
+    naviActivity.onNewIntent(intent);
+    verify(listener).call(intent);
+
+    naviActivity.removeNewIntentListener(listener);
+    naviActivity.onNewIntent(intent);
     verifyNoMoreInteractions(listener);
   }
 }

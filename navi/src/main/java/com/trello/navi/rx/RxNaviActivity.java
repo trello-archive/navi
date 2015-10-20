@@ -1,5 +1,6 @@
 package com.trello.navi.rx;
 
+import android.content.Intent;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
@@ -126,6 +127,20 @@ public final class RxNaviActivity {
       }
     }));
   }
+
+  @CheckResult @NonNull public static Observable<Intent> newIntent(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Intent>() {
+      @Override public void subscribe(Listener1<Intent> listener) {
+        naviActivity.addNewIntentListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Intent> listener) {
+        naviActivity.removeNewIntentListener(listener);
+      }
+    }));
+  }
+
 
   private RxNaviActivity() {
     throw new AssertionError("No instances!");

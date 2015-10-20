@@ -1,6 +1,7 @@
 package com.trello.navi.component;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
@@ -171,5 +172,21 @@ public abstract class AbstractNaviActivity extends Activity implements NaviActiv
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onRestoreInstanceState(savedInstanceState, persistentState);
     base.onRestoreInstanceState(savedInstanceState, persistentState);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onNewIntent
+
+  @Override public void addNewIntentListener(Listener1<Intent> listener) {
+    base.addNewIntentListener(listener);
+  }
+
+  @Override public void removeNewIntentListener(Listener1<Intent> listener) {
+    base.removeNewIntentListener(listener);
+  }
+
+  @Override protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    base.onNewIntent(intent);
   }
 }

@@ -1,5 +1,6 @@
 package com.trello.navi;
 
+import android.content.Intent;
 import com.trello.navi.model.BundleBundle;
 
 public interface NaviActivity {
@@ -38,4 +39,8 @@ public interface NaviActivity {
   void addRestoreInstanceStateListener(Listener1<BundleBundle> listener);
 
   void removeRestoreInstanceStateListener(Listener1<BundleBundle> listener);
+
+  void addNewIntentListener(Listener1<Intent> listener);
+
+  void removeNewIntentListener(Listener1<Intent> listener);
 }

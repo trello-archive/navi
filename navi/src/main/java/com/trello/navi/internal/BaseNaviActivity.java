@@ -1,5 +1,6 @@
 package com.trello.navi.internal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
@@ -31,6 +32,8 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener1<BundleBundle>> restoreInstanceStateListeners;
   private List<Listener1<BundleBundle>> saveInstanceStateListeners;
+
+  private List<Listener1<Intent>> newIntentListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -255,6 +258,29 @@ public final class BaseNaviActivity implements NaviActivity {
     if (restoreInstanceStateListeners != null) {
       emitListener1(restoreInstanceStateListeners,
           new BundleBundle(savedInstanceState, persistentState));
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onNewIntent
+
+  @Override public void addNewIntentListener(Listener1<Intent> listener) {
+    if (newIntentListeners == null) {
+      newIntentListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    newIntentListeners.add(listener);
+  }
+
+  @Override public void removeNewIntentListener(Listener1<Intent> listener) {
+    if (newIntentListeners != null) {
+      newIntentListeners.remove(listener);
+    }
+  }
+
+  public void onNewIntent(Intent intent) {
+    if (newIntentListeners != null) {
+      emitListener1(newIntentListeners, intent);
     }
   }
 }

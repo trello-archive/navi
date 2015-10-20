@@ -1,5 +1,6 @@
 package com.trello.navi.rx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -191,6 +192,21 @@ public final class RxNaviActivityTest {
     naviActivity.onRestoreInstanceState(bundle, persistableBundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void newIntent() {
+    TestSubscriber<Intent> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.newIntent(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Intent intent = new Intent();
+    naviActivity.onNewIntent(intent);
+    subscription.unsubscribe();
+    naviActivity.onNewIntent(intent);
+
+    testSubscriber.assertValue(intent);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
