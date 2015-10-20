@@ -1,9 +1,9 @@
 package com.trello.navi.rx;
 
+import com.trello.navi.Listener1;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
 
 final class OnSubscribe1<T> implements Observable.OnSubscribe<T> {
@@ -15,7 +15,7 @@ final class OnSubscribe1<T> implements Observable.OnSubscribe<T> {
   }
 
   @Override public void call(final Subscriber<? super T> subscriber) {
-    final Action1<T> listener = new Action1<T>() {
+    final Listener1<T> listener = new Listener1<T>() {
       @Override public void call(T t) {
         if (!subscriber.isUnsubscribed()) {
           subscriber.onNext(t);
@@ -33,8 +33,8 @@ final class OnSubscribe1<T> implements Observable.OnSubscribe<T> {
   }
 
   interface Implementation<T> {
-    void subscribe(Action1<T> listener);
+    void subscribe(Listener1<T> listener);
 
-    void unsubscribe(Action1<T> listener);
+    void unsubscribe(Listener1<T> listener);
   }
 }

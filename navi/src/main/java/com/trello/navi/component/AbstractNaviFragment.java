@@ -8,10 +8,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.trello.navi.Listener0;
+import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
 import com.trello.navi.internal.BaseNaviFragment;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 public abstract class AbstractNaviFragment extends Fragment implements NaviFragment {
 
@@ -20,11 +20,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onAttach
 
-  @Override public void addAttachListener(Action1<Context> listener) {
+  @Override public void addAttachListener(Listener1<Context> listener) {
     base.addAttachListener(listener);
   }
 
-  @Override public void removeAttachListener(Action1<Context> listener) {
+  @Override public void removeAttachListener(Listener1<Context> listener) {
     base.removeAttachListener(listener);
   }
 
@@ -41,11 +41,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
-  @Override public void addCreateListener(Action1<Bundle> listener) {
+  @Override public void addCreateListener(Listener1<Bundle> listener) {
     base.addCreateListener(listener);
   }
 
-  @Override public void removeCreateListener(Action1<Bundle> listener) {
+  @Override public void removeCreateListener(Listener1<Bundle> listener) {
     base.removeCreateListener(listener);
   }
 
@@ -57,11 +57,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onCreateView
 
-  @Override public void addCreateViewListener(Action1<Bundle> listener) {
+  @Override public void addCreateViewListener(Listener1<Bundle> listener) {
     base.addCreateViewListener(listener);
   }
 
-  @Override public void removeCreateViewListener(Action1<Bundle> listener) {
+  @Override public void removeCreateViewListener(Listener1<Bundle> listener) {
     base.removeCreateViewListener(listener);
   }
 
@@ -74,11 +74,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onActivityCreated
 
-  @Override public void addActivityCreatedListener(Action1<Bundle> listener) {
+  @Override public void addActivityCreatedListener(Listener1<Bundle> listener) {
     base.addActivityCreatedListener(listener);
   }
 
-  @Override public void removeActivityCreatedListener(Action1<Bundle> listener) {
+  @Override public void removeActivityCreatedListener(Listener1<Bundle> listener) {
     base.removeActivityCreatedListener(listener);
   }
 
@@ -90,11 +90,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onViewStatedRestored
 
-  @Override public void addViewStateRestoredListener(Action1<Bundle> listener) {
+  @Override public void addViewStateRestoredListener(Listener1<Bundle> listener) {
     base.addViewStateRestoredListener(listener);
   }
 
-  @Override public void removeViewStateRestoredListener(Action1<Bundle> listener) {
+  @Override public void removeViewStateRestoredListener(Listener1<Bundle> listener) {
     base.removeViewStateRestoredListener(listener);
   }
 
@@ -106,11 +106,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onStart
 
-  @Override public void addStartListener(Action0 listener) {
+  @Override public void addStartListener(Listener0 listener) {
     base.addStartListener(listener);
   }
 
-  @Override public void removeStartListener(Action0 listener) {
+  @Override public void removeStartListener(Listener0 listener) {
     base.removeStartListener(listener);
   }
 
@@ -122,11 +122,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onResume
 
-  @Override public void addResumeListener(Action0 listener) {
+  @Override public void addResumeListener(Listener0 listener) {
     base.addResumeListener(listener);
   }
 
-  @Override public void removeResumeListener(Action0 listener) {
+  @Override public void removeResumeListener(Listener0 listener) {
     base.removeResumeListener(listener);
   }
 
@@ -138,11 +138,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onPause
 
-  @Override public void addPauseListener(Action0 listener) {
+  @Override public void addPauseListener(Listener0 listener) {
     base.addPauseListener(listener);
   }
 
-  @Override public void removePauseListener(Action0 listener) {
+  @Override public void removePauseListener(Listener0 listener) {
     base.removePauseListener(listener);
   }
 
@@ -154,11 +154,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onStop
 
-  @Override public void addStopListener(Action0 listener) {
+  @Override public void addStopListener(Listener0 listener) {
     base.addStopListener(listener);
   }
 
-  @Override public void removeStopListener(Action0 listener) {
+  @Override public void removeStopListener(Listener0 listener) {
     base.removeStopListener(listener);
   }
 
@@ -170,11 +170,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onDestroyView
 
-  @Override public void addDestroyViewListener(Action0 listener) {
+  @Override public void addDestroyViewListener(Listener0 listener) {
     base.addDestroyViewListener(listener);
   }
 
-  @Override public void removeDestroyViewListener(Action0 listener) {
+  @Override public void removeDestroyViewListener(Listener0 listener) {
     base.removeDestroyViewListener(listener);
   }
 
@@ -186,11 +186,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onDestroy
 
-  @Override public void addDestroyListener(Action0 listener) {
+  @Override public void addDestroyListener(Listener0 listener) {
     base.addDestroyListener(listener);
   }
 
-  @Override public void removeDestroyListener(Action0 listener) {
+  @Override public void removeDestroyListener(Listener0 listener) {
     base.removeDestroyListener(listener);
   }
 
@@ -202,11 +202,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onDetach
 
-  @Override public void addDetachListener(Action0 listener) {
+  @Override public void addDetachListener(Listener0 listener) {
     base.addDetachListener(listener);
   }
 
-  @Override public void removeDetachListener(Action0 listener) {
+  @Override public void removeDetachListener(Listener0 listener) {
     base.removeDetachListener(listener);
   }
 
@@ -218,11 +218,11 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   ////////////////////////////////////////////////////////////////////////////
   // onSaveInstanceState
 
-  @Override public void addSaveInstanceStateListener(Action1<Bundle> listener) {
+  @Override public void addSaveInstanceStateListener(Listener1<Bundle> listener) {
     base.addSaveInstanceStateListener(listener);
   }
 
-  @Override public void removeSaveInstanceStateListener(Action1<Bundle> listener) {
+  @Override public void removeSaveInstanceStateListener(Listener1<Bundle> listener) {
     base.removeSaveInstanceStateListener(listener);
   }
 

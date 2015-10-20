@@ -3,11 +3,11 @@ package com.trello.navi.component.support;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import com.trello.navi.Listener0;
+import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.BundleBundle;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 public abstract class AbstractNaviActivity extends AppCompatActivity implements NaviActivity {
 
@@ -16,11 +16,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
-  @Override public void addCreateListener(Action1<BundleBundle> listener) {
+  @Override public void addCreateListener(Listener1<BundleBundle> listener) {
     base.addCreateListener(listener);
   }
 
-  @Override public void removeCreateListener(Action1<BundleBundle> listener) {
+  @Override public void removeCreateListener(Listener1<BundleBundle> listener) {
     base.removeCreateListener(listener);
   }
 
@@ -37,11 +37,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onStart
 
-  @Override public void addStartListener(Action0 listener) {
+  @Override public void addStartListener(Listener0 listener) {
     base.addStartListener(listener);
   }
 
-  @Override public void removeStartListener(Action0 listener) {
+  @Override public void removeStartListener(Listener0 listener) {
     base.removeStartListener(listener);
   }
 
@@ -53,11 +53,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onResume
 
-  @Override public void addResumeListener(Action0 listener) {
+  @Override public void addResumeListener(Listener0 listener) {
     base.addResumeListener(listener);
   }
 
-  @Override public void removeResumeListener(Action0 listener) {
+  @Override public void removeResumeListener(Listener0 listener) {
     base.removeResumeListener(listener);
   }
 
@@ -69,11 +69,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onPause
 
-  @Override public void addPauseListener(Action0 listener) {
+  @Override public void addPauseListener(Listener0 listener) {
     base.addPauseListener(listener);
   }
 
-  @Override public void removePauseListener(Action0 listener) {
+  @Override public void removePauseListener(Listener0 listener) {
     base.removePauseListener(listener);
   }
 
@@ -85,11 +85,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onStop
 
-  @Override public void addStopListener(Action0 listener) {
+  @Override public void addStopListener(Listener0 listener) {
     base.addStopListener(listener);
   }
 
-  @Override public void removeStopListener(Action0 listener) {
+  @Override public void removeStopListener(Listener0 listener) {
     base.removeStopListener(listener);
   }
 
@@ -101,11 +101,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onDestroy
 
-  @Override public void addDestroyListener(Action0 listener) {
+  @Override public void addDestroyListener(Listener0 listener) {
     base.addDestroyListener(listener);
   }
 
-  @Override public void removeDestroyListener(Action0 listener) {
+  @Override public void removeDestroyListener(Listener0 listener) {
     base.removeDestroyListener(listener);
   }
 
@@ -117,11 +117,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onRestart
 
-  @Override public void addRestartListener(Action0 listener) {
+  @Override public void addRestartListener(Listener0 listener) {
     base.addRestartListener(listener);
   }
 
-  @Override public void removeRestartListener(Action0 listener) {
+  @Override public void removeRestartListener(Listener0 listener) {
     base.removeRestartListener(listener);
   }
 
@@ -133,11 +133,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onSaveInstanceState
 
-  @Override public void addSaveInstanceStateListener(Action1<BundleBundle> listener) {
+  @Override public void addSaveInstanceStateListener(Listener1<BundleBundle> listener) {
     base.addSaveInstanceStateListener(listener);
   }
 
-  @Override public void removeSaveInstanceStateListener(Action1<BundleBundle> listener) {
+  @Override public void removeSaveInstanceStateListener(Listener1<BundleBundle> listener) {
     base.removeSaveInstanceStateListener(listener);
   }
 
@@ -154,11 +154,11 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   ////////////////////////////////////////////////////////////////////////////
   // onRestoreInstanceState
 
-  @Override public void addRestoreInstanceStateListener(Action1<BundleBundle> listener) {
+  @Override public void addRestoreInstanceStateListener(Listener1<BundleBundle> listener) {
     base.addRestoreInstanceStateListener(listener);
   }
 
-  @Override public void removeRestoreInstanceStateListener(Action1<BundleBundle> listener) {
+  @Override public void removeRestoreInstanceStateListener(Listener1<BundleBundle> listener) {
     base.removeRestoreInstanceStateListener(listener);
   }
 

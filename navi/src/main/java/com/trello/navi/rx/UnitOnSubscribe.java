@@ -1,5 +1,6 @@
 package com.trello.navi.rx;
 
+import com.trello.navi.Listener0;
 import com.trello.navi.internal.Constants;
 import rx.Observable;
 import rx.Subscriber;
@@ -15,7 +16,7 @@ final class UnitOnSubscribe implements Observable.OnSubscribe<Object> {
   }
 
   @Override public void call(final Subscriber<? super Object> subscriber) {
-    final Action0 listener = new Action0() {
+    final Listener0 listener = new Listener0() {
       @Override public void call() {
         if (!subscriber.isUnsubscribed()) {
           subscriber.onNext(Constants.UNIT);
@@ -33,8 +34,8 @@ final class UnitOnSubscribe implements Observable.OnSubscribe<Object> {
   }
 
   interface Implementation {
-    void subscribe(Action0 listener);
+    void subscribe(Listener0 listener);
 
-    void unsubscribe(Action0 listener);
+    void unsubscribe(Listener0 listener);
   }
 }

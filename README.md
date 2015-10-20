@@ -46,7 +46,6 @@ RxNaviActivity.creating(naviActivity)
 
 - Gather feedback
 - Implement more listeners
-- Remove reliance on RxJava for base lib
 
 ## Installation
 

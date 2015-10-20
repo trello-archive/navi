@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import com.trello.navi.Listener0;
+import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
 import java.util.ArrayList;
 import java.util.List;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
-import static com.trello.navi.internal.Emitters.emitAction0;
-import static com.trello.navi.internal.Emitters.emitAction1;
+import static com.trello.navi.internal.Emitters.emitListener0;
+import static com.trello.navi.internal.Emitters.emitListener1;
 
 /**
  * Base helper which contains all the actual logic
@@ -21,25 +21,25 @@ import static com.trello.navi.internal.Emitters.emitAction1;
  */
 public final class BaseNaviFragment implements NaviFragment {
 
-  private List<Action1<Context>> attachListeners;
-  private List<Action1<Bundle>> createListeners;
-  private List<Action1<Bundle>> createViewListeners;
-  private List<Action1<Bundle>> activityCreatedListeners;
-  private List<Action1<Bundle>> viewStateRestoredListeners;
-  private List<Action0> startListeners;
-  private List<Action0> resumeListeners;
-  private List<Action0> pauseListeners;
-  private List<Action0> stopListeners;
-  private List<Action0> destroyViewListeners;
-  private List<Action0> destroyListeners;
-  private List<Action0> detachListeners;
+  private List<Listener1<Context>> attachListeners;
+  private List<Listener1<Bundle>> createListeners;
+  private List<Listener1<Bundle>> createViewListeners;
+  private List<Listener1<Bundle>> activityCreatedListeners;
+  private List<Listener1<Bundle>> viewStateRestoredListeners;
+  private List<Listener0> startListeners;
+  private List<Listener0> resumeListeners;
+  private List<Listener0> pauseListeners;
+  private List<Listener0> stopListeners;
+  private List<Listener0> destroyViewListeners;
+  private List<Listener0> destroyListeners;
+  private List<Listener0> detachListeners;
 
-  private List<Action1<Bundle>> saveInstanceStateListeners;
+  private List<Listener1<Bundle>> saveInstanceStateListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onAttach
 
-  @Override public void addAttachListener(Action1<Context> listener) {
+  @Override public void addAttachListener(Listener1<Context> listener) {
     if (attachListeners == null) {
       attachListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -47,7 +47,7 @@ public final class BaseNaviFragment implements NaviFragment {
     attachListeners.add(listener);
   }
 
-  @Override public void removeAttachListener(Action1<Context> listener) {
+  @Override public void removeAttachListener(Listener1<Context> listener) {
     if (attachListeners != null) {
       attachListeners.remove(listener);
     }
@@ -55,20 +55,20 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onAttach(Activity activity) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && attachListeners != null) {
-      emitAction1(attachListeners, activity);
+      emitListener1(attachListeners, activity);
     }
   }
 
   public void onAttach(Context context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && attachListeners != null) {
-      emitAction1(attachListeners, context);
+      emitListener1(attachListeners, context);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
-  @Override public void addCreateListener(Action1<Bundle> listener) {
+  @Override public void addCreateListener(Listener1<Bundle> listener) {
     if (createListeners == null) {
       createListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -76,7 +76,7 @@ public final class BaseNaviFragment implements NaviFragment {
     createListeners.add(listener);
   }
 
-  @Override public void removeCreateListener(Action1<Bundle> listener) {
+  @Override public void removeCreateListener(Listener1<Bundle> listener) {
     if (createListeners != null) {
       createListeners.remove(listener);
     }
@@ -84,14 +84,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onCreate(Bundle savedInstanceState) {
     if (createListeners != null) {
-      emitAction1(createListeners, savedInstanceState);
+      emitListener1(createListeners, savedInstanceState);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreateView
 
-  @Override public void addCreateViewListener(Action1<Bundle> listener) {
+  @Override public void addCreateViewListener(Listener1<Bundle> listener) {
     if (createViewListeners == null) {
       createViewListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -99,7 +99,7 @@ public final class BaseNaviFragment implements NaviFragment {
     createViewListeners.add(listener);
   }
 
-  @Override public void removeCreateViewListener(Action1<Bundle> listener) {
+  @Override public void removeCreateViewListener(Listener1<Bundle> listener) {
     if (createViewListeners != null) {
       createViewListeners.remove(listener);
     }
@@ -107,14 +107,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onCreateView(Bundle savedInstanceState) {
     if (createViewListeners != null) {
-      emitAction1(createViewListeners, savedInstanceState);
+      emitListener1(createViewListeners, savedInstanceState);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onActivityCreated
 
-  @Override public void addActivityCreatedListener(Action1<Bundle> listener) {
+  @Override public void addActivityCreatedListener(Listener1<Bundle> listener) {
     if (activityCreatedListeners == null) {
       activityCreatedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -122,7 +122,7 @@ public final class BaseNaviFragment implements NaviFragment {
     activityCreatedListeners.add(listener);
   }
 
-  @Override public void removeActivityCreatedListener(Action1<Bundle> listener) {
+  @Override public void removeActivityCreatedListener(Listener1<Bundle> listener) {
     if (activityCreatedListeners != null) {
       activityCreatedListeners.remove(listener);
     }
@@ -130,14 +130,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onActivityCreated(Bundle savedInstanceState) {
     if (activityCreatedListeners != null) {
-      emitAction1(activityCreatedListeners, savedInstanceState);
+      emitListener1(activityCreatedListeners, savedInstanceState);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onViewStateRestored
 
-  @Override public void addViewStateRestoredListener(Action1<Bundle> listener) {
+  @Override public void addViewStateRestoredListener(Listener1<Bundle> listener) {
     if (viewStateRestoredListeners == null) {
       viewStateRestoredListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -145,7 +145,7 @@ public final class BaseNaviFragment implements NaviFragment {
     viewStateRestoredListeners.add(listener);
   }
 
-  @Override public void removeViewStateRestoredListener(Action1<Bundle> listener) {
+  @Override public void removeViewStateRestoredListener(Listener1<Bundle> listener) {
     if (viewStateRestoredListeners != null) {
       viewStateRestoredListeners.remove(listener);
     }
@@ -153,14 +153,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onViewStateRestored(Bundle savedInstanceState) {
     if (viewStateRestoredListeners != null) {
-      emitAction1(viewStateRestoredListeners, savedInstanceState);
+      emitListener1(viewStateRestoredListeners, savedInstanceState);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onStart
 
-  @Override public void addStartListener(Action0 listener) {
+  @Override public void addStartListener(Listener0 listener) {
     if (startListeners == null) {
       startListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -168,7 +168,7 @@ public final class BaseNaviFragment implements NaviFragment {
     startListeners.add(listener);
   }
 
-  @Override public void removeStartListener(Action0 listener) {
+  @Override public void removeStartListener(Listener0 listener) {
     if (startListeners != null) {
       startListeners.remove(listener);
     }
@@ -176,14 +176,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onStart() {
     if (startListeners != null) {
-      emitAction0(startListeners);
+      emitListener0(startListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onResume
 
-  @Override public void addResumeListener(Action0 listener) {
+  @Override public void addResumeListener(Listener0 listener) {
     if (resumeListeners == null) {
       resumeListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -191,7 +191,7 @@ public final class BaseNaviFragment implements NaviFragment {
     resumeListeners.add(listener);
   }
 
-  @Override public void removeResumeListener(Action0 listener) {
+  @Override public void removeResumeListener(Listener0 listener) {
     if (resumeListeners != null) {
       resumeListeners.remove(listener);
     }
@@ -199,14 +199,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onResume() {
     if (resumeListeners != null) {
-      emitAction0(resumeListeners);
+      emitListener0(resumeListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onPause
 
-  @Override public void addPauseListener(Action0 listener) {
+  @Override public void addPauseListener(Listener0 listener) {
     if (pauseListeners == null) {
       pauseListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -214,7 +214,7 @@ public final class BaseNaviFragment implements NaviFragment {
     pauseListeners.add(listener);
   }
 
-  @Override public void removePauseListener(Action0 listener) {
+  @Override public void removePauseListener(Listener0 listener) {
     if (pauseListeners != null) {
       pauseListeners.remove(listener);
     }
@@ -222,14 +222,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onPause() {
     if (pauseListeners != null) {
-      emitAction0(pauseListeners);
+      emitListener0(pauseListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onStop
 
-  @Override public void addStopListener(Action0 listener) {
+  @Override public void addStopListener(Listener0 listener) {
     if (stopListeners == null) {
       stopListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -237,7 +237,7 @@ public final class BaseNaviFragment implements NaviFragment {
     stopListeners.add(listener);
   }
 
-  @Override public void removeStopListener(Action0 listener) {
+  @Override public void removeStopListener(Listener0 listener) {
     if (stopListeners != null) {
       stopListeners.remove(listener);
     }
@@ -245,14 +245,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onStop() {
     if (stopListeners != null) {
-      emitAction0(stopListeners);
+      emitListener0(stopListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onDestroyView
 
-  @Override public void addDestroyViewListener(Action0 listener) {
+  @Override public void addDestroyViewListener(Listener0 listener) {
     if (destroyViewListeners == null) {
       destroyViewListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -260,7 +260,7 @@ public final class BaseNaviFragment implements NaviFragment {
     destroyViewListeners.add(listener);
   }
 
-  @Override public void removeDestroyViewListener(Action0 listener) {
+  @Override public void removeDestroyViewListener(Listener0 listener) {
     if (destroyViewListeners != null) {
       destroyViewListeners.remove(listener);
     }
@@ -268,14 +268,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onDestroyView() {
     if (destroyViewListeners != null) {
-      emitAction0(destroyViewListeners);
+      emitListener0(destroyViewListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onDestroy
 
-  @Override public void addDestroyListener(Action0 listener) {
+  @Override public void addDestroyListener(Listener0 listener) {
     if (destroyListeners == null) {
       destroyListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -283,7 +283,7 @@ public final class BaseNaviFragment implements NaviFragment {
     destroyListeners.add(listener);
   }
 
-  @Override public void removeDestroyListener(Action0 listener) {
+  @Override public void removeDestroyListener(Listener0 listener) {
     if (destroyListeners != null) {
       destroyListeners.remove(listener);
     }
@@ -291,14 +291,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onDestroy() {
     if (destroyListeners != null) {
-      emitAction0(destroyListeners);
+      emitListener0(destroyListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onDetach
 
-  @Override public void addDetachListener(Action0 listener) {
+  @Override public void addDetachListener(Listener0 listener) {
     if (detachListeners == null) {
       detachListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -306,7 +306,7 @@ public final class BaseNaviFragment implements NaviFragment {
     detachListeners.add(listener);
   }
 
-  @Override public void removeDetachListener(Action0 listener) {
+  @Override public void removeDetachListener(Listener0 listener) {
     if (detachListeners != null) {
       detachListeners.remove(listener);
     }
@@ -314,14 +314,14 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onDetach() {
     if (detachListeners != null) {
-      emitAction0(detachListeners);
+      emitListener0(detachListeners);
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
   // onSaveInstanceState
 
-  @Override public void addSaveInstanceStateListener(Action1<Bundle> listener) {
+  @Override public void addSaveInstanceStateListener(Listener1<Bundle> listener) {
     if (saveInstanceStateListeners == null) {
       saveInstanceStateListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
     }
@@ -329,7 +329,7 @@ public final class BaseNaviFragment implements NaviFragment {
     saveInstanceStateListeners.add(listener);
   }
 
-  @Override public void removeSaveInstanceStateListener(Action1<Bundle> listener) {
+  @Override public void removeSaveInstanceStateListener(Listener1<Bundle> listener) {
     if (saveInstanceStateListeners != null) {
       saveInstanceStateListeners.remove(listener);
     }
@@ -337,7 +337,7 @@ public final class BaseNaviFragment implements NaviFragment {
 
   public void onSaveInstanceState(Bundle outState) {
     if (saveInstanceStateListeners != null) {
-      emitAction1(saveInstanceStateListeners, outState);
+      emitListener1(saveInstanceStateListeners, outState);
     }
   }
 }
