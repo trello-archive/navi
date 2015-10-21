@@ -37,6 +37,8 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener0> backPressedListeners;
 
+  private List<Listener0> attachedToWindowListeners;
+
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
@@ -306,6 +308,29 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onBackPressed() {
     if (backPressedListeners != null) {
       emitListener0(backPressedListeners);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onAttachedToWindow
+
+  @Override public void addAttachedToWindowListener(Listener0 listener) {
+    if (attachedToWindowListeners == null) {
+      attachedToWindowListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    attachedToWindowListeners.add(listener);
+  }
+
+  @Override public void removeAttachedToWindowListener(Listener0 listener) {
+    if (attachedToWindowListeners != null) {
+      attachedToWindowListeners.remove(listener);
+    }
+  }
+
+  public void onAttachedToWindow() {
+    if (attachedToWindowListeners != null) {
+      emitListener0(attachedToWindowListeners);
     }
   }
 }

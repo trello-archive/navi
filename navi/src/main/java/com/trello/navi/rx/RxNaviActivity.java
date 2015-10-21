@@ -154,6 +154,19 @@ public final class RxNaviActivity {
     }));
   }
 
+  @CheckResult @NonNull
+  public static Observable<Object> windowAttaching(@NonNull final NaviActivity naviActivity) {
+    return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
+      @Override public void subscribe(Listener0 listener) {
+        naviActivity.addAttachedToWindowListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener0 listener) {
+        naviActivity.removeAttachedToWindowListener(listener);
+      }
+    }));
+  }
+
   private RxNaviActivity() {
     throw new AssertionError("No instances!");
   }

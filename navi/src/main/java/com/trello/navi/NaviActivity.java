@@ -47,4 +47,8 @@ public interface NaviActivity {
   void addBackPressedListener(Listener0 listener);
 
   void removeBackPressedListener(Listener0 listener);
+
+  void addAttachedToWindowListener(Listener0 listener0);
+
+  void removeAttachedToWindowListener(Listener0 listener0);
 }

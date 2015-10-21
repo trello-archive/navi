@@ -205,4 +205,20 @@ public abstract class AbstractNaviActivity extends Activity implements NaviActiv
     super.onBackPressed();
     base.onBackPressed();
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onAttachedToWindow
+
+  @Override public void addAttachedToWindowListener(Listener0 listener0) {
+    base.addAttachedToWindowListener(listener0);
+  }
+
+  @Override public void removeAttachedToWindowListener(Listener0 listener0) {
+    base.removeAttachedToWindowListener(listener0);
+  }
+
+  @Override public void onAttachedToWindow() {
+    super.onAttachedToWindow();
+    base.onAttachedToWindow();
+  }
 }

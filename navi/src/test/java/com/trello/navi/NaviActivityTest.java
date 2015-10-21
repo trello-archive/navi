@@ -192,4 +192,16 @@ public final class NaviActivityTest {
     naviActivity.onBackPressed();
     verifyNoMoreInteractions(listener);
   }
+
+  @Test public void attachedToWindowListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addAttachedToWindowListener(listener);
+
+    naviActivity.onAttachedToWindow();
+    verify(listener).call();
+
+    naviActivity.removeAttachedToWindowListener(listener);
+    naviActivity.onAttachedToWindow();
+    verifyNoMoreInteractions(listener);
+  }
 }
