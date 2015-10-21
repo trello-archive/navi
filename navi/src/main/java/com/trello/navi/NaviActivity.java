@@ -43,4 +43,8 @@ public interface NaviActivity {
   void addNewIntentListener(Listener1<Intent> listener);
 
   void removeNewIntentListener(Listener1<Intent> listener);
+
+  void addBackPressedListener(Listener0 listener);
+
+  void removeBackPressedListener(Listener0 listener);
 }

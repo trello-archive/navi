@@ -35,6 +35,8 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener1<Intent>> newIntentListeners;
 
+  private List<Listener0> backPressedListeners;
+
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
 
@@ -281,6 +283,29 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onNewIntent(Intent intent) {
     if (newIntentListeners != null) {
       emitListener1(newIntentListeners, intent);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onBackPressed
+
+  @Override public void addBackPressedListener(Listener0 listener) {
+    if (backPressedListeners == null) {
+      backPressedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    backPressedListeners.add(listener);
+  }
+
+  @Override public void removeBackPressedListener(Listener0 listener) {
+    if (backPressedListeners != null) {
+      backPressedListeners.remove(listener);
+    }
+  }
+
+  public void onBackPressed() {
+    if (backPressedListeners != null) {
+      emitListener0(backPressedListeners);
     }
   }
 }

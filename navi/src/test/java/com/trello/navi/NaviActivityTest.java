@@ -180,4 +180,16 @@ public final class NaviActivityTest {
     naviActivity.onNewIntent(intent);
     verifyNoMoreInteractions(listener);
   }
+
+  @Test public void backPressListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addBackPressedListener(listener);
+
+    naviActivity.onBackPressed();
+    verify(listener).call();
+
+    naviActivity.removeBackPressedListener(listener);
+    naviActivity.onBackPressed();
+    verifyNoMoreInteractions(listener);
+  }
 }

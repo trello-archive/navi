@@ -189,4 +189,20 @@ public abstract class AbstractNaviActivity extends Activity implements NaviActiv
     super.onNewIntent(intent);
     base.onNewIntent(intent);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onBackPressed
+
+  @Override public void addBackPressedListener(Listener0 listener) {
+    base.addBackPressedListener(listener);
+  }
+
+  @Override public void removeBackPressedListener(Listener0 listener) {
+    base.removeBackPressedListener(listener);
+  }
+
+  @Override public void onBackPressed() {
+    super.onBackPressed();
+    base.onBackPressed();
+  }
 }

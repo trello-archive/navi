@@ -210,4 +210,18 @@ public final class RxNaviActivityTest {
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
+
+  @Test public void backPresses() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.backPresses(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onBackPressed();
+    subscription.unsubscribe();
+    naviActivity.onBackPressed();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
 }
