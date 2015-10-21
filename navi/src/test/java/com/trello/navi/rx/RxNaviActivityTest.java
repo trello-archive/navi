@@ -22,6 +22,7 @@ public final class RxNaviActivityTest {
     Bundle bundle = new Bundle();
     naviActivity.onCreate(bundle);
     subscription.unsubscribe();
+    naviActivity.onCreate(bundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle));
     testSubscriber.assertNoTerminalEvent();
@@ -37,6 +38,7 @@ public final class RxNaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     naviActivity.onCreate(bundle, persistableBundle);
     subscription.unsubscribe();
+    naviActivity.onCreate(bundle, persistableBundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
@@ -50,6 +52,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onStart();
     subscription.unsubscribe();
+    naviActivity.onStart();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -63,6 +66,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onResume();
     subscription.unsubscribe();
+    naviActivity.onResume();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -76,6 +80,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onPause();
     subscription.unsubscribe();
+    naviActivity.onPause();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -89,6 +94,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onStop();
     subscription.unsubscribe();
+    naviActivity.onStop();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -102,6 +108,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onDestroy();
     subscription.unsubscribe();
+    naviActivity.onDestroy();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -115,6 +122,7 @@ public final class RxNaviActivityTest {
 
     naviActivity.onRestart();
     subscription.unsubscribe();
+    naviActivity.onRestart();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -130,6 +138,7 @@ public final class RxNaviActivityTest {
     Bundle bundle = new Bundle();
     naviActivity.onSaveInstanceState(bundle);
     subscription.unsubscribe();
+    naviActivity.onSaveInstanceState(bundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle));
     testSubscriber.assertNoTerminalEvent();
@@ -146,6 +155,7 @@ public final class RxNaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     naviActivity.onSaveInstanceState(bundle, persistableBundle);
     subscription.unsubscribe();
+    naviActivity.onSaveInstanceState(bundle, persistableBundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
@@ -161,6 +171,7 @@ public final class RxNaviActivityTest {
     Bundle bundle = new Bundle();
     naviActivity.onRestoreInstanceState(bundle);
     subscription.unsubscribe();
+    naviActivity.onRestoreInstanceState(bundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle));
     testSubscriber.assertNoTerminalEvent();
@@ -177,6 +188,7 @@ public final class RxNaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     naviActivity.onRestoreInstanceState(bundle, persistableBundle);
     subscription.unsubscribe();
+    naviActivity.onRestoreInstanceState(bundle, persistableBundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();

@@ -25,6 +25,7 @@ public final class RxNaviFragmentTest {
     Activity activity = mock(Activity.class);
     naviFragment.onAttach(activity);
     subscription.unsubscribe();
+    naviFragment.onAttach(activity);
 
     testSubscriber.assertValue(activity);
     testSubscriber.assertNoTerminalEvent();
@@ -41,6 +42,7 @@ public final class RxNaviFragmentTest {
     Context context = mock(Context.class);
     naviFragment.onAttach(context);
     subscription.unsubscribe();
+    naviFragment.onAttach(context);
 
     testSubscriber.assertValue(context);
     testSubscriber.assertNoTerminalEvent();
@@ -55,6 +57,7 @@ public final class RxNaviFragmentTest {
     Bundle bundle = new Bundle();
     naviFragment.onCreate(bundle);
     subscription.unsubscribe();
+    naviFragment.onCreate(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
@@ -69,6 +72,7 @@ public final class RxNaviFragmentTest {
     Bundle bundle = new Bundle();
     naviFragment.onCreateView(bundle);
     subscription.unsubscribe();
+    naviFragment.onCreateView(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
@@ -84,6 +88,7 @@ public final class RxNaviFragmentTest {
     Bundle bundle = new Bundle();
     naviFragment.onActivityCreated(bundle);
     subscription.unsubscribe();
+    naviFragment.onActivityCreated(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
@@ -99,6 +104,7 @@ public final class RxNaviFragmentTest {
     Bundle bundle = new Bundle();
     naviFragment.onViewStateRestored(bundle);
     subscription.unsubscribe();
+    naviFragment.onViewStateRestored(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
@@ -112,6 +118,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onStart();
     subscription.unsubscribe();
+    naviFragment.onStart();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -125,6 +132,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onResume();
     subscription.unsubscribe();
+    naviFragment.onResume();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -138,6 +146,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onPause();
     subscription.unsubscribe();
+    naviFragment.onPause();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -151,6 +160,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onStop();
     subscription.unsubscribe();
+    naviFragment.onStop();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -165,6 +175,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onDestroyView();
     subscription.unsubscribe();
+    naviFragment.onDestroyView();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -178,6 +189,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onDestroy();
     subscription.unsubscribe();
+    naviFragment.onDestroy();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -191,6 +203,7 @@ public final class RxNaviFragmentTest {
 
     naviFragment.onDetach();
     subscription.unsubscribe();
+    naviFragment.onDetach();
 
     testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
@@ -206,6 +219,7 @@ public final class RxNaviFragmentTest {
     Bundle bundle = new Bundle();
     naviFragment.onSaveInstanceState(bundle);
     subscription.unsubscribe();
+    naviFragment.onSaveInstanceState(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
