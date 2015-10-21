@@ -204,4 +204,16 @@ public final class NaviActivityTest {
     naviActivity.onAttachedToWindow();
     verifyNoMoreInteractions(listener);
   }
+
+  @Test public void detachedFromWindowListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addDetachedFromWindowListener(listener);
+
+    naviActivity.onDetachedFromWindow();
+    verify(listener).call();
+
+    naviActivity.removeDetachedFromWindowListener(listener);
+    naviActivity.onDetachedFromWindow();
+    verifyNoMoreInteractions(listener);
+  }
 }

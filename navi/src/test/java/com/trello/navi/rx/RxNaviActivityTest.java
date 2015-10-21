@@ -239,4 +239,19 @@ public final class RxNaviActivityTest {
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
+
+  @Test public void windowDetaching() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.windowDetaching(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onDetachedFromWindow();
+    subscription.unsubscribe();
+    naviActivity.onDetachedFromWindow();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
 }

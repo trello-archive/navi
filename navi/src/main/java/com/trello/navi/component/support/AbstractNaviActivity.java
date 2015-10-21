@@ -221,4 +221,20 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
     super.onAttachedToWindow();
     base.onAttachedToWindow();
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onDetachedFromWindow
+
+  @Override public void addDetachedFromWindowListener(Listener0 listener) {
+    base.addDetachedFromWindowListener(listener);
+  }
+
+  @Override public void removeDetachedFromWindowListener(Listener0 listener) {
+    base.removeDetachedFromWindowListener(listener);
+  }
+
+  @Override public void onDetachedFromWindow() {
+    super.onDetachedFromWindow();
+    base.onDetachedFromWindow();
+  }
 }

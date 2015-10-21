@@ -51,4 +51,8 @@ public interface NaviActivity {
   void addAttachedToWindowListener(Listener0 listener0);
 
   void removeAttachedToWindowListener(Listener0 listener0);
+
+  void addDetachedFromWindowListener(Listener0 listener);
+
+  void removeDetachedFromWindowListener(Listener0 listener);
 }
