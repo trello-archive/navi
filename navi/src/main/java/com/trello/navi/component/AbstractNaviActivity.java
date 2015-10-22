@@ -11,7 +11,7 @@ import com.trello.navi.NaviActivity;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
-import com.trello.navi.model.PermissionsRequestResult;
+import com.trello.navi.model.RequestPermissionsResult;
 
 public abstract class AbstractNaviActivity extends Activity implements NaviActivity {
 
@@ -277,13 +277,13 @@ public abstract class AbstractNaviActivity extends Activity implements NaviActiv
   // onRequestPermissionsResult
 
   @Override
-  public void addPermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
-    base.addPermissionsRequestResultListener(listener);
+  public void addRequestPermissionsResultListener(Listener1<RequestPermissionsResult> listener) {
+    base.addRequestPermissionsResultListener(listener);
   }
 
   @Override
-  public void removePermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
-    base.removePermissionsRequestResultListener(listener);
+  public void removeRequestPermissionsResultListener(Listener1<RequestPermissionsResult> listener) {
+    base.removeRequestPermissionsResultListener(listener);
   }
 
   @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
