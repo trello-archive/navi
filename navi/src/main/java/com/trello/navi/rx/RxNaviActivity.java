@@ -1,6 +1,7 @@
 package com.trello.navi.rx;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
@@ -128,8 +129,8 @@ public final class RxNaviActivity {
     }));
   }
 
-  @CheckResult @NonNull public static Observable<Intent> newIntent(
-      @NonNull final NaviActivity naviActivity) {
+  @CheckResult @NonNull
+  public static Observable<Intent> newIntent(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Intent>() {
       @Override public void subscribe(Listener1<Intent> listener) {
         naviActivity.addNewIntentListener(listener);
@@ -176,6 +177,19 @@ public final class RxNaviActivity {
 
       @Override public void unsubscribe(Listener0 listener) {
         naviActivity.removeDetachedFromWindowListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<Configuration> configurationChanging(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Configuration>() {
+      @Override public void subscribe(Listener1<Configuration> listener) {
+        naviActivity.addConfigurationChangedListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Configuration> listener) {
+        naviActivity.removeConfigurationChangedListener(listener);
       }
     }));
   }

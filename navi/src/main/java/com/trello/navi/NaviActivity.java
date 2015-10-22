@@ -1,6 +1,7 @@
 package com.trello.navi;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import com.trello.navi.model.BundleBundle;
 
 public interface NaviActivity {
@@ -55,4 +56,8 @@ public interface NaviActivity {
   void addDetachedFromWindowListener(Listener0 listener);
 
   void removeDetachedFromWindowListener(Listener0 listener);
+
+  void addConfigurationChangedListener(Listener1<Configuration> listener);
+
+  void removeConfigurationChangedListener(Listener1<Configuration> listener);
 }

@@ -2,6 +2,7 @@ package com.trello.navi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import com.trello.navi.internal.BaseNaviFragment;
 import org.junit.Test;
@@ -191,6 +192,19 @@ public final class NaviFragmentTest {
 
     naviFragment.removeSaveInstanceStateListener(listener);
     naviFragment.onSaveInstanceState(bundle);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void configurationChangeListener() {
+    Listener1<Configuration> listener = mock(Listener1.class);
+    naviFragment.addConfigurationChangedListener(listener);
+
+    Configuration configuration = mock(Configuration.class);
+    naviFragment.onConfigurationChanged(configuration);
+    verify(listener).call(configuration);
+
+    naviFragment.removeConfigurationChangedListener(listener);
+    naviFragment.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
 }

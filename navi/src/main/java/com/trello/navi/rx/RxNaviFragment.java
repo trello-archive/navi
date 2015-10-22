@@ -1,6 +1,7 @@
 package com.trello.navi.rx;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
@@ -176,6 +177,19 @@ public final class RxNaviFragment {
 
       @Override public void unsubscribe(Listener1<Bundle> listener) {
         naviFragment.removeSaveInstanceStateListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<Configuration> configurationChanging(
+      @NonNull final NaviFragment naviFragment) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Configuration>() {
+      @Override public void subscribe(Listener1<Configuration> listener) {
+        naviFragment.addConfigurationChangedListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Configuration> listener) {
+        naviFragment.removeConfigurationChangedListener(listener);
       }
     }));
   }

@@ -1,6 +1,7 @@
 package com.trello.navi.rx;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -251,6 +252,22 @@ public final class RxNaviActivityTest {
     naviActivity.onDetachedFromWindow();
 
     testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void configurationChanging() {
+    TestSubscriber<Configuration> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.configurationChanging(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Configuration configuration = mock(Configuration.class);
+    naviActivity.onConfigurationChanged(configuration);
+    subscription.unsubscribe();
+    naviActivity.onConfigurationChanged(configuration);
+
+    testSubscriber.assertValue(configuration);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

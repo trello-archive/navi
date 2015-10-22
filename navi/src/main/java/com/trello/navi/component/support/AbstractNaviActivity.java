@@ -1,6 +1,7 @@
 package com.trello.navi.component.support;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -236,5 +237,21 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   @Override public void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     base.onDetachedFromWindow();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.addConfigurationChangedListener(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.removeConfigurationChangedListener(listener);
+  }
+
+  @Override public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    base.onConfigurationChanged(newConfig);
   }
 }

@@ -2,6 +2,7 @@ package com.trello.navi.internal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import com.trello.navi.Listener0;
@@ -35,6 +36,8 @@ public final class BaseNaviFragment implements NaviFragment {
   private List<Listener0> detachListeners;
 
   private List<Listener1<Bundle>> saveInstanceStateListeners;
+
+  private List<Listener1<Configuration>> configurationChangedListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onAttach
@@ -338,6 +341,29 @@ public final class BaseNaviFragment implements NaviFragment {
   public void onSaveInstanceState(Bundle outState) {
     if (saveInstanceStateListeners != null) {
       emitListener1(saveInstanceStateListeners, outState);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners == null) {
+      configurationChangedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    configurationChangedListeners.add(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners != null) {
+      configurationChangedListeners.remove(listener);
+    }
+  }
+
+  public void onConfigurationChanged(Configuration newConfig) {
+    if (configurationChangedListeners != null) {
+      emitListener1(configurationChangedListeners, newConfig);
     }
   }
 }

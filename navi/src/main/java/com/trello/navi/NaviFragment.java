@@ -1,6 +1,7 @@
 package com.trello.navi;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 public interface NaviFragment {
@@ -55,4 +56,8 @@ public interface NaviFragment {
   void addSaveInstanceStateListener(Listener1<Bundle> listener);
 
   void removeSaveInstanceStateListener(Listener1<Bundle> listener);
+
+  void addConfigurationChangedListener(Listener1<Configuration> listener);
+
+  void removeConfigurationChangedListener(Listener1<Configuration> listener);
 }

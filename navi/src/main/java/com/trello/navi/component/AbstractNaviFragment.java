@@ -3,6 +3,7 @@ package com.trello.navi.component;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -229,5 +230,21 @@ public abstract class AbstractNaviFragment extends Fragment implements NaviFragm
   @Override public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     base.onSaveInstanceState(outState);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.addConfigurationChangedListener(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.removeConfigurationChangedListener(listener);
+  }
+
+  @Override public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    base.onConfigurationChanged(newConfig);
   }
 }

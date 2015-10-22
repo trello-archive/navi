@@ -1,6 +1,7 @@
 package com.trello.navi.internal;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
@@ -39,6 +40,8 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener0> attachedToWindowListeners;
   private List<Listener0> detachedFromWindowListeners;
+
+  private List<Listener1<Configuration>> configurationChangedListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -355,6 +358,29 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onDetachedFromWindow() {
     if (detachedFromWindowListeners != null) {
       emitListener0(detachedFromWindowListeners);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners == null) {
+      configurationChangedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    configurationChangedListeners.add(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners != null) {
+      configurationChangedListeners.remove(listener);
+    }
+  }
+
+  public void onConfigurationChanged(Configuration newConfig) {
+    if (configurationChangedListeners != null) {
+      emitListener1(configurationChangedListeners, newConfig);
     }
   }
 }

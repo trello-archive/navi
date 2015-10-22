@@ -1,6 +1,7 @@
 package com.trello.navi;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -214,6 +215,19 @@ public final class NaviActivityTest {
 
     naviActivity.removeDetachedFromWindowListener(listener);
     naviActivity.onDetachedFromWindow();
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void configurationChangeListener() {
+    Listener1<Configuration> listener = mock(Listener1.class);
+    naviActivity.addConfigurationChangedListener(listener);
+
+    Configuration configuration = mock(Configuration.class);
+    naviActivity.onConfigurationChanged(configuration);
+    verify(listener).call(configuration);
+
+    naviActivity.removeConfigurationChangedListener(listener);
+    naviActivity.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
 }
