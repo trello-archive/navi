@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 
 public interface NaviActivity {
   void addCreateListener(Listener1<BundleBundle> listener);
@@ -65,4 +66,8 @@ public interface NaviActivity {
   void addActivityResultListener(Listener1<ActivityResult> listener);
 
   void removeActivityResultListener(Listener1<ActivityResult> listener);
+
+  void addPermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener);
+
+  void removePermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener);
 }

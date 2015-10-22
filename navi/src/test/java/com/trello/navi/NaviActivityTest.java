@@ -8,6 +8,7 @@ import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -243,6 +244,21 @@ public final class NaviActivityTest {
 
     naviActivity.removeActivityResultListener(listener);
     naviActivity.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void permissionsRequestResultListener() {
+    Listener1<PermissionsRequestResult> listener = mock(Listener1.class);
+    naviActivity.addPermissionsRequestResultListener(listener);
+
+    PermissionsRequestResult result = new PermissionsRequestResult(42, new String[0], new int[0]);
+    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
+    verify(listener).call(result);
+
+    naviActivity.removePermissionsRequestResultListener(listener);
+    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
     verifyNoMoreInteractions(listener);
   }
 }

@@ -9,6 +9,7 @@ import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public final class BaseNaviActivity implements NaviActivity {
   private List<Listener1<Configuration>> configurationChangedListeners;
 
   private List<Listener1<ActivityResult>> activityResultListeners;
+
+  private List<Listener1<PermissionsRequestResult>> permissionsRequestResultListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -407,6 +410,33 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (activityResultListeners != null) {
       emitListener1(activityResultListeners, new ActivityResult(requestCode, resultCode, data));
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onRequestPermissionsResult
+
+  @Override
+  public void addPermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    if (permissionsRequestResultListeners == null) {
+      permissionsRequestResultListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    permissionsRequestResultListeners.add(listener);
+  }
+
+  @Override
+  public void removePermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    if (permissionsRequestResultListeners != null) {
+      permissionsRequestResultListeners.remove(listener);
+    }
+  }
+
+  public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      int[] grantResults) {
+    if (permissionsRequestResultListeners != null) {
+      emitListener1(permissionsRequestResultListeners,
+          new PermissionsRequestResult(requestCode, permissions, grantResults));
     }
   }
 }

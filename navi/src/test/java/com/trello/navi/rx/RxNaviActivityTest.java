@@ -8,6 +8,7 @@ import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 import org.junit.Test;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
@@ -284,6 +285,24 @@ public final class RxNaviActivityTest {
     naviActivity.onActivityResult(result.requestCode(), result.resultCode(), result.data());
     subscription.unsubscribe();
     naviActivity.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+
+    testSubscriber.assertValue(result);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void permissionsRequestResults() {
+    TestSubscriber<PermissionsRequestResult> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.permissionsRequestResults(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    PermissionsRequestResult result = new PermissionsRequestResult(42, new String[0], new int[0]);
+    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
+    subscription.unsubscribe();
+    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
 
     testSubscriber.assertValue(result);
     testSubscriber.assertNoTerminalEvent();

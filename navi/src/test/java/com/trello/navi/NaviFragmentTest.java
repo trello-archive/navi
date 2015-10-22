@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import com.trello.navi.internal.BaseNaviFragment;
 import com.trello.navi.model.ActivityResult;
+import com.trello.navi.model.PermissionsRequestResult;
 import org.junit.Test;
 
 import static com.trello.navi.TestUtils.setSdkInt;
@@ -220,6 +221,21 @@ public final class NaviFragmentTest {
 
     naviFragment.removeActivityResultListener(listener);
     naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void permissionsRequestResultListener() {
+    Listener1<PermissionsRequestResult> listener = mock(Listener1.class);
+    naviFragment.addPermissionsRequestResultListener(listener);
+
+    PermissionsRequestResult result = new PermissionsRequestResult(42, new String[0], new int[0]);
+    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
+    verify(listener).call(result);
+
+    naviFragment.removePermissionsRequestResultListener(listener);
+    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
     verifyNoMoreInteractions(listener);
   }
 }
