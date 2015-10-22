@@ -9,7 +9,7 @@ import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
 import com.trello.navi.model.ActivityResult;
-import com.trello.navi.model.PermissionsRequestResult;
+import com.trello.navi.model.RequestPermissionsResult;
 import rx.Observable;
 
 public final class RxNaviFragment {
@@ -210,16 +210,16 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<PermissionsRequestResult> permissionsRequestResults(
+  public static Observable<RequestPermissionsResult> requestPermissionsResults(
       @NonNull final NaviFragment naviFragment) {
     return Observable.create(
-        new OnSubscribe1<>(new OnSubscribe1.Implementation<PermissionsRequestResult>() {
-          @Override public void subscribe(Listener1<PermissionsRequestResult> listener) {
-            naviFragment.addPermissionsRequestResultListener(listener);
+        new OnSubscribe1<>(new OnSubscribe1.Implementation<RequestPermissionsResult>() {
+          @Override public void subscribe(Listener1<RequestPermissionsResult> listener) {
+            naviFragment.addRequestPermissionsResultListener(listener);
           }
 
-          @Override public void unsubscribe(Listener1<PermissionsRequestResult> listener) {
-            naviFragment.removePermissionsRequestResultListener(listener);
+          @Override public void unsubscribe(Listener1<RequestPermissionsResult> listener) {
+            naviFragment.removeRequestPermissionsResultListener(listener);
           }
         }));
   }

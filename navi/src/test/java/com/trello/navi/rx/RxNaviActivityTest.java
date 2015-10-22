@@ -8,7 +8,7 @@ import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
-import com.trello.navi.model.PermissionsRequestResult;
+import com.trello.navi.model.RequestPermissionsResult;
 import org.junit.Test;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
@@ -291,13 +291,13 @@ public final class RxNaviActivityTest {
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void permissionsRequestResults() {
-    TestSubscriber<PermissionsRequestResult> testSubscriber = new TestSubscriber<>();
+  @Test public void requestPermissionsResults() {
+    TestSubscriber<RequestPermissionsResult> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviActivity.permissionsRequestResults(naviActivity).subscribe(testSubscriber);
+        RxNaviActivity.requestPermissionsResults(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
-    PermissionsRequestResult result = new PermissionsRequestResult(42, new String[0], new int[0]);
+    RequestPermissionsResult result = new RequestPermissionsResult(42, new String[0], new int[0]);
     naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
         result.grantResults());
     subscription.unsubscribe();

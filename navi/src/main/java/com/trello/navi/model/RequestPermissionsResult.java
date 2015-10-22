@@ -3,13 +3,13 @@ package com.trello.navi.model;
 import android.support.annotation.NonNull;
 import java.util.Arrays;
 
-public final class PermissionsRequestResult {
+public final class RequestPermissionsResult {
 
   private final int requestCode;
   private final String[] permissions;
   private final int[] grantResults;
 
-  public PermissionsRequestResult(int requestCode, @NonNull String[] permissions,
+  public RequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     this.requestCode = requestCode;
     this.permissions = permissions;
@@ -32,7 +32,7 @@ public final class PermissionsRequestResult {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    PermissionsRequestResult that = (PermissionsRequestResult) o;
+    RequestPermissionsResult that = (RequestPermissionsResult) o;
 
     if (requestCode != that.requestCode) return false;
     // Probably incorrect - comparing Object[] arrays with Arrays.equals
@@ -48,7 +48,7 @@ public final class PermissionsRequestResult {
   }
 
   @Override public String toString() {
-    return "PermissionsRequestResult{" +
+    return "RequestPermissionsResult{" +
         "requestCode=" + requestCode +
         ", permissions=" + Arrays.toString(permissions) +
         ", grantResults=" + Arrays.toString(grantResults) +
