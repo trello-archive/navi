@@ -1,12 +1,15 @@
 package com.trello.navi.internal;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +42,12 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener0> attachedToWindowListeners;
   private List<Listener0> detachedFromWindowListeners;
+
+  private List<Listener1<Configuration>> configurationChangedListeners;
+
+  private List<Listener1<ActivityResult>> activityResultListeners;
+
+  private List<Listener1<PermissionsRequestResult>> permissionsRequestResultListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -355,6 +364,79 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onDetachedFromWindow() {
     if (detachedFromWindowListeners != null) {
       emitListener0(detachedFromWindowListeners);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners == null) {
+      configurationChangedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    configurationChangedListeners.add(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    if (configurationChangedListeners != null) {
+      configurationChangedListeners.remove(listener);
+    }
+  }
+
+  public void onConfigurationChanged(Configuration newConfig) {
+    if (configurationChangedListeners != null) {
+      emitListener1(configurationChangedListeners, newConfig);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onActivityResult
+
+  @Override public void addActivityResultListener(Listener1<ActivityResult> listener) {
+    if (activityResultListeners == null) {
+      activityResultListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    activityResultListeners.add(listener);
+  }
+
+  @Override public void removeActivityResultListener(Listener1<ActivityResult> listener) {
+    if (activityResultListeners != null) {
+      activityResultListeners.remove(listener);
+    }
+  }
+
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (activityResultListeners != null) {
+      emitListener1(activityResultListeners, new ActivityResult(requestCode, resultCode, data));
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onRequestPermissionsResult
+
+  @Override
+  public void addPermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    if (permissionsRequestResultListeners == null) {
+      permissionsRequestResultListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    permissionsRequestResultListeners.add(listener);
+  }
+
+  @Override
+  public void removePermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    if (permissionsRequestResultListeners != null) {
+      permissionsRequestResultListeners.remove(listener);
+    }
+  }
+
+  public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      int[] grantResults) {
+    if (permissionsRequestResultListeners != null) {
+      emitListener1(permissionsRequestResultListeners,
+          new PermissionsRequestResult(requestCode, permissions, grantResults));
     }
   }
 }

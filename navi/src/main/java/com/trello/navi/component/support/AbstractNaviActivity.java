@@ -1,6 +1,7 @@
 package com.trello.navi.component.support;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,9 @@ import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
 import com.trello.navi.internal.BaseNaviActivity;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 
 public abstract class AbstractNaviActivity extends AppCompatActivity implements NaviActivity {
 
@@ -236,5 +239,56 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   @Override public void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     base.onDetachedFromWindow();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onConfigurationChanged
+
+  @Override public void addConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.addConfigurationChangedListener(listener);
+  }
+
+  @Override public void removeConfigurationChangedListener(Listener1<Configuration> listener) {
+    base.removeConfigurationChangedListener(listener);
+  }
+
+  @Override public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    base.onConfigurationChanged(newConfig);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onActivityResult
+
+  @Override public void addActivityResultListener(Listener1<ActivityResult> listener) {
+    base.addActivityResultListener(listener);
+  }
+
+  @Override public void removeActivityResultListener(Listener1<ActivityResult> listener) {
+    base.removeActivityResultListener(listener);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    base.onActivityResult(requestCode, resultCode, data);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onRequestPermissionsResult
+
+  @Override
+  public void addPermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    base.addPermissionsRequestResultListener(listener);
+  }
+
+  @Override
+  public void removePermissionsRequestResultListener(Listener1<PermissionsRequestResult> listener) {
+    base.removePermissionsRequestResultListener(listener);
+  }
+
+  @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    base.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 }

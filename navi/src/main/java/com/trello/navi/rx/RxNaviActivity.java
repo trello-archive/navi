@@ -1,12 +1,15 @@
 package com.trello.navi.rx;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
+import com.trello.navi.model.PermissionsRequestResult;
 import rx.Observable;
 
 public final class RxNaviActivity {
@@ -128,8 +131,8 @@ public final class RxNaviActivity {
     }));
   }
 
-  @CheckResult @NonNull public static Observable<Intent> newIntent(
-      @NonNull final NaviActivity naviActivity) {
+  @CheckResult @NonNull
+  public static Observable<Intent> newIntent(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Intent>() {
       @Override public void subscribe(Listener1<Intent> listener) {
         naviActivity.addNewIntentListener(listener);
@@ -178,6 +181,47 @@ public final class RxNaviActivity {
         naviActivity.removeDetachedFromWindowListener(listener);
       }
     }));
+  }
+
+  @CheckResult @NonNull public static Observable<Configuration> configurationChanging(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Configuration>() {
+      @Override public void subscribe(Listener1<Configuration> listener) {
+        naviActivity.addConfigurationChangedListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Configuration> listener) {
+        naviActivity.removeConfigurationChangedListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<ActivityResult> activityResults(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<ActivityResult>() {
+      @Override public void subscribe(Listener1<ActivityResult> listener) {
+        naviActivity.addActivityResultListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<ActivityResult> listener) {
+        naviActivity.removeActivityResultListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull
+  public static Observable<PermissionsRequestResult> permissionsRequestResults(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(
+        new OnSubscribe1<>(new OnSubscribe1.Implementation<PermissionsRequestResult>() {
+          @Override public void subscribe(Listener1<PermissionsRequestResult> listener) {
+            naviActivity.addPermissionsRequestResultListener(listener);
+          }
+
+          @Override public void unsubscribe(Listener1<PermissionsRequestResult> listener) {
+            naviActivity.removePermissionsRequestResultListener(listener);
+          }
+        }));
   }
 
   private RxNaviActivity() {

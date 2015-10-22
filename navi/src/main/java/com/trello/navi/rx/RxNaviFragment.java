@@ -1,12 +1,15 @@
 package com.trello.navi.rx;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
+import com.trello.navi.model.ActivityResult;
+import com.trello.navi.model.PermissionsRequestResult;
 import rx.Observable;
 
 public final class RxNaviFragment {
@@ -178,6 +181,47 @@ public final class RxNaviFragment {
         naviFragment.removeSaveInstanceStateListener(listener);
       }
     }));
+  }
+
+  @CheckResult @NonNull public static Observable<Configuration> configurationChanging(
+      @NonNull final NaviFragment naviFragment) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Configuration>() {
+      @Override public void subscribe(Listener1<Configuration> listener) {
+        naviFragment.addConfigurationChangedListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Configuration> listener) {
+        naviFragment.removeConfigurationChangedListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<ActivityResult> activityResults(
+      @NonNull final NaviFragment naviFragment) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<ActivityResult>() {
+      @Override public void subscribe(Listener1<ActivityResult> listener) {
+        naviFragment.addActivityResultListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<ActivityResult> listener) {
+        naviFragment.removeActivityResultListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull
+  public static Observable<PermissionsRequestResult> permissionsRequestResults(
+      @NonNull final NaviFragment naviFragment) {
+    return Observable.create(
+        new OnSubscribe1<>(new OnSubscribe1.Implementation<PermissionsRequestResult>() {
+          @Override public void subscribe(Listener1<PermissionsRequestResult> listener) {
+            naviFragment.addPermissionsRequestResultListener(listener);
+          }
+
+          @Override public void unsubscribe(Listener1<PermissionsRequestResult> listener) {
+            naviFragment.removePermissionsRequestResultListener(listener);
+          }
+        }));
   }
 
   private RxNaviFragment() {

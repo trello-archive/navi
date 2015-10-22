@@ -2,8 +2,12 @@ package com.trello.navi.rx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.model.ActivityResult;
+import com.trello.navi.model.PermissionsRequestResult;
 import org.junit.Test;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
@@ -222,6 +226,56 @@ public final class RxNaviFragmentTest {
     naviFragment.onSaveInstanceState(bundle);
 
     testSubscriber.assertValue(bundle);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void configurationChanging() {
+    TestSubscriber<Configuration> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviFragment.configurationChanging(naviFragment).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Configuration configuration = mock(Configuration.class);
+    naviFragment.onConfigurationChanged(configuration);
+    subscription.unsubscribe();
+    naviFragment.onConfigurationChanged(configuration);
+
+    testSubscriber.assertValue(configuration);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void activityResults() {
+    TestSubscriber<ActivityResult> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviFragment.activityResults(naviFragment).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    subscription.unsubscribe();
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+
+    testSubscriber.assertValue(result);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void permissionsRequestResults() {
+    TestSubscriber<PermissionsRequestResult> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviFragment.permissionsRequestResults(naviFragment).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    PermissionsRequestResult result = new PermissionsRequestResult(42, new String[0], new int[0]);
+    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
+    subscription.unsubscribe();
+    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
+        result.grantResults());
+
+    testSubscriber.assertValue(result);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
