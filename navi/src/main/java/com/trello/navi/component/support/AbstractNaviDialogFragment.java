@@ -2,6 +2,7 @@ package com.trello.navi.component.support;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
 import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.model.ActivityResult;
 
 public abstract class AbstractNaviDialogFragment extends DialogFragment implements NaviFragment {
 
@@ -246,5 +248,21 @@ public abstract class AbstractNaviDialogFragment extends DialogFragment implemen
   @Override public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     base.onConfigurationChanged(newConfig);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onActivityResult
+
+  @Override public void addActivityResultListener(Listener1<ActivityResult> listener) {
+    base.addActivityResultListener(listener);
+  }
+
+  @Override public void removeActivityResultListener(Listener1<ActivityResult> listener) {
+    base.removeActivityResultListener(listener);
+  }
+
+  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    base.onActivityResult(requestCode, resultCode, data);
   }
 }

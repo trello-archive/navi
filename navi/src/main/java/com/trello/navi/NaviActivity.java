@@ -2,6 +2,7 @@ package com.trello.navi;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 
 public interface NaviActivity {
@@ -60,4 +61,8 @@ public interface NaviActivity {
   void addConfigurationChangedListener(Listener1<Configuration> listener);
 
   void removeConfigurationChangedListener(Listener1<Configuration> listener);
+
+  void addActivityResultListener(Listener1<ActivityResult> listener);
+
+  void removeActivityResultListener(Listener1<ActivityResult> listener);
 }

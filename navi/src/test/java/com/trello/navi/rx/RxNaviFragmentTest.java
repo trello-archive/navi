@@ -2,9 +2,11 @@ package com.trello.navi.rx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.model.ActivityResult;
 import org.junit.Test;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
@@ -239,6 +241,22 @@ public final class RxNaviFragmentTest {
     naviFragment.onConfigurationChanged(configuration);
 
     testSubscriber.assertValue(configuration);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void activityResults() {
+    TestSubscriber<ActivityResult> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviFragment.activityResults(naviFragment).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    subscription.unsubscribe();
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+
+    testSubscriber.assertValue(result);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

@@ -7,6 +7,7 @@ import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public final class BaseNaviActivity implements NaviActivity {
   private List<Listener0> detachedFromWindowListeners;
 
   private List<Listener1<Configuration>> configurationChangedListeners;
+
+  private List<Listener1<ActivityResult>> activityResultListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -381,6 +384,29 @@ public final class BaseNaviActivity implements NaviActivity {
   public void onConfigurationChanged(Configuration newConfig) {
     if (configurationChangedListeners != null) {
       emitListener1(configurationChangedListeners, newConfig);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onActivityResult
+
+  @Override public void addActivityResultListener(Listener1<ActivityResult> listener) {
+    if (activityResultListeners == null) {
+      activityResultListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    activityResultListeners.add(listener);
+  }
+
+  @Override public void removeActivityResultListener(Listener1<ActivityResult> listener) {
+    if (activityResultListeners != null) {
+      activityResultListeners.remove(listener);
+    }
+  }
+
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (activityResultListeners != null) {
+      emitListener1(activityResultListeners, new ActivityResult(requestCode, resultCode, data));
     }
   }
 }

@@ -9,6 +9,7 @@ import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviActivity;
 import com.trello.navi.internal.BaseNaviActivity;
+import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 
 public abstract class AbstractNaviActivity extends Activity implements NaviActivity {
@@ -253,5 +254,21 @@ public abstract class AbstractNaviActivity extends Activity implements NaviActiv
   @Override public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     base.onConfigurationChanged(newConfig);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onActivityResult
+
+  @Override public void addActivityResultListener(Listener1<ActivityResult> listener) {
+    base.addActivityResultListener(listener);
+  }
+
+  @Override public void removeActivityResultListener(Listener1<ActivityResult> listener) {
+    base.removeActivityResultListener(listener);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    base.onActivityResult(requestCode, resultCode, data);
   }
 }

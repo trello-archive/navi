@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
 import com.trello.navi.Listener1;
 import com.trello.navi.NaviFragment;
+import com.trello.navi.model.ActivityResult;
 import rx.Observable;
 
 public final class RxNaviFragment {
@@ -190,6 +191,19 @@ public final class RxNaviFragment {
 
       @Override public void unsubscribe(Listener1<Configuration> listener) {
         naviFragment.removeConfigurationChangedListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<ActivityResult> activityResults(
+      @NonNull final NaviFragment naviFragment) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<ActivityResult>() {
+      @Override public void subscribe(Listener1<ActivityResult> listener) {
+        naviFragment.addActivityResultListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<ActivityResult> listener) {
+        naviFragment.removeActivityResultListener(listener);
       }
     }));
   }

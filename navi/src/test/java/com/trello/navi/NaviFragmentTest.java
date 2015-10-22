@@ -2,9 +2,11 @@ package com.trello.navi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.model.ActivityResult;
 import org.junit.Test;
 
 import static com.trello.navi.TestUtils.setSdkInt;
@@ -205,6 +207,19 @@ public final class NaviFragmentTest {
 
     naviFragment.removeConfigurationChangedListener(listener);
     naviFragment.onConfigurationChanged(configuration);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void activityResultListener() {
+    Listener1<ActivityResult> listener = mock(Listener1.class);
+    naviFragment.addActivityResultListener(listener);
+
+    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    verify(listener).call(result);
+
+    naviFragment.removeActivityResultListener(listener);
+    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
     verifyNoMoreInteractions(listener);
   }
 }
