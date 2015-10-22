@@ -1,5 +1,6 @@
 package com.trello.navi.component.support;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -171,5 +172,69 @@ public abstract class AbstractNaviActivity extends AppCompatActivity implements 
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onRestoreInstanceState(savedInstanceState, persistentState);
     base.onRestoreInstanceState(savedInstanceState, persistentState);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onNewIntent
+
+  @Override public void addNewIntentListener(Listener1<Intent> listener) {
+    base.addNewIntentListener(listener);
+  }
+
+  @Override public void removeNewIntentListener(Listener1<Intent> listener) {
+    base.removeNewIntentListener(listener);
+  }
+
+  @Override protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    base.onNewIntent(intent);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onBackPressed
+
+  @Override public void addBackPressedListener(Listener0 listener) {
+    base.addBackPressedListener(listener);
+  }
+
+  @Override public void removeBackPressedListener(Listener0 listener) {
+    base.removeBackPressedListener(listener);
+  }
+
+  @Override public void onBackPressed() {
+    super.onBackPressed();
+    base.onBackPressed();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onAttachedToWindow
+
+  @Override public void addAttachedToWindowListener(Listener0 listener0) {
+    base.addAttachedToWindowListener(listener0);
+  }
+
+  @Override public void removeAttachedToWindowListener(Listener0 listener0) {
+    base.removeAttachedToWindowListener(listener0);
+  }
+
+  @Override public void onAttachedToWindow() {
+    super.onAttachedToWindow();
+    base.onAttachedToWindow();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onDetachedFromWindow
+
+  @Override public void addDetachedFromWindowListener(Listener0 listener) {
+    base.addDetachedFromWindowListener(listener);
+  }
+
+  @Override public void removeDetachedFromWindowListener(Listener0 listener) {
+    base.removeDetachedFromWindowListener(listener);
+  }
+
+  @Override public void onDetachedFromWindow() {
+    super.onDetachedFromWindow();
+    base.onDetachedFromWindow();
   }
 }

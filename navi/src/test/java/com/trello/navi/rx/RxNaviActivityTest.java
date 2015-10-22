@@ -1,5 +1,6 @@
 package com.trello.navi.rx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -191,6 +192,65 @@ public final class RxNaviActivityTest {
     naviActivity.onRestoreInstanceState(bundle, persistableBundle);
 
     testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void newIntent() {
+    TestSubscriber<Intent> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.newIntent(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Intent intent = new Intent();
+    naviActivity.onNewIntent(intent);
+    subscription.unsubscribe();
+    naviActivity.onNewIntent(intent);
+
+    testSubscriber.assertValue(intent);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void backPresses() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNaviActivity.backPresses(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onBackPressed();
+    subscription.unsubscribe();
+    naviActivity.onBackPressed();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void windowAttaching() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.windowAttaching(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onAttachedToWindow();
+    subscription.unsubscribe();
+    naviActivity.onAttachedToWindow();
+
+    testSubscriber.assertValueCount(1);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void windowDetaching() {
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNaviActivity.windowDetaching(naviActivity).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    naviActivity.onDetachedFromWindow();
+    subscription.unsubscribe();
+    naviActivity.onDetachedFromWindow();
+
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

@@ -1,5 +1,6 @@
 package com.trello.navi.rx;
 
+import android.content.Intent;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi.Listener0;
@@ -123,6 +124,58 @@ public final class RxNaviActivity {
 
       @Override public void unsubscribe(Listener1<BundleBundle> listener) {
         naviActivity.removeRestoreInstanceStateListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull public static Observable<Intent> newIntent(
+      @NonNull final NaviActivity naviActivity) {
+    return Observable.create(new OnSubscribe1<>(new OnSubscribe1.Implementation<Intent>() {
+      @Override public void subscribe(Listener1<Intent> listener) {
+        naviActivity.addNewIntentListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener1<Intent> listener) {
+        naviActivity.removeNewIntentListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull
+  public static Observable<Object> backPresses(@NonNull final NaviActivity naviActivity) {
+    return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
+      @Override public void subscribe(Listener0 listener) {
+        naviActivity.addBackPressedListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener0 listener) {
+        naviActivity.removeBackPressedListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull
+  public static Observable<Object> windowAttaching(@NonNull final NaviActivity naviActivity) {
+    return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
+      @Override public void subscribe(Listener0 listener) {
+        naviActivity.addAttachedToWindowListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener0 listener) {
+        naviActivity.removeAttachedToWindowListener(listener);
+      }
+    }));
+  }
+
+  @CheckResult @NonNull
+  public static Observable<Object> windowDetaching(@NonNull final NaviActivity naviActivity) {
+    return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
+      @Override public void subscribe(Listener0 listener) {
+        naviActivity.addDetachedFromWindowListener(listener);
+      }
+
+      @Override public void unsubscribe(Listener0 listener) {
+        naviActivity.removeDetachedFromWindowListener(listener);
       }
     }));
   }

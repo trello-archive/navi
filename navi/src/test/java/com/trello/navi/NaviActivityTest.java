@@ -1,5 +1,6 @@
 package com.trello.navi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.BaseNaviActivity;
@@ -164,6 +165,55 @@ public final class NaviActivityTest {
 
     naviActivity.removeRestoreInstanceStateListener(listener);
     naviActivity.onRestoreInstanceState(bundle, persistableBundle);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void newIntentListener() {
+    Listener1<Intent> listener = mock(Listener1.class);
+    naviActivity.addNewIntentListener(listener);
+
+    Intent intent = new Intent();
+    naviActivity.onNewIntent(intent);
+    verify(listener).call(intent);
+
+    naviActivity.removeNewIntentListener(listener);
+    naviActivity.onNewIntent(intent);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void backPressListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addBackPressedListener(listener);
+
+    naviActivity.onBackPressed();
+    verify(listener).call();
+
+    naviActivity.removeBackPressedListener(listener);
+    naviActivity.onBackPressed();
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void attachedToWindowListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addAttachedToWindowListener(listener);
+
+    naviActivity.onAttachedToWindow();
+    verify(listener).call();
+
+    naviActivity.removeAttachedToWindowListener(listener);
+    naviActivity.onAttachedToWindow();
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void detachedFromWindowListener() {
+    Listener0 listener = mock(Listener0.class);
+    naviActivity.addDetachedFromWindowListener(listener);
+
+    naviActivity.onDetachedFromWindow();
+    verify(listener).call();
+
+    naviActivity.removeDetachedFromWindowListener(listener);
+    naviActivity.onDetachedFromWindow();
     verifyNoMoreInteractions(listener);
   }
 }

@@ -1,5 +1,6 @@
 package com.trello.navi.internal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Listener0;
@@ -31,6 +32,13 @@ public final class BaseNaviActivity implements NaviActivity {
 
   private List<Listener1<BundleBundle>> restoreInstanceStateListeners;
   private List<Listener1<BundleBundle>> saveInstanceStateListeners;
+
+  private List<Listener1<Intent>> newIntentListeners;
+
+  private List<Listener0> backPressedListeners;
+
+  private List<Listener0> attachedToWindowListeners;
+  private List<Listener0> detachedFromWindowListeners;
 
   ////////////////////////////////////////////////////////////////////////////
   // onCreate
@@ -255,6 +263,98 @@ public final class BaseNaviActivity implements NaviActivity {
     if (restoreInstanceStateListeners != null) {
       emitListener1(restoreInstanceStateListeners,
           new BundleBundle(savedInstanceState, persistentState));
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onNewIntent
+
+  @Override public void addNewIntentListener(Listener1<Intent> listener) {
+    if (newIntentListeners == null) {
+      newIntentListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    newIntentListeners.add(listener);
+  }
+
+  @Override public void removeNewIntentListener(Listener1<Intent> listener) {
+    if (newIntentListeners != null) {
+      newIntentListeners.remove(listener);
+    }
+  }
+
+  public void onNewIntent(Intent intent) {
+    if (newIntentListeners != null) {
+      emitListener1(newIntentListeners, intent);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onBackPressed
+
+  @Override public void addBackPressedListener(Listener0 listener) {
+    if (backPressedListeners == null) {
+      backPressedListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    backPressedListeners.add(listener);
+  }
+
+  @Override public void removeBackPressedListener(Listener0 listener) {
+    if (backPressedListeners != null) {
+      backPressedListeners.remove(listener);
+    }
+  }
+
+  public void onBackPressed() {
+    if (backPressedListeners != null) {
+      emitListener0(backPressedListeners);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onAttachedToWindow
+
+  @Override public void addAttachedToWindowListener(Listener0 listener) {
+    if (attachedToWindowListeners == null) {
+      attachedToWindowListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    attachedToWindowListeners.add(listener);
+  }
+
+  @Override public void removeAttachedToWindowListener(Listener0 listener) {
+    if (attachedToWindowListeners != null) {
+      attachedToWindowListeners.remove(listener);
+    }
+  }
+
+  public void onAttachedToWindow() {
+    if (attachedToWindowListeners != null) {
+      emitListener0(attachedToWindowListeners);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // onDetachedFromWindow
+
+  @Override public void addDetachedFromWindowListener(Listener0 listener) {
+    if (detachedFromWindowListeners == null) {
+      detachedFromWindowListeners = new ArrayList<>(Constants.DEFAULT_LIST_SIZE);
+    }
+
+    detachedFromWindowListeners.add(listener);
+  }
+
+  @Override public void removeDetachedFromWindowListener(Listener0 listener) {
+    if (detachedFromWindowListeners != null) {
+      detachedFromWindowListeners.remove(listener);
+    }
+  }
+
+  public void onDetachedFromWindow() {
+    if (detachedFromWindowListeners != null) {
+      emitListener0(detachedFromWindowListeners);
     }
   }
 }
