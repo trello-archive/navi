@@ -7,7 +7,7 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.subscriptions.Subscriptions;
 
-final class UnitOnSubscribe implements Observable.OnSubscribe<Object> {
+final class UnitOnSubscribe implements Observable.OnSubscribe<Void> {
 
   private final Implementation implementation;
 
@@ -15,11 +15,11 @@ final class UnitOnSubscribe implements Observable.OnSubscribe<Object> {
     this.implementation = implementation;
   }
 
-  @Override public void call(final Subscriber<? super Object> subscriber) {
+  @Override public void call(final Subscriber<? super Void> subscriber) {
     final Listener0 listener = new Listener0() {
       @Override public void call() {
         if (!subscriber.isUnsubscribed()) {
-          subscriber.onNext(Constants.UNIT);
+          subscriber.onNext(null);
         }
       }
     };

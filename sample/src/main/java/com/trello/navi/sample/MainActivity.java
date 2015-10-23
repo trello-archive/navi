@@ -38,8 +38,8 @@ public class MainActivity extends AbstractNaviActivity {
 
     // Counter that operates on screen only while resumed; automatically ends itself on destroy
     RxNaviActivity.resuming(naviActivity)
-        .flatMap(new Func1<Object, Observable<Long>>() {
-          @Override public Observable<Long> call(Object o) {
+        .flatMap(new Func1<Void, Observable<Long>>() {
+          @Override public Observable<Long> call(Void v) {
             return Observable.interval(1, TimeUnit.SECONDS)
                 .takeUntil(RxNaviActivity.pausing(naviActivity));
           }

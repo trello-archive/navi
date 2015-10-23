@@ -116,7 +116,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void starting() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.starting(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -130,7 +130,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void resuming() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.resuming(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -144,7 +144,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void pausing() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.pausing(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -158,7 +158,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void stopping() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.stopping(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -172,7 +172,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void destroyingView() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNaviFragment.destroyingView(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
@@ -187,7 +187,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void destroying() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.destroying(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -201,7 +201,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void detaching() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviFragment.detaching(naviFragment).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
