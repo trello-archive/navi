@@ -51,7 +51,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void starting() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.starting(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -65,7 +65,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void resuming() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.resuming(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -79,7 +79,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void pausing() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.pausing(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -93,7 +93,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void stopping() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.stopping(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -107,7 +107,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void destroying() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.destroying(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -121,7 +121,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void restarting() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.restarting(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -216,7 +216,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void backPresses() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNaviActivity.backPresses(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -230,7 +230,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void windowAttaching() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNaviActivity.windowAttaching(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
@@ -245,7 +245,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void windowDetaching() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNaviActivity.windowDetaching(naviActivity).subscribe(testSubscriber);
     testSubscriber.assertNoValues();

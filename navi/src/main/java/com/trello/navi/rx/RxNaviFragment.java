@@ -80,7 +80,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> starting(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> starting(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addStartListener(listener);
@@ -93,7 +93,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> resuming(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> resuming(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addResumeListener(listener);
@@ -106,7 +106,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> pausing(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> pausing(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addPauseListener(listener);
@@ -119,7 +119,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> stopping(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> stopping(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addStopListener(listener);
@@ -132,7 +132,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> destroyingView(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> destroyingView(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addDestroyViewListener(listener);
@@ -145,7 +145,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> destroying(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> destroying(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addDestroyListener(listener);
@@ -158,7 +158,7 @@ public final class RxNaviFragment {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> detaching(@NonNull final NaviFragment naviFragment) {
+  public static Observable<Void> detaching(@NonNull final NaviFragment naviFragment) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviFragment.addDetachListener(listener);

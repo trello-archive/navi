@@ -28,7 +28,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> starting(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> starting(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addStartListener(listener);
@@ -41,7 +41,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> resuming(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> resuming(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addResumeListener(listener);
@@ -54,7 +54,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> pausing(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> pausing(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addPauseListener(listener);
@@ -67,7 +67,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> stopping(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> stopping(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addStopListener(listener);
@@ -80,7 +80,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> destroying(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> destroying(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addDestroyListener(listener);
@@ -93,7 +93,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> restarting(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> restarting(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addRestartListener(listener);
@@ -145,7 +145,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> backPresses(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> backPresses(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addBackPressedListener(listener);
@@ -158,7 +158,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> windowAttaching(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> windowAttaching(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addAttachedToWindowListener(listener);
@@ -171,7 +171,7 @@ public final class RxNaviActivity {
   }
 
   @CheckResult @NonNull
-  public static Observable<Object> windowDetaching(@NonNull final NaviActivity naviActivity) {
+  public static Observable<Void> windowDetaching(@NonNull final NaviActivity naviActivity) {
     return Observable.create(new UnitOnSubscribe(new UnitOnSubscribe.Implementation() {
       @Override public void subscribe(Listener0 listener) {
         naviActivity.addDetachedFromWindowListener(listener);
