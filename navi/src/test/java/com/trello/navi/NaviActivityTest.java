@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import com.trello.navi.internal.BaseNaviActivity;
+import com.trello.navi.internal.BaseNaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
@@ -17,248 +17,291 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public final class NaviActivityTest {
 
-  private final BaseNaviActivity naviActivity = new BaseNaviActivity();
+  private final BaseNaviComponent activity = BaseNaviComponent.createActivityComponent();
 
   @Test public void createListener() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addCreateListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    activity.addListener(Event.CREATE, listener);
 
     Bundle bundle = new Bundle();
-    naviActivity.onCreate(bundle);
-    verify(listener).call(new BundleBundle(bundle));
+    activity.onCreate(bundle);
+    verify(listener).call(bundle);
 
-    naviActivity.removeCreateListener(listener);
-    naviActivity.onCreate(bundle);
+    activity.removeListener(Event.CREATE, listener);
+    activity.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void createListenerPersistable() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addCreateListener(listener);
+  @Test public void createPersistableListener() {
+    Listener<Bundle> listener = mock(Listener.class);
+    Listener<BundleBundle> persistableListener = mock(Listener.class);
+    activity.addListener(Event.CREATE, listener);
+    activity.addListener(Event.CREATE_PERSISTABLE, persistableListener);
 
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
-    naviActivity.onCreate(bundle, persistableBundle);
-    verify(listener).call(new BundleBundle(bundle, persistableBundle));
+    activity.onCreate(bundle, persistableBundle);
+    verify(listener).call(bundle);
+    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    naviActivity.removeCreateListener(listener);
-    naviActivity.onCreate(bundle, persistableBundle);
+    activity.removeListener(Event.CREATE, listener);
+    activity.removeListener(Event.CREATE_PERSISTABLE, persistableListener);
+    activity.onCreate(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
+    verifyNoMoreInteractions(persistableListener);
   }
 
   @Test public void startListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addStartListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.START, listener);
 
-    naviActivity.onStart();
-    verify(listener).call();
+    activity.onStart();
+    verify(listener).call(null);
 
-    naviActivity.removeStartListener(listener);
-    naviActivity.onStart();
+    activity.removeListener(Event.START, listener);
+    activity.onStart();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void resumeListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addResumeListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.RESUME, listener);
 
-    naviActivity.onResume();
-    verify(listener).call();
+    activity.onResume();
+    verify(listener).call(null);
 
-    naviActivity.removeResumeListener(listener);
-    naviActivity.onResume();
+    activity.removeListener(Event.RESUME, listener);
+    activity.onResume();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void pauseListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addPauseListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.PAUSE, listener);
 
-    naviActivity.onPause();
-    verify(listener).call();
+    activity.onPause();
+    verify(listener).call(null);
 
-    naviActivity.removePauseListener(listener);
-    naviActivity.onPause();
+    activity.removeListener(Event.PAUSE, listener);
+    activity.onPause();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void stopListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addStopListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.STOP, listener);
 
-    naviActivity.onStop();
-    verify(listener).call();
+    activity.onStop();
+    verify(listener).call(null);
 
-    naviActivity.removeStopListener(listener);
-    naviActivity.onStop();
+    activity.removeListener(Event.STOP, listener);
+    activity.onStop();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void destroyListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addDestroyListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.DESTROY, listener);
 
-    naviActivity.onDestroy();
-    verify(listener).call();
+    activity.onDestroy();
+    verify(listener).call(null);
 
-    naviActivity.removeDestroyListener(listener);
-    naviActivity.onDestroy();
+    activity.removeListener(Event.DESTROY, listener);
+    activity.onDestroy();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void restartListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addRestartListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.RESTART, listener);
 
-    naviActivity.onRestart();
-    verify(listener).call();
+    activity.onRestart();
+    verify(listener).call(null);
 
-    naviActivity.removeRestartListener(listener);
-    naviActivity.onRestart();
+    activity.removeListener(Event.RESTART, listener);
+    activity.onRestart();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void saveInstanceStateListener() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addSaveInstanceStateListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    activity.addListener(Event.SAVE_INSTANCE_STATE, listener);
 
     Bundle bundle = new Bundle();
-    naviActivity.onSaveInstanceState(bundle);
-    verify(listener).call(new BundleBundle(bundle));
+    activity.onSaveInstanceState(bundle);
+    verify(listener).call(bundle);
 
-    naviActivity.removeSaveInstanceStateListener(listener);
-    naviActivity.onSaveInstanceState(bundle);
+    activity.removeListener(Event.SAVE_INSTANCE_STATE, listener);
+    activity.onSaveInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void saveInstanceStateListenerPersistable() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addSaveInstanceStateListener(listener);
+  @Test public void saveInstanceStatePersistableListener() {
+    Listener<Bundle> listener = mock(Listener.class);
+    Listener<BundleBundle> persistableListener = mock(Listener.class);
+    activity.addListener(Event.SAVE_INSTANCE_STATE, listener);
+    activity.addListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, persistableListener);
 
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
-    naviActivity.onSaveInstanceState(bundle, persistableBundle);
-    verify(listener).call(new BundleBundle(bundle, persistableBundle));
+    activity.onSaveInstanceState(bundle, persistableBundle);
+    verify(listener).call(bundle);
+    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    naviActivity.removeSaveInstanceStateListener(listener);
-    naviActivity.onSaveInstanceState(bundle, persistableBundle);
+    activity.removeListener(Event.SAVE_INSTANCE_STATE, listener);
+    activity.removeListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, persistableListener);
+    activity.onSaveInstanceState(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
+    verifyNoMoreInteractions(persistableListener);
   }
 
   @Test public void restoreInstanceStateListener() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addRestoreInstanceStateListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    activity.addListener(Event.RESTORE_INSTANCE_STATE, listener);
 
     Bundle bundle = new Bundle();
-    naviActivity.onRestoreInstanceState(bundle);
-    verify(listener).call(new BundleBundle(bundle));
+    activity.onRestoreInstanceState(bundle);
+    verify(listener).call(bundle);
 
-    naviActivity.removeRestoreInstanceStateListener(listener);
-    naviActivity.onRestoreInstanceState(bundle);
+    activity.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
+    activity.onSaveInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void restoreInstanceStateListenerPersistable() {
-    Listener1<BundleBundle> listener = mock(Listener1.class);
-    naviActivity.addRestoreInstanceStateListener(listener);
+  @Test public void restoreInstanceStatePersistableListener() {
+    Listener<Bundle> listener = mock(Listener.class);
+    Listener<BundleBundle> persistableListener = mock(Listener.class);
+    activity.addListener(Event.RESTORE_INSTANCE_STATE, listener);
+    activity.addListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, persistableListener);
 
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
-    naviActivity.onRestoreInstanceState(bundle, persistableBundle);
-    verify(listener).call(new BundleBundle(bundle, persistableBundle));
+    activity.onRestoreInstanceState(bundle, persistableBundle);
+    verify(listener).call(bundle);
+    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    naviActivity.removeRestoreInstanceStateListener(listener);
-    naviActivity.onRestoreInstanceState(bundle, persistableBundle);
+    activity.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
+    activity.removeListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, persistableListener);
+    activity.onSaveInstanceState(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
+    verifyNoMoreInteractions(persistableListener);
   }
 
   @Test public void newIntentListener() {
-    Listener1<Intent> listener = mock(Listener1.class);
-    naviActivity.addNewIntentListener(listener);
+    Listener<Intent> listener = mock(Listener.class);
+    activity.addListener(Event.NEW_INTENT, listener);
 
     Intent intent = new Intent();
-    naviActivity.onNewIntent(intent);
+    activity.onNewIntent(intent);
     verify(listener).call(intent);
 
-    naviActivity.removeNewIntentListener(listener);
-    naviActivity.onNewIntent(intent);
+    activity.removeListener(Event.NEW_INTENT, listener);
+    activity.onNewIntent(intent);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void backPressListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addBackPressedListener(listener);
+  @Test public void backPressedListener() {
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.BACK_PRESSED, listener);
 
-    naviActivity.onBackPressed();
-    verify(listener).call();
+    activity.onBackPressed();
+    verify(listener).call(null);
 
-    naviActivity.removeBackPressedListener(listener);
-    naviActivity.onBackPressed();
+    activity.removeListener(Event.BACK_PRESSED, listener);
+    activity.onBackPressed();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void attachedToWindowListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addAttachedToWindowListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.ATTACHED_TO_WINDOW, listener);
 
-    naviActivity.onAttachedToWindow();
-    verify(listener).call();
+    activity.onAttachedToWindow();
+    verify(listener).call(null);
 
-    naviActivity.removeAttachedToWindowListener(listener);
-    naviActivity.onAttachedToWindow();
+    activity.removeListener(Event.ATTACHED_TO_WINDOW, listener);
+    activity.onAttachedToWindow();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void detachedFromWindowListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviActivity.addDetachedFromWindowListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    activity.addListener(Event.DETACHED_FROM_WINDOW, listener);
 
-    naviActivity.onDetachedFromWindow();
-    verify(listener).call();
+    activity.onDetachedFromWindow();
+    verify(listener).call(null);
 
-    naviActivity.removeDetachedFromWindowListener(listener);
-    naviActivity.onDetachedFromWindow();
+    activity.removeListener(Event.DETACHED_FROM_WINDOW, listener);
+    activity.onDetachedFromWindow();
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void configurationChangeListener() {
-    Listener1<Configuration> listener = mock(Listener1.class);
-    naviActivity.addConfigurationChangedListener(listener);
+  @Test public void configurationChangedListener() {
+    Listener<Configuration> listener = mock(Listener.class);
+    activity.addListener(Event.CONFIGURATION_CHANGED, listener);
 
-    Configuration configuration = mock(Configuration.class);
-    naviActivity.onConfigurationChanged(configuration);
+    Configuration configuration = new Configuration();
+    activity.onConfigurationChanged(configuration);
     verify(listener).call(configuration);
 
-    naviActivity.removeConfigurationChangedListener(listener);
-    naviActivity.onConfigurationChanged(configuration);
+    activity.removeListener(Event.CONFIGURATION_CHANGED, listener);
+    activity.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void activityResultListener() {
-    Listener1<ActivityResult> listener = mock(Listener1.class);
-    naviActivity.addActivityResultListener(listener);
+    Listener<ActivityResult> listener = mock(Listener.class);
+    activity.addListener(Event.ACTIVITY_RESULT, listener);
 
-    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
-    naviActivity.onActivityResult(result.requestCode(), result.resultCode(), result.data());
-    verify(listener).call(result);
+    int requestCode = 1;
+    int resultCode = Activity.RESULT_OK;
+    Intent data = new Intent();
+    activity.onActivityResult(requestCode, resultCode, data);
+    verify(listener).call(new ActivityResult(requestCode, resultCode, data));
 
-    naviActivity.removeActivityResultListener(listener);
-    naviActivity.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    activity.removeListener(Event.ACTIVITY_RESULT, listener);
+    activity.onActivityResult(requestCode, resultCode, data);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void requestPermissionsResultListener() {
-    Listener1<RequestPermissionsResult> listener = mock(Listener1.class);
-    naviActivity.addRequestPermissionsResultListener(listener);
+    Listener<RequestPermissionsResult> listener = mock(Listener.class);
+    activity.addListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
 
-    RequestPermissionsResult result = new RequestPermissionsResult(42, new String[0], new int[0]);
-    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
-    verify(listener).call(result);
+    int requestCode = 1;
+    String[] permissions = new String[0];
+    int[] grantResults = new int[0];
+    activity.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
 
-    naviActivity.removeRequestPermissionsResultListener(listener);
-    naviActivity.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
+    activity.removeListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
+    activity.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verifyNoMoreInteractions(listener);
+  }
+
+  // The below should not work with activities
+
+  @Test(expected = IllegalArgumentException.class) public void attachListener() {
+    activity.addListener(Event.ATTACH, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void createViewListener() {
+    activity.addListener(Event.CREATE_VIEW, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void activityCreatedListener() {
+    activity.addListener(Event.ACTIVITY_CREATED, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void viewStateRestoredListener() {
+    activity.addListener(Event.VIEW_STATE_RESTORED, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void destroyViewListener() {
+    activity.addListener(Event.DESTROY_VIEW, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void detachListener() {
+    activity.addListener(Event.DETACH, mock(Listener.class));
   }
 }

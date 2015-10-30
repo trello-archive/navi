@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.Event;
+import com.trello.navi.internal.BaseNaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.RequestPermissionsResult;
 import org.junit.Test;
@@ -17,265 +18,269 @@ import static org.mockito.Mockito.mock;
 
 public final class RxNaviFragmentTest {
 
-  private final BaseNaviFragment naviFragment = new BaseNaviFragment();
+  private final BaseNaviComponent fragment = BaseNaviComponent.createFragmentComponent();
 
-  @Test public void attachingActivity() {
-    setSdkInt(22);
+  @Test public void observeAttach() {
+    setSdkInt(21);
 
     TestSubscriber<Context> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.attaching(naviFragment).subscribe(testSubscriber);
+    Subscription subscription = RxNavi.observe(fragment, Event.ATTACH).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Activity activity = mock(Activity.class);
-    naviFragment.onAttach(activity);
+    fragment.onAttach(activity);
     subscription.unsubscribe();
-    naviFragment.onAttach(activity);
+    fragment.onAttach(activity);
 
     testSubscriber.assertValue(activity);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void attachingContext() {
+  @Test public void observeAttachApi23() {
     setSdkInt(23);
 
     TestSubscriber<Context> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.attaching(naviFragment).subscribe(testSubscriber);
+    Subscription subscription = RxNavi.observe(fragment, Event.ATTACH).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Context context = mock(Context.class);
-    naviFragment.onAttach(context);
+    fragment.onAttach(context);
     subscription.unsubscribe();
-    naviFragment.onAttach(context);
+    fragment.onAttach(context);
 
     testSubscriber.assertValue(context);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void creating() {
+
+  @Test public void observeCreate() {
     TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.creating(naviFragment).subscribe(testSubscriber);
+    Subscription subscription = RxNavi.observe(fragment, Event.CREATE).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Bundle bundle = new Bundle();
-    naviFragment.onCreate(bundle);
+    fragment.onCreate(bundle);
     subscription.unsubscribe();
-    naviFragment.onCreate(bundle);
+    fragment.onCreate(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void creatingView() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.creatingView(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    Bundle bundle = new Bundle();
-    naviFragment.onCreateView(bundle);
-    subscription.unsubscribe();
-    naviFragment.onCreateView(bundle);
-
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void activityCreated() {
+  @Test public void observeCreateView() {
     TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.activityCreated(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.CREATE_VIEW).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Bundle bundle = new Bundle();
-    naviFragment.onActivityCreated(bundle);
+    fragment.onCreateView(bundle);
     subscription.unsubscribe();
-    naviFragment.onActivityCreated(bundle);
+    fragment.onCreateView(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void viewStateRestored() {
+  @Test public void observeActivityCreated() {
     TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.viewStateRestored(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.ACTIVITY_CREATED).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Bundle bundle = new Bundle();
-    naviFragment.onViewStateRestored(bundle);
+    fragment.onActivityCreated(bundle);
     subscription.unsubscribe();
-    naviFragment.onViewStateRestored(bundle);
+    fragment.onActivityCreated(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void starting() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.starting(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onStart();
-    subscription.unsubscribe();
-    naviFragment.onStart();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void resuming() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.resuming(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onResume();
-    subscription.unsubscribe();
-    naviFragment.onResume();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void pausing() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.pausing(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onPause();
-    subscription.unsubscribe();
-    naviFragment.onPause();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void stopping() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.stopping(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onStop();
-    subscription.unsubscribe();
-    naviFragment.onStop();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void destroyingView() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNaviFragment.destroyingView(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onDestroyView();
-    subscription.unsubscribe();
-    naviFragment.onDestroyView();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void destroying() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.destroying(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onDestroy();
-    subscription.unsubscribe();
-    naviFragment.onDestroy();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void detaching() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNaviFragment.detaching(naviFragment).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
-
-    naviFragment.onDetach();
-    subscription.unsubscribe();
-    naviFragment.onDetach();
-
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
-  }
-
-  @Test public void savingInstanceState() {
+  @Test public void observeViewStateRestored() {
     TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.savingInstanceState(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.VIEW_STATE_RESTORED).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Bundle bundle = new Bundle();
-    naviFragment.onSaveInstanceState(bundle);
+    fragment.onViewStateRestored(bundle);
     subscription.unsubscribe();
-    naviFragment.onSaveInstanceState(bundle);
+    fragment.onViewStateRestored(bundle);
 
     testSubscriber.assertValue(bundle);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void configurationChanging() {
+  @Test public void observeStart() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.START).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onStart();
+    subscription.unsubscribe();
+    fragment.onStart();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeResume() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.RESUME).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onResume();
+    subscription.unsubscribe();
+    fragment.onResume();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observePause() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.PAUSE).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onPause();
+    subscription.unsubscribe();
+    fragment.onPause();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeStop() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.STOP).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onStop();
+    subscription.unsubscribe();
+    fragment.onStop();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeDestroyView() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.DESTROY_VIEW).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onDestroyView();
+    subscription.unsubscribe();
+    fragment.onDestroyView();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeDestroy() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.DESTROY).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onDestroy();
+    subscription.unsubscribe();
+    fragment.onDestroy();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeDetach() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(fragment, Event.DETACH).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    fragment.onDetach();
+    subscription.unsubscribe();
+    fragment.onDetach();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeSaveInstanceState() {
+    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+        RxNavi.observe(fragment, Event.SAVE_INSTANCE_STATE).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    fragment.onSaveInstanceState(bundle);
+    subscription.unsubscribe();
+    fragment.onSaveInstanceState(bundle);
+
+    testSubscriber.assertValue(bundle);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
+  @Test public void observeConfigurationChanged() {
     TestSubscriber<Configuration> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.configurationChanging(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.CONFIGURATION_CHANGED).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
     Configuration configuration = mock(Configuration.class);
-    naviFragment.onConfigurationChanged(configuration);
+    fragment.onConfigurationChanged(configuration);
     subscription.unsubscribe();
-    naviFragment.onConfigurationChanged(configuration);
+    fragment.onConfigurationChanged(configuration);
 
     testSubscriber.assertValue(configuration);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void activityResults() {
+  @Test public void observeActivityResult() {
     TestSubscriber<ActivityResult> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.activityResults(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.ACTIVITY_RESULT).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
-    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
-    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    int requestCode = 1;
+    int resultCode = Activity.RESULT_OK;
+    Intent data = new Intent();
+    fragment.onActivityResult(requestCode, resultCode, data);
     subscription.unsubscribe();
-    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    fragment.onActivityResult(requestCode, resultCode, data);
 
-    testSubscriber.assertValue(result);
+    testSubscriber.assertValue(new ActivityResult(requestCode, resultCode, data));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void requestPermissionsResults() {
+  @Test public void observeRequestPermissionsResult() {
     TestSubscriber<RequestPermissionsResult> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
-        RxNaviFragment.requestPermissionsResults(naviFragment).subscribe(testSubscriber);
+        RxNavi.observe(fragment, Event.REQUEST_PERMISSIONS_RESULT).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
-    RequestPermissionsResult result = new RequestPermissionsResult(42, new String[0], new int[0]);
-    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
+    int requestCode = 1;
+    String[] permissions = new String[0];
+    int[] grantResults = new int[0];
+    fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     subscription.unsubscribe();
-    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
+    fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-    testSubscriber.assertValue(result);
+    testSubscriber.assertValue(
+        new RequestPermissionsResult(requestCode, permissions, grantResults));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

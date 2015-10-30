@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import com.trello.navi.internal.BaseNaviFragment;
+import com.trello.navi.internal.BaseNaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.RequestPermissionsResult;
 import org.junit.Test;
@@ -17,225 +17,269 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public final class NaviFragmentTest {
 
-  private final BaseNaviFragment naviFragment = new BaseNaviFragment();
+  private final BaseNaviComponent fragment = BaseNaviComponent.createFragmentComponent();
 
-  @Test public void attachActivityListener() {
-    setSdkInt(22);
+  @Test public void attachListener() {
+    setSdkInt(21);
 
-    Listener1<Context> listener = mock(Listener1.class);
-    naviFragment.addAttachListener(listener);
+    Listener<Context> listener = mock(Listener.class);
+    fragment.addListener(Event.ATTACH, listener);
 
     Activity activity = mock(Activity.class);
-    naviFragment.onAttach(activity);
+    fragment.onAttach(activity);
     verify(listener).call(activity);
 
-    naviFragment.removeAttachListener(listener);
-    naviFragment.onAttach(activity);
+    fragment.removeListener(Event.ATTACH, listener);
+    fragment.onAttach(activity);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void attachContextListener() {
+  @Test public void attachListenerApi23() {
     setSdkInt(23);
 
-    Listener1<Context> listener = mock(Listener1.class);
-    naviFragment.addAttachListener(listener);
+    Listener<Context> listener = mock(Listener.class);
+    fragment.addListener(Event.ATTACH, listener);
 
     Context context = mock(Context.class);
-    naviFragment.onAttach(context);
+    fragment.onAttach(context);
     verify(listener).call(context);
 
-    naviFragment.removeAttachListener(listener);
-    naviFragment.onAttach(context);
+    fragment.removeListener(Event.ATTACH, listener);
+    fragment.onAttach(context);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void createListener() {
-    Listener1<Bundle> listener = mock(Listener1.class);
-    naviFragment.addCreateListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    fragment.addListener(Event.CREATE, listener);
 
     Bundle bundle = new Bundle();
-    naviFragment.onCreate(bundle);
+    fragment.onCreate(bundle);
     verify(listener).call(bundle);
 
-    naviFragment.removeCreateListener(listener);
-    naviFragment.onCreate(bundle);
+    fragment.removeListener(Event.CREATE, listener);
+    fragment.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void createViewListener() {
-    Listener1<Bundle> listener = mock(Listener1.class);
-    naviFragment.addCreateViewListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    fragment.addListener(Event.CREATE_VIEW, listener);
 
     Bundle bundle = new Bundle();
-    naviFragment.onCreateView(bundle);
+    fragment.onCreateView(bundle);
     verify(listener).call(bundle);
 
-    naviFragment.removeCreateViewListener(listener);
-    naviFragment.onCreateView(bundle);
+    fragment.removeListener(Event.CREATE_VIEW, listener);
+    fragment.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void activityCreatedListener() {
-    Listener1<Bundle> listener = mock(Listener1.class);
-    naviFragment.addActivityCreatedListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    fragment.addListener(Event.ACTIVITY_CREATED, listener);
 
     Bundle bundle = new Bundle();
-    naviFragment.onActivityCreated(bundle);
+    fragment.onActivityCreated(bundle);
     verify(listener).call(bundle);
 
-    naviFragment.removeActivityCreatedListener(listener);
-    naviFragment.onActivityCreated(bundle);
+    fragment.removeListener(Event.ACTIVITY_CREATED, listener);
+    fragment.onActivityCreated(bundle);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void viewStateRestoredListener() {
-    Listener1<Bundle> listener = mock(Listener1.class);
-    naviFragment.addViewStateRestoredListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    fragment.addListener(Event.VIEW_STATE_RESTORED, listener);
 
     Bundle bundle = new Bundle();
-    naviFragment.onViewStateRestored(bundle);
+    fragment.onViewStateRestored(bundle);
     verify(listener).call(bundle);
 
-    naviFragment.removeViewStateRestoredListener(listener);
-    naviFragment.onViewStateRestored(bundle);
+    fragment.removeListener(Event.VIEW_STATE_RESTORED, listener);
+    fragment.onViewStateRestored(bundle);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void startListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addStartListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.START, listener);
 
-    naviFragment.onStart();
-    verify(listener).call();
+    fragment.onStart();
+    verify(listener).call(null);
 
-    naviFragment.removeStartListener(listener);
-    naviFragment.onStart();
+    fragment.removeListener(Event.START, listener);
+    fragment.onStart();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void resumeListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addResumeListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.RESUME, listener);
 
-    naviFragment.onResume();
-    verify(listener).call();
+    fragment.onResume();
+    verify(listener).call(null);
 
-    naviFragment.removeResumeListener(listener);
-    naviFragment.onResume();
+    fragment.removeListener(Event.RESUME, listener);
+    fragment.onResume();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void pauseListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addPauseListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.PAUSE, listener);
 
-    naviFragment.onPause();
-    verify(listener).call();
+    fragment.onPause();
+    verify(listener).call(null);
 
-    naviFragment.removePauseListener(listener);
-    naviFragment.onPause();
+    fragment.removeListener(Event.PAUSE, listener);
+    fragment.onPause();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void stopListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addStopListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.STOP, listener);
 
-    naviFragment.onStop();
-    verify(listener).call();
+    fragment.onStop();
+    verify(listener).call(null);
 
-    naviFragment.removeStopListener(listener);
-    naviFragment.onStop();
+    fragment.removeListener(Event.STOP, listener);
+    fragment.onStop();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void destroyViewListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addDestroyViewListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.DESTROY_VIEW, listener);
 
-    naviFragment.onDestroyView();
-    verify(listener).call();
+    fragment.onDestroyView();
+    verify(listener).call(null);
 
-    naviFragment.removeDestroyViewListener(listener);
-    naviFragment.onDestroyView();
+    fragment.removeListener(Event.DESTROY_VIEW, listener);
+    fragment.onDestroyView();
     verifyNoMoreInteractions(listener);
+
+    fragment.addListener(Event.DESTROY_VIEW, mock(Listener.class));
   }
 
   @Test public void destroyListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addDestroyListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.DESTROY, listener);
 
-    naviFragment.onDestroy();
-    verify(listener).call();
+    fragment.onDestroy();
+    verify(listener).call(null);
 
-    naviFragment.removeDestroyListener(listener);
-    naviFragment.onDestroy();
+    fragment.removeListener(Event.DESTROY, listener);
+    fragment.onDestroy();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void detachListener() {
-    Listener0 listener = mock(Listener0.class);
-    naviFragment.addDetachListener(listener);
+    Listener<Void> listener = mock(Listener.class);
+    fragment.addListener(Event.DETACH, listener);
 
-    naviFragment.onDetach();
-    verify(listener).call();
+    fragment.onDetach();
+    verify(listener).call(null);
 
-    naviFragment.removeDetachListener(listener);
-    naviFragment.onDetach();
+    fragment.removeListener(Event.DETACH, listener);
+    fragment.onDetach();
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void saveInstanceStateListener() {
-    Listener1<Bundle> listener = mock(Listener1.class);
-    naviFragment.addSaveInstanceStateListener(listener);
+    Listener<Bundle> listener = mock(Listener.class);
+    fragment.addListener(Event.SAVE_INSTANCE_STATE, listener);
 
     Bundle bundle = new Bundle();
-    naviFragment.onSaveInstanceState(bundle);
+    fragment.onSaveInstanceState(bundle);
     verify(listener).call(bundle);
 
-    naviFragment.removeSaveInstanceStateListener(listener);
-    naviFragment.onSaveInstanceState(bundle);
+    fragment.removeListener(Event.SAVE_INSTANCE_STATE, listener);
+    fragment.onSaveInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
 
-  @Test public void configurationChangeListener() {
-    Listener1<Configuration> listener = mock(Listener1.class);
-    naviFragment.addConfigurationChangedListener(listener);
+  @Test public void configurationChangedListener() {
+    Listener<Configuration> listener = mock(Listener.class);
+    fragment.addListener(Event.CONFIGURATION_CHANGED, listener);
 
-    Configuration configuration = mock(Configuration.class);
-    naviFragment.onConfigurationChanged(configuration);
+    Configuration configuration = new Configuration();
+    fragment.onConfigurationChanged(configuration);
     verify(listener).call(configuration);
 
-    naviFragment.removeConfigurationChangedListener(listener);
-    naviFragment.onConfigurationChanged(configuration);
+    fragment.removeListener(Event.CONFIGURATION_CHANGED, listener);
+    fragment.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void activityResultListener() {
-    Listener1<ActivityResult> listener = mock(Listener1.class);
-    naviFragment.addActivityResultListener(listener);
+    Listener<ActivityResult> listener = mock(Listener.class);
+    fragment.addListener(Event.ACTIVITY_RESULT, listener);
 
-    ActivityResult result = new ActivityResult(1, Activity.RESULT_OK, new Intent());
-    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
-    verify(listener).call(result);
+    int requestCode = 1;
+    int resultCode = Activity.RESULT_OK;
+    Intent data = new Intent();
+    fragment.onActivityResult(requestCode, resultCode, data);
+    verify(listener).call(new ActivityResult(requestCode, resultCode, data));
 
-    naviFragment.removeActivityResultListener(listener);
-    naviFragment.onActivityResult(result.requestCode(), result.resultCode(), result.data());
+    fragment.removeListener(Event.ACTIVITY_RESULT, listener);
+    fragment.onActivityResult(requestCode, resultCode, data);
     verifyNoMoreInteractions(listener);
   }
 
   @Test public void requestPermissionsResultListener() {
-    Listener1<RequestPermissionsResult> listener = mock(Listener1.class);
-    naviFragment.addRequestPermissionsResultListener(listener);
+    Listener<RequestPermissionsResult> listener = mock(Listener.class);
+    fragment.addListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
 
-    RequestPermissionsResult result = new RequestPermissionsResult(42, new String[0], new int[0]);
-    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
-    verify(listener).call(result);
+    int requestCode = 1;
+    String[] permissions = new String[0];
+    int[] grantResults = new int[0];
+    fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
 
-    naviFragment.removeRequestPermissionsResultListener(listener);
-    naviFragment.onRequestPermissionsResult(result.requestCode(), result.permissions(),
-        result.grantResults());
+    fragment.removeListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
+    fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verifyNoMoreInteractions(listener);
+  }
+
+  // The below should not work with fragments
+
+  @Test(expected = IllegalArgumentException.class) public void createPersistableListener() {
+    fragment.addListener(Event.CREATE_PERSISTABLE, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void restartListener() {
+    fragment.addListener(Event.RESTART, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void saveInstanceStatePersistableListener() {
+    fragment.addListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void restoreInstanceStateListener() {
+    fragment.addListener(Event.RESTORE_INSTANCE_STATE, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void restoreInstanceStatePersistableListener() {
+    fragment.addListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void newIntentListener() {
+    fragment.addListener(Event.NEW_INTENT, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void backPressedListener() {
+    fragment.addListener(Event.BACK_PRESSED, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void attachedToWindowListener() {
+    fragment.addListener(Event.ATTACHED_TO_WINDOW, mock(Listener.class));
+  }
+
+  @Test(expected = IllegalArgumentException.class) public void detachedFromWindowListener() {
+    fragment.addListener(Event.DETACHED_FROM_WINDOW, mock(Listener.class));
   }
 }
