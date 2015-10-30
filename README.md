@@ -4,30 +4,32 @@
 
 Adds listeners for `Activity` and `Fragment`.
 
-## WARNING
-
-If you can't tell, this is a work in progress! It's not even alpha and you shouldn't use it.
-
-It's open for comments, feedback, etc. but most likely everything will change.
-
 ## Why?
 
 In a word: **composition**.
 
 **For applications**, you currently have to tie a lot of your functionality directly to each `Activity` and `Fragment`. The potential for code reuse is low. Testing is difficult.
 
-**For libraries**, if you want to interact with the `Activity` or `Fragment` at all, good luck. You either have to leave brittle instructions on how to properly implement the library, or you provide your own `Activity`/`Fragment`. Two libraries with the same problem are difficult (or impossible) to use together.
+**For libraries**, if you want to interact with the `Activity` or `Fragment` at all, good luck. You either have to leave brittle instructions on how to properly implement the library, or you provide your own `Activity`/`Fragment`. Two libraries providing their own components are difficult (or impossible) to use together.
 
 With Navi, you can avoid all these problems. Applications can decouple your code from the underlying `Activity` or `Fragment`. Libraries using Navi can write real plugins instead of brittle/coupled solutions.
 
 ## Usage
 
 `NaviComponent` is the basis for everything; you can add/remove listeners for
-any specific callbacks that exist on `Activity` and `Fragment`.
+any specific callbacks that exist on `Activity` and `Fragment`:
 
-Implementing the interface yourself would be a pain, so Navi provides default
+```java
+naviComponent.addListener(Event.CREATE, new Listener<Bundle>() {
+  @Override public void call(Bundle bundle) {
+    setContentView(R.layout.main);
+  }
+});
+```
+
+Implementing the `NaviComponent` interface yourself would be a pain, so Navi provides default
 implementations in `NaviActivity`, `NaviAppCompatActivity`, `NaviFragment` and
-`DialogNaviFragment`.
+`NaviDialogFragment`.
 
 Since RxJava is the bees knees, it also provides Rx bindings for all listeners via `RxNavi`. Simply pass your `NaviComponent` to them and it'll do the
 rest. For example, you could use it to set the content view instead of overriding `onCreate()`:
@@ -36,15 +38,6 @@ rest. For example, you could use it to set the content view instead of overridin
 RxNavi.observe(naviComponent, Event.CREATE)
     .subscribe(bundle -> setContentView(R.layout.main));
 ```
-
-## Issues
-
-- How do we handle events like `Fragment.onCreateView()`? Obviously we can't have multiple listeners returning `Views` they all want to be the `Fragment`. However, if we don't at least provide the option then it's not possible to create an entirely listener-based `Fragment`.
-
-## Plans
-
-- Gather feedback
-- Implement more listeners
 
 ## Installation
 
