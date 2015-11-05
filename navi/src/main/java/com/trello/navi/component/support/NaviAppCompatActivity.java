@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import com.trello.navi.Event;
 import com.trello.navi.Listener;
@@ -19,11 +20,11 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
   }
 
   @Override public <T> void addListener(Event<T> event, Listener<T> listener) {
-    addListener(event, listener);
+    base.addListener(event, listener);
   }
 
   @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    removeListener(event, listener);
+    base.removeListener(event, listener);
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +118,8 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
     base.onActivityResult(requestCode, resultCode, data);
   }
 
-  @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      int[] grantResults) {
+  @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+      @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     base.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }

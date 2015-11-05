@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,11 +25,11 @@ public class NaviFragment extends Fragment implements NaviComponent {
   }
 
   @Override public <T> void addListener(Event<T> event, Listener<T> listener) {
-    addListener(event, listener);
+    base.addListener(event, listener);
   }
 
   @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    removeListener(event, listener);
+    base.removeListener(event, listener);
   }
 
   @Override public void onAttach(Activity activity) {
@@ -112,8 +113,8 @@ public class NaviFragment extends Fragment implements NaviComponent {
     base.onActivityResult(requestCode, resultCode, data);
   }
 
-  @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      int[] grantResults) {
+  @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+      @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     base.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
