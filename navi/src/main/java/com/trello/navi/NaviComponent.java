@@ -11,6 +11,7 @@ public interface NaviComponent {
    * For example, Activities do not handle Event.CREATE_VIEW since they do not have that step.
    *
    * @param event the event to check
+   * @param <T> the callback type for the event
    * @return true if it can be handled
    */
   <T> boolean hasEvent(Event<T> event);
@@ -20,6 +21,7 @@ public interface NaviComponent {
    *
    * @param event an Event
    * @param listener the listener for that event
+   * @param <T> the callback type for the event
    * @throws IllegalArgumentException if this component cannot handle the event
    */
   <T> void addListener(Event<T> event, Listener<T> listener);
@@ -29,6 +31,7 @@ public interface NaviComponent {
    *
    * @param event an Event
    * @param listener the listener for that event
+   * @param <T> the callback type for the event
    * @throws IllegalArgumentException if this component cannot handle the event
    */
   <T> void removeListener(Event<T> event, Listener<T> listener);
