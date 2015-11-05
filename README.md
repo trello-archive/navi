@@ -41,7 +41,9 @@ RxNavi.observe(naviComponent, Event.CREATE)
 
 ## Installation
 
-You'll just have to compile it yourself for now!
+```gradle
+compile 'com.trello:navi:0.1.0'
+```
 
 ## License
 
