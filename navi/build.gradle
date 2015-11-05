@@ -23,3 +23,6 @@ dependencies {
   testCompile rootProject.ext.junit
   testCompile rootProject.ext.mockito
 }
+
+apply from: "$rootDir/gradle/artifacts.gradle"
+apply from: "$rootDir/gradle/gradle-mvn-push.gradle"
