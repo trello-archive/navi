@@ -14,7 +14,6 @@ import com.trello.navi.NaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Base helper which contains all the actual logic
@@ -31,8 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * without duplicating quite as much code.
  */
 public final class BaseNaviComponent implements NaviComponent {
-
-  private static final int DEFAULT_LIST_SIZE = 3;
 
   private final Set<Event<?>> handledEvents;
 
@@ -104,7 +102,7 @@ public final class BaseNaviComponent implements NaviComponent {
     }
 
     if (!listenerMap.containsKey(event)) {
-      listenerMap.put(event, new ArrayList<Listener>(DEFAULT_LIST_SIZE));
+      listenerMap.put(event, new CopyOnWriteArrayList<Listener>());
     }
 
     List<Listener> listeners = listenerMap.get(event);
@@ -131,8 +129,8 @@ public final class BaseNaviComponent implements NaviComponent {
     }
 
     List<Listener> listeners = listenerMap.get(event);
-    for (int a = 0, size = listeners.size(); a < size; a++) {
-      listeners.get(a).call(data);
+    for (Listener listener : listeners) {
+      listener.call(data);
     }
   }
 
