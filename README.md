@@ -16,7 +16,7 @@ With Navi, you can avoid all these problems. Applications can decouple your code
 
 ## Usage
 
-`NaviComponent` is the basis for everything; you can add/remove listeners for
+The `NaviComponent` interface is the basis for everything; you can add/remove listeners for
 any specific callbacks that exist on `Activity` and `Fragment`:
 
 ```java
@@ -27,9 +27,10 @@ naviComponent.addListener(Event.CREATE, new Listener<Bundle>() {
 });
 ```
 
-Implementing the `NaviComponent` interface yourself would be a pain, so Navi provides default
-implementations in `NaviActivity`, `NaviAppCompatActivity`, `NaviFragment` and
-`NaviDialogFragment`.
+You will either need to implement the `NaviComponent` interface yourself, or if you're able, you
+can save time by using one of the default implementations provided (in the form of `NaviActivity`,
+`NaviAppCompatActivity`, `NaviFragment` and `NaviDialogFragment`). This flexibility allows you to
+integrate Navi even if you're already being forced to use a different base `Activity` or `Fragment`.
 
 Since RxJava is the bees knees, it also provides Rx bindings for all listeners via `RxNavi`. Simply pass your `NaviComponent` to them and it'll do the
 rest. For example, you could use it to set the content view instead of overriding `onCreate()`:
