@@ -15,7 +15,6 @@ import com.trello.navi.NaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,60 +37,17 @@ public final class BaseNaviComponent implements NaviComponent {
 
   private final Map<Event, List<Listener>> listenerMap;
 
-  private static final List<Event<?>> ACTIVITY_EVENTS =
-      Arrays.asList(
-          Event.CREATE,
-          Event.CREATE_PERSISTABLE,
-          Event.START,
-          Event.RESUME,
-          Event.PAUSE,
-          Event.STOP,
-          Event.DESTROY,
-          Event.RESTART,
-          Event.SAVE_INSTANCE_STATE,
-          Event.SAVE_INSTANCE_STATE_PERSISTABLE,
-          Event.RESTORE_INSTANCE_STATE,
-          Event.RESTORE_INSTANCE_STATE_PERSISTABLE,
-          Event.NEW_INTENT,
-          Event.BACK_PRESSED,
-          Event.ATTACHED_TO_WINDOW,
-          Event.DETACHED_FROM_WINDOW,
-          Event.CONFIGURATION_CHANGED,
-          Event.ACTIVITY_RESULT,
-          Event.REQUEST_PERMISSIONS_RESULT
-      );
-
-  private static final List<Event<?>> FRAGMENT_EVENTS =
-      Arrays.asList(
-          Event.ATTACH,
-          Event.CREATE,
-          Event.CREATE_VIEW,
-          Event.ACTIVITY_CREATED,
-          Event.VIEW_STATE_RESTORED,
-          Event.START,
-          Event.RESUME,
-          Event.PAUSE,
-          Event.STOP,
-          Event.DESTROY_VIEW,
-          Event.DESTROY,
-          Event.DETACH,
-          Event.SAVE_INSTANCE_STATE,
-          Event.CONFIGURATION_CHANGED,
-          Event.ACTIVITY_RESULT,
-          Event.REQUEST_PERMISSIONS_RESULT
-      );
-
   public BaseNaviComponent(@NonNull Collection<Event<?>> handledEvents) {
     this.handledEvents = Collections.unmodifiableSet(new HashSet<>(handledEvents));
     this.listenerMap = new ConcurrentHashMap<>();
   }
 
   public static BaseNaviComponent createActivityComponent() {
-    return new BaseNaviComponent(ACTIVITY_EVENTS);
+    return new BaseNaviComponent(HandledEvents.ACTIVITY_EVENTS);
   }
 
   public static BaseNaviComponent createFragmentComponent() {
-    return new BaseNaviComponent(FRAGMENT_EVENTS);
+    return new BaseNaviComponent(HandledEvents.FRAGMENT_EVENTS);
   }
 
   @Override public <T> boolean hasEvent(Event<T> event) {
