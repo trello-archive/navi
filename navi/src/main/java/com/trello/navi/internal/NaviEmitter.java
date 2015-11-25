@@ -26,28 +26,28 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Base helper which contains all the actual logic
+ * Emitter of Navi events which contains all the actual logic
  *
  * This makes it easier to port {@link com.trello.navi.NaviComponent} to Activities and Fragments
  * without duplicating quite as much code.
  */
-public final class BaseNaviComponent implements NaviComponent {
+public final class NaviEmitter implements NaviComponent {
 
   private final Set<Event<?>> handledEvents;
 
   private final Map<Event, List<Listener>> listenerMap;
 
-  public BaseNaviComponent(@NonNull Collection<Event<?>> handledEvents) {
+  public NaviEmitter(@NonNull Collection<Event<?>> handledEvents) {
     this.handledEvents = Collections.unmodifiableSet(new HashSet<>(handledEvents));
     this.listenerMap = new ConcurrentHashMap<>();
   }
 
-  public static BaseNaviComponent createActivityComponent() {
-    return new BaseNaviComponent(HandledEvents.ACTIVITY_EVENTS);
+  public static NaviEmitter createActivityEmitter() {
+    return new NaviEmitter(HandledEvents.ACTIVITY_EVENTS);
   }
 
-  public static BaseNaviComponent createFragmentComponent() {
-    return new BaseNaviComponent(HandledEvents.FRAGMENT_EVENTS);
+  public static NaviEmitter createFragmentEmitter() {
+    return new NaviEmitter(HandledEvents.FRAGMENT_EVENTS);
   }
 
   @Override public <T> boolean hasEvent(Event<T> event) {
