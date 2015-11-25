@@ -9,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import com.trello.navi.Event;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
-import com.trello.navi.internal.BaseNaviComponent;
+import com.trello.navi.internal.NaviEmitter;
 
 public class NaviAppCompatActivity extends AppCompatActivity implements NaviComponent {
 
-  private final BaseNaviComponent base = BaseNaviComponent.createActivityComponent();
+  private final NaviEmitter base = NaviEmitter.createActivityEmitter();
 
   @Override public <T> boolean hasEvent(Event<T> event) {
     return base.hasEvent(event);

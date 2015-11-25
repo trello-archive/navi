@@ -14,11 +14,11 @@ import android.view.ViewGroup;
 import com.trello.navi.Event;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
-import com.trello.navi.internal.BaseNaviComponent;
+import com.trello.navi.internal.NaviEmitter;
 
 public class NaviDialogFragment extends DialogFragment implements NaviComponent {
 
-  private final BaseNaviComponent base = BaseNaviComponent.createFragmentComponent();
+  private final NaviEmitter base = NaviEmitter.createFragmentEmitter();
 
   @Override public <T> boolean hasEvent(Event<T> event) {
     return base.hasEvent(event);

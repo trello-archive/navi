@@ -15,7 +15,6 @@ import com.trello.navi.NaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,71 +26,28 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Base helper which contains all the actual logic
+ * Emitter of Navi events which contains all the actual logic
  *
  * This makes it easier to port {@link com.trello.navi.NaviComponent} to Activities and Fragments
  * without duplicating quite as much code.
  */
-public final class BaseNaviComponent implements NaviComponent {
+public final class NaviEmitter implements NaviComponent {
 
   private final Set<Event<?>> handledEvents;
 
   private final Map<Event, List<Listener>> listenerMap;
 
-  private static final List<Event<?>> ACTIVITY_EVENTS =
-      Arrays.asList(
-          Event.CREATE,
-          Event.CREATE_PERSISTABLE,
-          Event.START,
-          Event.RESUME,
-          Event.PAUSE,
-          Event.STOP,
-          Event.DESTROY,
-          Event.RESTART,
-          Event.SAVE_INSTANCE_STATE,
-          Event.SAVE_INSTANCE_STATE_PERSISTABLE,
-          Event.RESTORE_INSTANCE_STATE,
-          Event.RESTORE_INSTANCE_STATE_PERSISTABLE,
-          Event.NEW_INTENT,
-          Event.BACK_PRESSED,
-          Event.ATTACHED_TO_WINDOW,
-          Event.DETACHED_FROM_WINDOW,
-          Event.CONFIGURATION_CHANGED,
-          Event.ACTIVITY_RESULT,
-          Event.REQUEST_PERMISSIONS_RESULT
-      );
-
-  private static final List<Event<?>> FRAGMENT_EVENTS =
-      Arrays.asList(
-          Event.ATTACH,
-          Event.CREATE,
-          Event.CREATE_VIEW,
-          Event.ACTIVITY_CREATED,
-          Event.VIEW_STATE_RESTORED,
-          Event.START,
-          Event.RESUME,
-          Event.PAUSE,
-          Event.STOP,
-          Event.DESTROY_VIEW,
-          Event.DESTROY,
-          Event.DETACH,
-          Event.SAVE_INSTANCE_STATE,
-          Event.CONFIGURATION_CHANGED,
-          Event.ACTIVITY_RESULT,
-          Event.REQUEST_PERMISSIONS_RESULT
-      );
-
-  public BaseNaviComponent(@NonNull Collection<Event<?>> handledEvents) {
+  public NaviEmitter(@NonNull Collection<Event<?>> handledEvents) {
     this.handledEvents = Collections.unmodifiableSet(new HashSet<>(handledEvents));
     this.listenerMap = new ConcurrentHashMap<>();
   }
 
-  public static BaseNaviComponent createActivityComponent() {
-    return new BaseNaviComponent(ACTIVITY_EVENTS);
+  public static NaviEmitter createActivityEmitter() {
+    return new NaviEmitter(HandledEvents.ACTIVITY_EVENTS);
   }
 
-  public static BaseNaviComponent createFragmentComponent() {
-    return new BaseNaviComponent(FRAGMENT_EVENTS);
+  public static NaviEmitter createFragmentEmitter() {
+    return new NaviEmitter(HandledEvents.FRAGMENT_EVENTS);
   }
 
   @Override public <T> boolean hasEvent(Event<T> event) {
