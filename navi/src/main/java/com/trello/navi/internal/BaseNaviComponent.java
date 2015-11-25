@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import com.trello.navi.Event;
+import com.trello.navi.Event.Type;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
 import com.trello.navi.model.ActivityResult;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -93,6 +95,11 @@ public final class BaseNaviComponent implements NaviComponent {
   }
 
   @Override public <T> boolean hasEvent(Event<T> event) {
+    // ALL always works
+    if (event == Event.ALL) {
+      return true;
+    }
+
     return handledEvents.contains(event);
   }
 
@@ -124,13 +131,27 @@ public final class BaseNaviComponent implements NaviComponent {
   }
 
   private <T> void emitEvent(Event<T> event, T data) {
-    if (!listenerMap.containsKey(event)) {
-      return;
+    // We gather listener iterators  all at once so adding/removing listeners during emission
+    // doesn't change the listener list.
+    final List<Listener> listeners = listenerMap.get(event);
+    final Iterator<Listener> listenersIterator =
+        listeners != null ? listeners.listIterator() : null;
+
+    final List<Listener> allListeners = listenerMap.get(Event.ALL);
+    final Iterator<Listener> allListenersIterator =
+        allListeners != null ? allListeners.iterator() : null;
+
+    if (allListenersIterator != null) {
+      final Type type = event.type();
+      while (allListenersIterator.hasNext()) {
+        allListenersIterator.next().call(type);
+      }
     }
 
-    List<Listener> listeners = listenerMap.get(event);
-    for (Listener listener : listeners) {
-      listener.call(data);
+    if (listeners != null) {
+      while (listenersIterator.hasNext()) {
+        listenersIterator.next().call(data);
+      }
     }
   }
 

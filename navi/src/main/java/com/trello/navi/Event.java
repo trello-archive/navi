@@ -17,6 +17,8 @@ import com.trello.navi.model.RequestPermissionsResult;
  */
 public final class Event<T> {
 
+  public static final Event<Type> ALL = new Event<>(Type.ALL, Type.class);
+
   public static final Event<Bundle> CREATE = new Event<>(Type.CREATE, Bundle.class);
   public static final Event<BundleBundle> CREATE_PERSISTABLE =
       new Event<>(Type.CREATE, BundleBundle.class);
@@ -67,6 +69,10 @@ public final class Event<T> {
     this.callbackType = callbackType;
   }
 
+  public Type type() {
+    return eventType;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -90,9 +96,9 @@ public final class Event<T> {
         '}';
   }
 
-  // Allows us to distinguish between listeners that have the same callback but occur
-  // for different events. Private, since no one else needs to know.
-  private enum Type {
+  public enum Type {
+    ALL,
+
     // Shared
     CREATE,
     START,
