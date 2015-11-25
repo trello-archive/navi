@@ -164,7 +164,7 @@ public final class NaviActivityTest {
     verify(listener).call(bundle);
 
     activity.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
-    activity.onSaveInstanceState(bundle);
+    activity.onRestoreInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
 
@@ -182,7 +182,7 @@ public final class NaviActivityTest {
 
     activity.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
     activity.removeListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, persistableListener);
-    activity.onSaveInstanceState(bundle, persistableBundle);
+    activity.onRestoreInstanceState(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
     verifyNoMoreInteractions(persistableListener);
   }
