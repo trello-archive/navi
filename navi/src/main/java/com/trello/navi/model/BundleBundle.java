@@ -4,20 +4,11 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
-/**
- * Combines both the Bundle and PersistableBundle in one object.
- *
- * This avoids needing to handle two separate callbacks for one lifecycle event.
- */
 public final class BundleBundle {
 
   private final Bundle bundle;
 
   private final PersistableBundle persistableBundle;
-
-  public BundleBundle(@Nullable Bundle bundle) {
-    this(bundle, null);
-  }
 
   public BundleBundle(@Nullable Bundle bundle, @Nullable PersistableBundle persistableBundle) {
     this.bundle = bundle;
