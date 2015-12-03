@@ -15,8 +15,8 @@ public class NaviActivity extends Activity implements NaviComponent {
 
   private final NaviEmitter base = NaviEmitter.createActivityEmitter();
 
-  @Override public <T> boolean hasEvent(Event<T> event) {
-    return base.hasEvent(event);
+  @Override public boolean handlesEvents(Event... events) {
+    return base.handlesEvents(events);
   }
 
   @Override public <T> void addListener(Event<T> event, Listener<T> listener) {

@@ -6,15 +6,14 @@ package com.trello.navi;
 public interface NaviComponent {
 
   /**
-   * Determines whether this component can handle a particular type of event.
+   * Determines whether this component can handle particular events.
    *
    * For example, Activities do not handle Event.CREATE_VIEW since they do not have that step.
    *
-   * @param event the event to check
-   * @param <T> the callback type for the event
-   * @return true if it can be handled
+   * @param events the events to check
+   * @return true if all events can be handled
    */
-  <T> boolean hasEvent(Event<T> event);
+  boolean handlesEvents(Event... events);
 
   /**
    * Adds a listener to this component.

@@ -50,17 +50,19 @@ public final class NaviEmitter implements NaviComponent {
     return new NaviEmitter(HandledEvents.FRAGMENT_EVENTS);
   }
 
-  @Override public <T> boolean hasEvent(Event<T> event) {
-    // ALL always works
-    if (event == Event.ALL) {
-      return true;
+  @Override public boolean handlesEvents(Event... events) {
+    for (int a = 0; a < events.length; a++) {
+      Event event = events[a];
+      if (event != Event.ALL && !handledEvents.contains(event)) {
+        return false;
+      }
     }
 
-    return handledEvents.contains(event);
+    return true;
   }
 
   @Override public <T> void addListener(Event<T> event, Listener<T> listener) {
-    if (!hasEvent(event)) {
+    if (!handlesEvents(event)) {
       throw new IllegalArgumentException("This component cannot handle event " + event);
     }
 
@@ -73,7 +75,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    if (!hasEvent(event)) {
+    if (!handlesEvents(event)) {
       throw new IllegalArgumentException("This component cannot handle event " + event);
     }
 
