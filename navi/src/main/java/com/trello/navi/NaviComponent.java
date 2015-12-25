@@ -1,5 +1,7 @@
 package com.trello.navi;
 
+import com.trello.navi.internal.NaviPlugin;
+
 /**
  * Represents an Android component (Activity, Fragment) that can have listeners.
  */
@@ -34,4 +36,8 @@ public interface NaviComponent {
    * @throws IllegalArgumentException if this component cannot handle the event
    */
   <T> void removeListener(Event<T> event, Listener<T> listener);
+
+  void addPlugin(NaviPlugin plugin);
+
+  void removePlugin(NaviPlugin plugin);
 }

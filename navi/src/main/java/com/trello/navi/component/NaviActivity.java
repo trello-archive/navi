@@ -10,6 +10,7 @@ import com.trello.navi.Event;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
 import com.trello.navi.internal.NaviEmitter;
+import com.trello.navi.internal.NaviPlugin;
 
 public class NaviActivity extends Activity implements NaviComponent {
 
@@ -25,6 +26,14 @@ public class NaviActivity extends Activity implements NaviComponent {
 
   @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
     base.removeListener(event, listener);
+  }
+
+  @Override public void addPlugin(NaviPlugin plugin) {
+    base.addPlugin(plugin);
+  }
+
+  @Override public void removePlugin(NaviPlugin plugin) {
+    base.removePlugin(plugin);
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
