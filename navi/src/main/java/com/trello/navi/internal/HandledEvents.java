@@ -32,7 +32,7 @@ public final class HandledEvents {
           Event.REQUEST_PERMISSIONS_RESULT
       );
 
-  static final List<Event<?>> FRAGMENT_EVENTS =
+  public static final List<Event<?>> FRAGMENT_EVENTS =
       Arrays.asList(
           Event.ATTACH,
           Event.CREATE,
