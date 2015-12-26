@@ -16,36 +16,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-public class PluginTest {
+public class NaviActivityPluginTest {
 
   private final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-
-  @Test public void addRemovePlugin() {
-    NaviPlugin plugin = spy(new NaviPlugin(Event.START) {
-      @Override public <T> void onEvent(Event<T> event, T data) {
-
-      }
-    });
-    emitter.addPlugin(plugin);
-    verify(plugin).getEvents();
-
-    emitter.onStart();
-    verify(plugin).onEvent(Event.START, null);
-
-    emitter.removePlugin(plugin);
-    emitter.onStart();
-    verifyNoMoreInteractions(plugin);
-  }
-
-  @Test(expected = IllegalArgumentException.class) public void addWrongPlugin()
-      throws Exception {
-    NaviEmitter emitter = NaviEmitter.createFragmentEmitter();
-    ActivityNaviPlugin plugin = new ActivityNaviPlugin();
-    emitter.addPlugin(plugin);
-  }
+  private ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
 
   @Test public void testOnCreate() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -60,7 +36,6 @@ public class PluginTest {
   }
 
   @Test public void testOnCreatePersistable() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -79,7 +54,6 @@ public class PluginTest {
   }
 
   @Test public void testOnStart() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -93,7 +67,6 @@ public class PluginTest {
   }
 
   @Test public void testOnResume() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -107,7 +80,6 @@ public class PluginTest {
   }
 
   @Test public void testOnPause() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -121,7 +93,6 @@ public class PluginTest {
   }
 
   @Test public void testStop() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -135,7 +106,6 @@ public class PluginTest {
   }
 
   @Test public void testOnDestroy() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -149,7 +119,6 @@ public class PluginTest {
   }
 
   @Test public void testOnSaveInstanceState() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -164,7 +133,6 @@ public class PluginTest {
   }
 
   @Test public void testOnSaveInstanceStatePersistable() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -183,7 +151,6 @@ public class PluginTest {
   }
 
   @Test public void testOnConfigurationChanged() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -198,7 +165,6 @@ public class PluginTest {
   }
 
   @Test public void testOnActivityResult() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -214,7 +180,6 @@ public class PluginTest {
   }
 
   @Test public void testOnRequestPermissionResult() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -232,7 +197,6 @@ public class PluginTest {
   }
 
   @Test public void testOnRestart() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -246,7 +210,6 @@ public class PluginTest {
   }
 
   @Test public void testOnRestoreInstanceState() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -261,7 +224,6 @@ public class PluginTest {
   }
 
   @Test public void testOnRestoreInstanceStatePersistable() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -280,7 +242,6 @@ public class PluginTest {
   }
 
   @Test public void testOnNewIntent() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -295,7 +256,6 @@ public class PluginTest {
   }
 
   @Test public void testOnBackPressed() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -309,7 +269,6 @@ public class PluginTest {
   }
 
   @Test public void testOnAttachedToWindow() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
@@ -323,7 +282,6 @@ public class PluginTest {
   }
 
   @Test public void testOnDetachedToWindow() throws Exception {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
