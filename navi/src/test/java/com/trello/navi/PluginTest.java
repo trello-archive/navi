@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.internal.NaviEmitter;
+import com.trello.navi.internal.NaviPlugin;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
@@ -20,13 +21,16 @@ public class PluginTest {
   private final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
 
   @Test public void addRemovePlugin() {
-    ActivityNaviPlugin plugin = spy(new ActivityNaviPlugin());
+    NaviPlugin plugin = spy(new NaviPlugin(Event.START) {
+      @Override public <T> void onEvent(Event<T> event, T data) {
+
+      }
+    });
     emitter.addPlugin(plugin);
     verify(plugin).getEvents();
 
     emitter.onStart();
     verify(plugin).onEvent(Event.START, null);
-    verify(plugin).onStart();
 
     emitter.removePlugin(plugin);
     emitter.onStart();
