@@ -8,7 +8,9 @@ import android.os.Bundle;
 import com.trello.navi.internal.NaviEmitter;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.RequestPermissionsResult;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static com.trello.navi.TestUtils.setSdkInt;
 import static org.mockito.Mockito.mock;
@@ -16,6 +18,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public final class NaviFragmentTest {
+
+  @Rule public final ExpectedException exception = ExpectedException.none();
 
   private final NaviEmitter emitter = NaviEmitter.createFragmentEmitter();
 
@@ -245,41 +249,50 @@ public final class NaviFragmentTest {
 
   // The below should not work with fragments
 
-  @Test(expected = IllegalArgumentException.class) public void createPersistableListener() {
+  @Test public void createPersistableListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.CREATE_PERSISTABLE, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void restartListener() {
+  @Test public void restartListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.RESTART, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void saveInstanceStatePersistableListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void restoreInstanceStateListener() {
+  @Test public void restoreInstanceStateListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.RESTORE_INSTANCE_STATE, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void restoreInstanceStatePersistableListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void newIntentListener() {
+  @Test public void newIntentListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.NEW_INTENT, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void backPressedListener() {
+  @Test public void backPressedListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.BACK_PRESSED, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void attachedToWindowListener() {
+  @Test public void attachedToWindowListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.ATTACHED_TO_WINDOW, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void detachedFromWindowListener() {
+  @Test public void detachedFromWindowListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.DETACHED_FROM_WINDOW, mock(Listener.class));
   }
 }
