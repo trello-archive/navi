@@ -37,9 +37,12 @@ public final class NaviEmitter implements NaviComponent {
 
   private final Map<Event, List<Listener>> listenerMap;
 
+  private final CopyOnWriteArrayList<NaviPlugin> plugins;
+
   public NaviEmitter(@NonNull Collection<Event<?>> handledEvents) {
     this.handledEvents = Collections.unmodifiableSet(new HashSet<>(handledEvents));
     this.listenerMap = new ConcurrentHashMap<>();
+    this.plugins = new CopyOnWriteArrayList<>();
   }
 
   public static NaviEmitter createActivityEmitter() {
@@ -84,6 +87,21 @@ public final class NaviEmitter implements NaviComponent {
     }
   }
 
+  @Override public void addPlugin(NaviPlugin plugin) {
+    final Set<Event<?>> events = plugin.getEvents();
+    for (Event<?> event : events) {
+      if (!handlesEvents(event)) {
+        throw new IllegalArgumentException("This component cannot handle event " + event);
+      }
+    }
+
+    plugins.add(plugin);
+  }
+
+  @Override public void removePlugin(NaviPlugin plugin) {
+    plugins.remove(plugin);
+  }
+
   private void emitEvent(Event<Void> event) {
     emitEvent(event, null);
   }
@@ -110,6 +128,11 @@ public final class NaviEmitter implements NaviComponent {
       while (listenersIterator.hasNext()) {
         listenersIterator.next().call(data);
       }
+    }
+
+    for (int i = 0; i < plugins.size(); i++) {
+      NaviPlugin plugin = plugins.get(i);
+      plugin.onEvent(event, data);
     }
   }
 

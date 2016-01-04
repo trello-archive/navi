@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * A place to store a common list of handled events by activities and fragments
  */
-final class HandledEvents {
+public final class HandledEvents {
 
-  static final List<Event<?>> ACTIVITY_EVENTS =
+  public static final List<Event<?>> ACTIVITY_EVENTS =
       Arrays.asList(
           Event.CREATE,
           Event.CREATE_PERSISTABLE,
@@ -32,7 +32,7 @@ final class HandledEvents {
           Event.REQUEST_PERMISSIONS_RESULT
       );
 
-  static final List<Event<?>> FRAGMENT_EVENTS =
+  public static final List<Event<?>> FRAGMENT_EVENTS =
       Arrays.asList(
           Event.ATTACH,
           Event.CREATE,

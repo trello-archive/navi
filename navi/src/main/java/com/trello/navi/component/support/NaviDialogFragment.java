@@ -15,6 +15,7 @@ import com.trello.navi.Event;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
 import com.trello.navi.internal.NaviEmitter;
+import com.trello.navi.internal.NaviPlugin;
 
 public class NaviDialogFragment extends DialogFragment implements NaviComponent {
 
@@ -30,6 +31,14 @@ public class NaviDialogFragment extends DialogFragment implements NaviComponent 
 
   @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
     base.removeListener(event, listener);
+  }
+
+  @Override public void addPlugin(NaviPlugin plugin) {
+    base.addPlugin(plugin);
+  }
+
+  @Override public void removePlugin(NaviPlugin plugin) {
+    base.removePlugin(plugin);
   }
 
   @Override public void onAttach(Activity activity) {
