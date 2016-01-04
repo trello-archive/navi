@@ -9,13 +9,17 @@ import com.trello.navi.internal.NaviEmitter;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public final class NaviActivityTest {
+
+  @Rule public final ExpectedException exception = ExpectedException.none();
 
   private final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
 
@@ -281,27 +285,33 @@ public final class NaviActivityTest {
 
   // The below should not work with activities
 
-  @Test(expected = IllegalArgumentException.class) public void attachListener() {
+  @Test public void attachListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.ATTACH, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void createViewListener() {
+  @Test public void createViewListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.CREATE_VIEW, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void activityCreatedListener() {
+  @Test public void activityCreatedListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.ACTIVITY_CREATED, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void viewStateRestoredListener() {
+  @Test public void viewStateRestoredListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.VIEW_STATE_RESTORED, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void destroyViewListener() {
+  @Test public void destroyViewListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.DESTROY_VIEW, mock(Listener.class));
   }
 
-  @Test(expected = IllegalArgumentException.class) public void detachListener() {
+  @Test public void detachListener() {
+    exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.DETACH, mock(Listener.class));
   }
 }
