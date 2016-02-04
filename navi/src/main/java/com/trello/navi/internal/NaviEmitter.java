@@ -35,11 +35,15 @@ public final class NaviEmitter implements NaviComponent {
 
   private final Set<Event<?>> handledEvents;
 
-  private final Map<Event, List<Listener>> listenerMap;
+  private final Map<Event<?>, List<Listener>> listenerMap;
+
+  // Only used for fast removal of listeners
+  private final Map<Listener, Event<?>> eventMap;
 
   public NaviEmitter(@NonNull Collection<Event<?>> handledEvents) {
     this.handledEvents = Collections.unmodifiableSet(new HashSet<>(handledEvents));
     this.listenerMap = new ConcurrentHashMap<>();
+    this.eventMap = new ConcurrentHashMap<>();
   }
 
   public static NaviEmitter createActivityEmitter() {
@@ -66,6 +70,19 @@ public final class NaviEmitter implements NaviComponent {
       throw new IllegalArgumentException("This component cannot handle event " + event);
     }
 
+    // Check that we're not adding the same listener in multiple places
+    // For the same event, it's idempotent; for different events, it's an error
+    if (eventMap.containsKey(listener)) {
+      final Event otherEvent = eventMap.get(listener);
+      if (!event.equals(otherEvent)) {
+        throw new IllegalStateException(
+            "Cannot use the same listener for two events! e1: " + event + " e2: " + otherEvent);
+      }
+      return;
+    }
+
+    eventMap.put(listener, event);
+
     if (!listenerMap.containsKey(event)) {
       listenerMap.put(event, new CopyOnWriteArrayList<Listener>());
     }
@@ -74,12 +91,9 @@ public final class NaviEmitter implements NaviComponent {
     listeners.add(listener);
   }
 
-  @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    if (!handlesEvents(event)) {
-      throw new IllegalArgumentException("This component cannot handle event " + event);
-    }
-
-    if (listenerMap.containsKey(event)) {
+  @Override public <T> void removeListener(Listener<T> listener) {
+    final Event event = eventMap.remove(listener);
+    if (event != null && listenerMap.containsKey(event)) {
       listenerMap.get(event).remove(listener);
     }
   }

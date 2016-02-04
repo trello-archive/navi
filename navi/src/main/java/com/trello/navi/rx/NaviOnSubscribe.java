@@ -32,7 +32,7 @@ final class NaviOnSubscribe<T> implements Observable.OnSubscribe<T> {
 
     subscriber.add(Subscriptions.create(new Action0() {
       @Override public void call() {
-        component.removeListener(event, listener);
+        component.removeListener(listener);
       }
     }));
   }

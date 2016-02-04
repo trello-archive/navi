@@ -28,10 +28,9 @@ public interface NaviComponent {
   /**
    * Removes a listener from this component.
    *
-   * @param event an Event
-   * @param listener the listener for that event
    * @param <T> the callback type for the event
+   * @param listener the listener for that event
    * @throws IllegalArgumentException if this component cannot handle the event
    */
-  <T> void removeListener(Event<T> event, Listener<T> listener);
+  <T> void removeListener(Listener<T> listener);
 }

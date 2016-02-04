@@ -23,8 +23,8 @@ public class NaviActivity extends Activity implements NaviComponent {
     base.addListener(event, listener);
   }
 
-  @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    base.removeListener(event, listener);
+  @Override public <T> void removeListener(Listener<T> listener) {
+    base.removeListener(listener);
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {

@@ -33,7 +33,7 @@ public final class NaviFragmentTest {
     emitter.onAttach(activity);
     verify(listener).call(activity);
 
-    emitter.removeListener(Event.ATTACH, listener);
+    emitter.removeListener(listener);
     emitter.onAttach(activity);
     verifyNoMoreInteractions(listener);
   }
@@ -48,7 +48,7 @@ public final class NaviFragmentTest {
     emitter.onAttach(context);
     verify(listener).call(context);
 
-    emitter.removeListener(Event.ATTACH, listener);
+    emitter.removeListener(listener);
     emitter.onAttach(context);
     verifyNoMoreInteractions(listener);
   }
@@ -61,7 +61,7 @@ public final class NaviFragmentTest {
     emitter.onCreate(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.CREATE, listener);
+    emitter.removeListener(listener);
     emitter.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -74,7 +74,7 @@ public final class NaviFragmentTest {
     emitter.onCreateView(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.CREATE_VIEW, listener);
+    emitter.removeListener(listener);
     emitter.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -87,7 +87,7 @@ public final class NaviFragmentTest {
     emitter.onActivityCreated(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.ACTIVITY_CREATED, listener);
+    emitter.removeListener(listener);
     emitter.onActivityCreated(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -100,7 +100,7 @@ public final class NaviFragmentTest {
     emitter.onViewStateRestored(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.VIEW_STATE_RESTORED, listener);
+    emitter.removeListener(listener);
     emitter.onViewStateRestored(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -112,7 +112,7 @@ public final class NaviFragmentTest {
     emitter.onStart();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.START, listener);
+    emitter.removeListener(listener);
     emitter.onStart();
     verifyNoMoreInteractions(listener);
   }
@@ -124,7 +124,7 @@ public final class NaviFragmentTest {
     emitter.onResume();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.RESUME, listener);
+    emitter.removeListener(listener);
     emitter.onResume();
     verifyNoMoreInteractions(listener);
   }
@@ -136,7 +136,7 @@ public final class NaviFragmentTest {
     emitter.onPause();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.PAUSE, listener);
+    emitter.removeListener(listener);
     emitter.onPause();
     verifyNoMoreInteractions(listener);
   }
@@ -148,7 +148,7 @@ public final class NaviFragmentTest {
     emitter.onStop();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.STOP, listener);
+    emitter.removeListener(listener);
     emitter.onStop();
     verifyNoMoreInteractions(listener);
   }
@@ -160,7 +160,7 @@ public final class NaviFragmentTest {
     emitter.onDestroyView();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.DESTROY_VIEW, listener);
+    emitter.removeListener(listener);
     emitter.onDestroyView();
     verifyNoMoreInteractions(listener);
 
@@ -174,7 +174,7 @@ public final class NaviFragmentTest {
     emitter.onDestroy();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.DESTROY, listener);
+    emitter.removeListener(listener);
     emitter.onDestroy();
     verifyNoMoreInteractions(listener);
   }
@@ -186,7 +186,7 @@ public final class NaviFragmentTest {
     emitter.onDetach();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.DETACH, listener);
+    emitter.removeListener(listener);
     emitter.onDetach();
     verifyNoMoreInteractions(listener);
   }
@@ -199,7 +199,7 @@ public final class NaviFragmentTest {
     emitter.onSaveInstanceState(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.SAVE_INSTANCE_STATE, listener);
+    emitter.removeListener(listener);
     emitter.onSaveInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -212,7 +212,7 @@ public final class NaviFragmentTest {
     emitter.onConfigurationChanged(configuration);
     verify(listener).call(configuration);
 
-    emitter.removeListener(Event.CONFIGURATION_CHANGED, listener);
+    emitter.removeListener(listener);
     emitter.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
@@ -227,7 +227,7 @@ public final class NaviFragmentTest {
     emitter.onActivityResult(requestCode, resultCode, data);
     verify(listener).call(new ActivityResult(requestCode, resultCode, data));
 
-    emitter.removeListener(Event.ACTIVITY_RESULT, listener);
+    emitter.removeListener(listener);
     emitter.onActivityResult(requestCode, resultCode, data);
     verifyNoMoreInteractions(listener);
   }
@@ -242,7 +242,7 @@ public final class NaviFragmentTest {
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
 
-    emitter.removeListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
+    emitter.removeListener(listener);
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verifyNoMoreInteractions(listener);
   }

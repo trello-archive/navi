@@ -31,12 +31,6 @@ public class EventHandlingTest {
     assertFalse(component.handlesEvents(Event.CREATE, Event.CREATE_VIEW));
   }
 
-  @Test public void throwOnRemoveUnsupportedListener() {
-    final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-    exception.expect(IllegalArgumentException.class);
-    emitter.removeListener(Event.DETACH, mock(Listener.class));
-  }
-
   @Test public void throwOnAddUnsupportedListener() {
     final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
     exception.expect(IllegalArgumentException.class);
