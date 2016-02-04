@@ -31,7 +31,7 @@ public final class NaviActivityTest {
     emitter.onCreate(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.CREATE, listener);
+    emitter.removeListener(listener);
     emitter.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -48,8 +48,8 @@ public final class NaviActivityTest {
     verify(listener).call(bundle);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    emitter.removeListener(Event.CREATE, listener);
-    emitter.removeListener(Event.CREATE_PERSISTABLE, persistableListener);
+    emitter.removeListener(listener);
+    emitter.removeListener(persistableListener);
     emitter.onCreate(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
     verifyNoMoreInteractions(persistableListener);
@@ -62,7 +62,7 @@ public final class NaviActivityTest {
     emitter.onStart();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.START, listener);
+    emitter.removeListener(listener);
     emitter.onStart();
     verifyNoMoreInteractions(listener);
   }
@@ -74,7 +74,7 @@ public final class NaviActivityTest {
     emitter.onResume();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.RESUME, listener);
+    emitter.removeListener(listener);
     emitter.onResume();
     verifyNoMoreInteractions(listener);
   }
@@ -86,7 +86,7 @@ public final class NaviActivityTest {
     emitter.onPause();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.PAUSE, listener);
+    emitter.removeListener(listener);
     emitter.onPause();
     verifyNoMoreInteractions(listener);
   }
@@ -98,7 +98,7 @@ public final class NaviActivityTest {
     emitter.onStop();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.STOP, listener);
+    emitter.removeListener(listener);
     emitter.onStop();
     verifyNoMoreInteractions(listener);
   }
@@ -110,7 +110,7 @@ public final class NaviActivityTest {
     emitter.onDestroy();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.DESTROY, listener);
+    emitter.removeListener(listener);
     emitter.onDestroy();
     verifyNoMoreInteractions(listener);
   }
@@ -122,7 +122,7 @@ public final class NaviActivityTest {
     emitter.onRestart();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.RESTART, listener);
+    emitter.removeListener(listener);
     emitter.onRestart();
     verifyNoMoreInteractions(listener);
   }
@@ -135,7 +135,7 @@ public final class NaviActivityTest {
     emitter.onSaveInstanceState(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.SAVE_INSTANCE_STATE, listener);
+    emitter.removeListener(listener);
     emitter.onSaveInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -152,8 +152,8 @@ public final class NaviActivityTest {
     verify(listener).call(bundle);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    emitter.removeListener(Event.SAVE_INSTANCE_STATE, listener);
-    emitter.removeListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, persistableListener);
+    emitter.removeListener(listener);
+    emitter.removeListener(persistableListener);
     emitter.onSaveInstanceState(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
     verifyNoMoreInteractions(persistableListener);
@@ -167,7 +167,7 @@ public final class NaviActivityTest {
     emitter.onRestoreInstanceState(bundle);
     verify(listener).call(bundle);
 
-    emitter.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
+    emitter.removeListener(listener);
     emitter.onRestoreInstanceState(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -184,8 +184,8 @@ public final class NaviActivityTest {
     verify(listener).call(bundle);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
-    emitter.removeListener(Event.RESTORE_INSTANCE_STATE, listener);
-    emitter.removeListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, persistableListener);
+    emitter.removeListener(listener);
+    emitter.removeListener(persistableListener);
     emitter.onRestoreInstanceState(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
     verifyNoMoreInteractions(persistableListener);
@@ -199,7 +199,7 @@ public final class NaviActivityTest {
     emitter.onNewIntent(intent);
     verify(listener).call(intent);
 
-    emitter.removeListener(Event.NEW_INTENT, listener);
+    emitter.removeListener(listener);
     emitter.onNewIntent(intent);
     verifyNoMoreInteractions(listener);
   }
@@ -211,7 +211,7 @@ public final class NaviActivityTest {
     emitter.onBackPressed();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.BACK_PRESSED, listener);
+    emitter.removeListener(listener);
     emitter.onBackPressed();
     verifyNoMoreInteractions(listener);
   }
@@ -223,7 +223,7 @@ public final class NaviActivityTest {
     emitter.onAttachedToWindow();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.ATTACHED_TO_WINDOW, listener);
+    emitter.removeListener(listener);
     emitter.onAttachedToWindow();
     verifyNoMoreInteractions(listener);
   }
@@ -235,7 +235,7 @@ public final class NaviActivityTest {
     emitter.onDetachedFromWindow();
     verify(listener).call(null);
 
-    emitter.removeListener(Event.DETACHED_FROM_WINDOW, listener);
+    emitter.removeListener(listener);
     emitter.onDetachedFromWindow();
     verifyNoMoreInteractions(listener);
   }
@@ -248,7 +248,7 @@ public final class NaviActivityTest {
     emitter.onConfigurationChanged(configuration);
     verify(listener).call(configuration);
 
-    emitter.removeListener(Event.CONFIGURATION_CHANGED, listener);
+    emitter.removeListener(listener);
     emitter.onConfigurationChanged(configuration);
     verifyNoMoreInteractions(listener);
   }
@@ -263,7 +263,7 @@ public final class NaviActivityTest {
     emitter.onActivityResult(requestCode, resultCode, data);
     verify(listener).call(new ActivityResult(requestCode, resultCode, data));
 
-    emitter.removeListener(Event.ACTIVITY_RESULT, listener);
+    emitter.removeListener(listener);
     emitter.onActivityResult(requestCode, resultCode, data);
     verifyNoMoreInteractions(listener);
   }
@@ -278,7 +278,7 @@ public final class NaviActivityTest {
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
 
-    emitter.removeListener(Event.REQUEST_PERMISSIONS_RESULT, listener);
+    emitter.removeListener(listener);
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     verifyNoMoreInteractions(listener);
   }

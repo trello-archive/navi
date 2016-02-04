@@ -17,12 +17,12 @@ public final class ConcurrencyTest {
   @Test public void handleInnerRemovals() {
     final Listener<Void> listener1 = spy(new Listener<Void>() {
       @Override public void call(Void __) {
-        emitter.removeListener(Event.RESUME, this);
+        emitter.removeListener(this);
       }
     });
     final Listener<Void> listener2 = spy(new Listener<Void>() {
       @Override public void call(Void __) {
-        emitter.removeListener(Event.RESUME, this);
+        emitter.removeListener(this);
       }
     });
 
@@ -90,7 +90,7 @@ public final class ConcurrencyTest {
     final Listener<Void> removedDuringEmit = mock(Listener.class);
     final Listener<Void> listener = spy(new Listener<Void>() {
       @Override public void call(Void __) {
-        emitter.removeListener(Event.RESUME, removedDuringEmit);
+        emitter.removeListener(removedDuringEmit);
       }
     });
 
@@ -108,7 +108,7 @@ public final class ConcurrencyTest {
     final Listener<Type> removedDuringEmit = mock(Listener.class);
     final Listener<Void> listener = spy(new Listener<Void>() {
       @Override public void call(Void __) {
-        emitter.removeListener(Event.ALL, removedDuringEmit);
+        emitter.removeListener(removedDuringEmit);
       }
     });
 
@@ -126,7 +126,7 @@ public final class ConcurrencyTest {
     final Listener<Void> removedDuringEmit = mock(Listener.class);
     final Listener<Type> listener = spy(new Listener<Type>() {
       @Override public void call(Type type) {
-        emitter.removeListener(Event.RESUME, removedDuringEmit);
+        emitter.removeListener(removedDuringEmit);
       }
     });
 

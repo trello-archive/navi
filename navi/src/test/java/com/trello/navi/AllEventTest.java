@@ -23,7 +23,7 @@ public final class AllEventTest {
     emitter.onStart();
     verify(listener).call(Type.START);
 
-    emitter.removeListener(Event.ALL, listener);
+    emitter.removeListener(listener);
     emitter.onStart();
     verifyNoMoreInteractions(listener);
   }
@@ -37,7 +37,7 @@ public final class AllEventTest {
     emitter.onCreate(bundle);
     verify(listener).call(Type.CREATE);
 
-    emitter.removeListener(Event.ALL, listener);
+    emitter.removeListener(listener);
     emitter.onCreate(bundle);
     verifyNoMoreInteractions(listener);
   }
@@ -52,7 +52,7 @@ public final class AllEventTest {
     emitter.onCreate(bundle, persistableBundle);
     verify(listener, times(2)).call(Type.CREATE);
 
-    emitter.removeListener(Event.ALL, listener);
+    emitter.removeListener(listener);
     emitter.onCreate(bundle, persistableBundle);
     verifyNoMoreInteractions(listener);
   }

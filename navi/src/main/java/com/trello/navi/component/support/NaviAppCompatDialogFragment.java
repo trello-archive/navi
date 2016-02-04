@@ -28,8 +28,8 @@ public class NaviAppCompatDialogFragment extends DialogFragment implements NaviC
     base.addListener(event, listener);
   }
 
-  @Override public <T> void removeListener(Event<T> event, Listener<T> listener) {
-    base.removeListener(event, listener);
+  @Override public <T> void removeListener(Listener<T> listener) {
+    base.removeListener(listener);
   }
 
   @Override public void onAttach(Activity activity) {
