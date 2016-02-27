@@ -7,7 +7,6 @@ import com.trello.navi.internal.NaviEmitter;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -50,7 +49,7 @@ public final class AllEventTest {
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onCreate(bundle, persistableBundle);
-    verify(listener, times(2)).call(Type.CREATE);
+    verify(listener).call(Type.CREATE);
 
     emitter.removeListener(listener);
     emitter.onCreate(bundle, persistableBundle);
