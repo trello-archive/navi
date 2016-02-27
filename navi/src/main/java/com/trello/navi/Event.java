@@ -43,7 +43,7 @@ public final class Event<T> {
    * Emits {@link Activity#onCreate(Bundle, PersistableBundle)}. Emitted after super().
    */
   public static final Event<BundleBundle> CREATE_PERSISTABLE =
-      new Event<>(Type.CREATE, BundleBundle.class);
+      new Event<>(Type.CREATE_PERSISTABLE, BundleBundle.class);
 
   /**
    * Emits {@link Activity#onStart()} and {@link Fragment#onStart()}. Emitted after super().
@@ -74,14 +74,14 @@ public final class Event<T> {
    * Emits {@link Activity#onSaveInstanceState(Bundle)} and
    * {@link Fragment#onSaveInstanceState(Bundle)}. Emitted after super().
    */
-  public static final Event<BundleBundle> SAVE_INSTANCE_STATE_PERSISTABLE =
-      new Event<>(Type.SAVE_INSTANCE_STATE, BundleBundle.class);
+  public static final Event<Bundle> SAVE_INSTANCE_STATE =
+      new Event<>(Type.SAVE_INSTANCE_STATE, Bundle.class);
 
   /**
    * Emits {@link Activity#onSaveInstanceState(Bundle, PersistableBundle)}. Emitted after super().
    */
-  public static final Event<Bundle> SAVE_INSTANCE_STATE =
-      new Event<>(Type.SAVE_INSTANCE_STATE, Bundle.class);
+  public static final Event<BundleBundle> SAVE_INSTANCE_STATE_PERSISTABLE =
+      new Event<>(Type.SAVE_INSTANCE_STATE_PERSISTABLE, BundleBundle.class);
 
   /**
    * Emits {@link Activity#onConfigurationChanged(Configuration)} and
@@ -120,7 +120,7 @@ public final class Event<T> {
    * super().
    */
   public static final Event<BundleBundle> RESTORE_INSTANCE_STATE_PERSISTABLE =
-      new Event<>(Type.RESTORE_INSTANCE_STATE, BundleBundle.class);
+      new Event<>(Type.RESTORE_INSTANCE_STATE_PERSISTABLE, BundleBundle.class);
 
   /**
    * Emits {@link Activity#onNewIntent(Intent)}. Emitted after super().
@@ -229,8 +229,11 @@ public final class Event<T> {
     REQUEST_PERMISSIONS_RESULT,
 
     // Activity-only
+    CREATE_PERSISTABLE,
     RESTART,
+    SAVE_INSTANCE_STATE_PERSISTABLE,
     RESTORE_INSTANCE_STATE,
+    RESTORE_INSTANCE_STATE_PERSISTABLE,
     NEW_INTENT,
     BACK_PRESSED,
     ATTACHED_TO_WINDOW,

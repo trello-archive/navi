@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 public final class NaviActivityTest {
 
@@ -45,7 +46,7 @@ public final class NaviActivityTest {
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onCreate(bundle, persistableBundle);
-    verify(listener).call(bundle);
+    verifyZeroInteractions(listener);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
     emitter.removeListener(listener);
@@ -149,7 +150,7 @@ public final class NaviActivityTest {
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onSaveInstanceState(bundle, persistableBundle);
-    verify(listener).call(bundle);
+    verifyZeroInteractions(listener);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
     emitter.removeListener(listener);
@@ -181,7 +182,7 @@ public final class NaviActivityTest {
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onRestoreInstanceState(bundle, persistableBundle);
-    verify(listener).call(bundle);
+    verifyZeroInteractions(listener);
     verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
 
     emitter.removeListener(listener);

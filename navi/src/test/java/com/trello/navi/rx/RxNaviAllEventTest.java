@@ -54,11 +54,13 @@ public final class RxNaviAllEventTest {
 
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    emitter.onCreate(bundle);
     emitter.onCreate(bundle, persistableBundle);
     subscription.unsubscribe();
+    emitter.onCreate(bundle);
     emitter.onCreate(bundle, persistableBundle);
 
-    testSubscriber.assertValues(Type.CREATE, Type.CREATE);
+    testSubscriber.assertValues(Type.CREATE, Type.CREATE_PERSISTABLE);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

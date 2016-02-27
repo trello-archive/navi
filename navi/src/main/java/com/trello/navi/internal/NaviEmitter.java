@@ -167,7 +167,6 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-    emitEvent(Event.CREATE, savedInstanceState);
     emitEvent(Event.CREATE_PERSISTABLE, new BundleBundle(savedInstanceState, persistentState));
   }
 
@@ -214,7 +213,6 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
-    emitEvent(Event.RESTORE_INSTANCE_STATE, savedInstanceState);
     emitEvent(Event.RESTORE_INSTANCE_STATE_PERSISTABLE,
         new BundleBundle(savedInstanceState, persistentState));
   }
@@ -228,7 +226,6 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-    emitEvent(Event.SAVE_INSTANCE_STATE, outState);
     emitEvent(Event.SAVE_INSTANCE_STATE_PERSISTABLE,
         new BundleBundle(outState, outPersistentState));
   }
