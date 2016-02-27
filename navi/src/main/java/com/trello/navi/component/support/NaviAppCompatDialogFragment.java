@@ -74,28 +74,28 @@ public class NaviAppCompatDialogFragment extends DialogFragment implements NaviC
   }
 
   @Override public void onPause() {
-    super.onPause();
     base.onPause();
+    super.onPause();
   }
 
   @Override public void onStop() {
-    super.onStop();
     base.onStop();
+    super.onStop();
   }
 
   @Override public void onDestroyView() {
-    super.onDestroyView();
     base.onDestroyView();
+    super.onDestroyView();
   }
 
   @Override public void onDestroy() {
-    super.onDestroy();
     base.onDestroy();
+    super.onDestroy();
   }
 
   @Override public void onDetach() {
-    super.onDetach();
     base.onDetach();
+    super.onDetach();
   }
 
   @Override public void onSaveInstanceState(Bundle outState) {

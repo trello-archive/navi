@@ -48,18 +48,18 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
   }
 
   @Override protected void onPause() {
-    super.onPause();
     base.onPause();
+    super.onPause();
   }
 
   @Override protected void onStop() {
-    super.onStop();
     base.onStop();
+    super.onStop();
   }
 
   @Override protected void onDestroy() {
-    super.onDestroy();
     base.onDestroy();
+    super.onDestroy();
   }
 
   @Override protected void onRestart() {
