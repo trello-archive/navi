@@ -48,8 +48,10 @@ public final class AllEventTest {
 
     Bundle bundle = new Bundle();
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    emitter.onCreate(bundle);
     emitter.onCreate(bundle, persistableBundle);
     verify(listener).call(Type.CREATE);
+    verify(listener).call(Type.CREATE_PERSISTABLE);
 
     emitter.removeListener(listener);
     emitter.onCreate(bundle, persistableBundle);

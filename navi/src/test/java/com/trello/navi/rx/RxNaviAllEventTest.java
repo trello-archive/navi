@@ -60,7 +60,7 @@ public final class RxNaviAllEventTest {
     emitter.onCreate(bundle);
     emitter.onCreate(bundle, persistableBundle);
 
-    testSubscriber.assertValues(Type.CREATE, Type.CREATE);
+    testSubscriber.assertValues(Type.CREATE, Type.CREATE_PERSISTABLE);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
