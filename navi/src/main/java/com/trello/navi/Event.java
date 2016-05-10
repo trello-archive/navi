@@ -19,9 +19,9 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Represents an event that can be listened to in an Activity or Fragment.
- * <p/>
+ * 
  * Comes with a set of predefined events.
- * <p/>
+ * 
  * Events will vary in their timing in relation to the normally-required super() call. Generally,
  * component creation ({@code onCreate()}, {@code onStart()}, etc.) is emitted *after*
  * their super calls are made. Component destruction ({@code onPause()}, {@code onStop()}, etc.)
@@ -255,9 +255,9 @@ public final class Event<T> {
         // Fragment-only
         int ATTACH = 20;
         int CREATE_VIEW = 21;
-        int ACTIVITY_CREATED = 21;
-        int VIEW_STATE_RESTORED = 22;
-        int DESTROY_VIEW = 23;
-        int DETACH = 24;
+        int ACTIVITY_CREATED = 22;
+        int VIEW_STATE_RESTORED = 23;
+        int DESTROY_VIEW = 24;
+        int DETACH = 25;
     }
 }
