@@ -16,7 +16,7 @@ public final class AllEventTest {
 
   // Test event without listener params works
   @Test public void startAllListener() {
-    Listener<Type> listener = mock(Listener.class);
+    Listener<Integer> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     emitter.onStart();
@@ -29,7 +29,7 @@ public final class AllEventTest {
 
   // Test event with listener params works
   @Test public void createAllListener() {
-    Listener<Type> listener = mock(Listener.class);
+    Listener<Integer> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     Bundle bundle = new Bundle();
@@ -43,7 +43,7 @@ public final class AllEventTest {
 
   // Test persistable Activities
   @Test public void createPersistableListener() {
-    Listener<Type> listener = mock(Listener.class);
+    Listener<Integer> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     Bundle bundle = new Bundle();

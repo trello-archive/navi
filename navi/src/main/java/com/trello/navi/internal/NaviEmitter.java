@@ -114,7 +114,7 @@ public final class NaviEmitter implements NaviComponent {
         allListeners != null ? allListeners.iterator() : null;
 
     if (allListenersIterator != null) {
-      final Type type = event.type();
+      final Integer type = event.type();
       while (allListenersIterator.hasNext()) {
         allListenersIterator.next().call(type);
       }

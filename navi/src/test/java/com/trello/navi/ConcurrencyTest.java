@@ -53,7 +53,7 @@ public final class ConcurrencyTest {
   // Verify that adding an ALL listener during emission
   // doesn't cause it to get the current emission
   @Test public void addAllDuringEmit() {
-    final Listener<Type> addedDuringEmit = mock(Listener.class);
+    final Listener<Integer> addedDuringEmit = mock(Listener.class);
     final Listener<Void> listener = spy(new Listener<Void>() {
       @Override public void call(Void aVoid) {
         emitter.addListener(Event.ALL, addedDuringEmit);
@@ -71,8 +71,8 @@ public final class ConcurrencyTest {
   // doesn't cause it to get the current emission
   @Test public void addDuringEmitAll() {
     final Listener<Void> addedDuringEmit = mock(Listener.class);
-    final Listener<Type> listener = spy(new Listener<Type>() {
-      @Override public void call(Type type) {
+    final Listener<Integer> listener = spy(new Listener<Integer>() {
+      @Override public void call(Integer type) {
         emitter.addListener(Event.RESUME, addedDuringEmit);
       }
     });
@@ -105,7 +105,7 @@ public final class ConcurrencyTest {
   // Verify that removing an ALL listener during emission
   // doesn't cause it to lose the current emission
   @Test public void removeAllDuringEmit() {
-    final Listener<Type> removedDuringEmit = mock(Listener.class);
+    final Listener<Integer> removedDuringEmit = mock(Listener.class);
     final Listener<Void> listener = spy(new Listener<Void>() {
       @Override public void call(Void __) {
         emitter.removeListener(removedDuringEmit);
@@ -124,8 +124,8 @@ public final class ConcurrencyTest {
   // doesn't cause it to lose the current emission
   @Test public void removeDuringEmitAll() {
     final Listener<Void> removedDuringEmit = mock(Listener.class);
-    final Listener<Type> listener = spy(new Listener<Type>() {
-      @Override public void call(Type type) {
+    final Listener<Integer> listener = spy(new Listener<Integer>() {
+      @Override public void call(Integer type) {
         emitter.removeListener(removedDuringEmit);
       }
     });
