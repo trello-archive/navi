@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import com.trello.navi.Event;
 import com.trello.navi.Listener;
@@ -27,98 +28,97 @@ public class NaviActivity extends Activity implements NaviComponent {
     base.removeListener(listener);
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override @CallSuper protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     base.onCreate(savedInstanceState);
   }
 
-  @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+  @Override @CallSuper public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onCreate(savedInstanceState, persistentState);
     base.onCreate(savedInstanceState, persistentState);
   }
 
-  @Override protected void onStart() {
+  @Override @CallSuper protected void onStart() {
     super.onStart();
     base.onStart();
   }
 
-  @Override protected void onResume() {
+  @Override @CallSuper protected void onResume() {
     super.onResume();
     base.onResume();
   }
 
-  @Override protected void onPause() {
+  @Override @CallSuper protected void onPause() {
     base.onPause();
     super.onPause();
   }
 
-  @Override protected void onStop() {
+  @Override @CallSuper protected void onStop() {
     base.onStop();
     super.onStop();
   }
 
-  @Override protected void onDestroy() {
+  @Override @CallSuper protected void onDestroy() {
     base.onDestroy();
     super.onDestroy();
   }
 
-  @Override protected void onRestart() {
+  @Override @CallSuper protected void onRestart() {
     super.onRestart();
     base.onRestart();
   }
 
-  @Override protected void onSaveInstanceState(Bundle outState) {
+  @Override @CallSuper protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     base.onSaveInstanceState(outState);
   }
 
-  @Override public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+  @Override @CallSuper public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
     super.onSaveInstanceState(outState, outPersistentState);
     base.onSaveInstanceState(outState, outPersistentState);
   }
 
-  @Override protected void onRestoreInstanceState(Bundle savedInstanceState) {
+  @Override @CallSuper protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     base.onRestoreInstanceState(savedInstanceState);
   }
 
-  @Override
-  public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+  @Override @CallSuper public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onRestoreInstanceState(savedInstanceState, persistentState);
     base.onRestoreInstanceState(savedInstanceState, persistentState);
   }
 
-  @Override protected void onNewIntent(Intent intent) {
+  @Override @CallSuper protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     base.onNewIntent(intent);
   }
 
-  @Override public void onBackPressed() {
+  @Override @CallSuper public void onBackPressed() {
     super.onBackPressed();
     base.onBackPressed();
   }
 
-  @Override public void onAttachedToWindow() {
+  @Override @CallSuper public void onAttachedToWindow() {
     super.onAttachedToWindow();
     base.onAttachedToWindow();
   }
 
-  @Override public void onDetachedFromWindow() {
+  @Override @CallSuper public void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     base.onDetachedFromWindow();
   }
 
-  @Override public void onConfigurationChanged(Configuration newConfig) {
+  @Override @CallSuper public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     base.onConfigurationChanged(newConfig);
   }
 
-  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override @CallSuper protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     base.onActivityResult(requestCode, resultCode, data);
   }
 
-  @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+  @Override @CallSuper public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     base.onRequestPermissionsResult(requestCode, permissions, grantResults);
