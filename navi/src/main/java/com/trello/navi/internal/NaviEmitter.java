@@ -8,6 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
+
 import com.trello.navi.Event;
 import com.trello.navi.Event.Type;
 import com.trello.navi.Listener;
@@ -240,5 +243,9 @@ public final class NaviEmitter implements NaviComponent {
 
   public void onViewStateRestored(Bundle savedInstanceState) {
     emitEvent(Event.VIEW_STATE_RESTORED, savedInstanceState);
+  }
+
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    emitEvent(Event.VIEW_CREATED, savedInstanceState);
   }
 }

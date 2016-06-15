@@ -295,4 +295,9 @@ public final class NaviFragmentTest {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.DETACHED_FROM_WINDOW, mock(Listener.class));
   }
+
+  @Test public void onViewCreatedListener() {
+    exception.expect(IllegalArgumentException.class);
+    emitter.addListener(Event.VIEW_CREATED, mock(Listener.class));
+  }
 }

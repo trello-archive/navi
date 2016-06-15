@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
@@ -172,6 +173,11 @@ public final class Event<T> {
   public static final Event<Void> DESTROY_VIEW = new Event<>(Type.DESTROY_VIEW, Void.class);
 
   /**
+   * Emits {@link Fragment#onViewCreated(View, Bundle)} ()}. Emitted before super().
+   */
+  public static final Event<Bundle> VIEW_CREATED = new Event<>(Type.VIEW_CREATED, Bundle.class);
+
+  /**
    * Emits {@link Fragment#onDetach()}. Emitted before super().
    */
   public static final Event<Void> DETACH = new Event<>(Type.DETACH, Void.class);
@@ -245,6 +251,7 @@ public final class Event<T> {
     ACTIVITY_CREATED,
     VIEW_STATE_RESTORED,
     DESTROY_VIEW,
-    DETACH
+    DETACH,
+    VIEW_CREATED
   }
 }
