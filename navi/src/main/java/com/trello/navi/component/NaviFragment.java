@@ -54,6 +54,12 @@ public class NaviFragment extends Fragment implements NaviComponent {
     return super.onCreateView(inflater, container, savedInstanceState);
   }
 
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    base.onViewCreated(view, savedInstanceState);
+    super.onViewCreated(view, savedInstanceState);
+  }
+
   @Override @CallSuper public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     base.onActivityCreated(savedInstanceState);
@@ -118,11 +124,5 @@ public class NaviFragment extends Fragment implements NaviComponent {
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     base.onRequestPermissionsResult(requestCode, permissions, grantResults);
-  }
-
-  @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    base.onViewCreated(view, savedInstanceState);
-    super.onViewCreated(view, savedInstanceState);
   }
 }

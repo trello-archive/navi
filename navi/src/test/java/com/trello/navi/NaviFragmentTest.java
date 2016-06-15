@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
+
 import com.trello.navi.internal.NaviEmitter;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.RequestPermissionsResult;
@@ -72,6 +74,20 @@ public final class NaviFragmentTest {
 
     Bundle bundle = new Bundle();
     emitter.onCreateView(bundle);
+    verify(listener).call(bundle);
+
+    emitter.removeListener(listener);
+    emitter.onCreate(bundle);
+    verifyNoMoreInteractions(listener);
+  }
+
+  @Test public void onViewCreatedListener() {
+    Listener<Bundle> listener = mock(Listener.class);
+    emitter.addListener(Event.VIEW_CREATED, listener);
+
+    Bundle bundle = new Bundle();
+    View view = mock(View.class);
+    emitter.onViewCreated(view, bundle);
     verify(listener).call(bundle);
 
     emitter.removeListener(listener);
@@ -294,10 +310,5 @@ public final class NaviFragmentTest {
   @Test public void detachedFromWindowListener() {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.DETACHED_FROM_WINDOW, mock(Listener.class));
-  }
-
-  @Test public void onViewCreatedListener() {
-    exception.expect(IllegalArgumentException.class);
-    emitter.addListener(Event.VIEW_CREATED, mock(Listener.class));
   }
 }

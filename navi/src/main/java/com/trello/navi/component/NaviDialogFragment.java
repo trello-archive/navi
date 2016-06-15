@@ -54,6 +54,12 @@ public class NaviDialogFragment extends DialogFragment implements NaviComponent 
     return super.onCreateView(inflater, container, savedInstanceState);
   }
 
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    base.onViewCreated(view, savedInstanceState);
+    super.onViewCreated(view, savedInstanceState);
+  }
+
   @Override @CallSuper public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     base.onActivityCreated(savedInstanceState);

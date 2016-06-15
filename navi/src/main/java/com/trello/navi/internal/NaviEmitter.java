@@ -177,6 +177,10 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.CREATE_VIEW, savedInstanceState);
   }
 
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    emitEvent(Event.VIEW_CREATED, savedInstanceState);
+  }
+
   public void onDestroy() {
     emitEvent(Event.DESTROY);
   }
@@ -243,9 +247,5 @@ public final class NaviEmitter implements NaviComponent {
 
   public void onViewStateRestored(Bundle savedInstanceState) {
     emitEvent(Event.VIEW_STATE_RESTORED, savedInstanceState);
-  }
-
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    emitEvent(Event.VIEW_CREATED, savedInstanceState);
   }
 }

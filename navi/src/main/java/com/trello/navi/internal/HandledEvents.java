@@ -37,6 +37,7 @@ final class HandledEvents {
           Event.ATTACH,
           Event.CREATE,
           Event.CREATE_VIEW,
+          Event.VIEW_CREATED,
           Event.ACTIVITY_CREATED,
           Event.VIEW_STATE_RESTORED,
           Event.START,

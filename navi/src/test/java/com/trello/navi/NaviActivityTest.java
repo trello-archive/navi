@@ -296,6 +296,11 @@ public final class NaviActivityTest {
     emitter.addListener(Event.CREATE_VIEW, mock(Listener.class));
   }
 
+  @Test public void viewCreatedListener() {
+    exception.expect(IllegalArgumentException.class);
+    emitter.addListener(Event.VIEW_CREATED, mock(Listener.class));
+  }
+
   @Test public void activityCreatedListener() {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.ACTIVITY_CREATED, mock(Listener.class));

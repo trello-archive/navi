@@ -156,6 +156,11 @@ public final class Event<T> {
   public static final Event<Bundle> CREATE_VIEW = new Event<>(Type.CREATE_VIEW, Bundle.class);
 
   /**
+   * Emits {@link Fragment#onViewCreated(View, Bundle)} ()}. Emitted before super().
+   */
+  public static final Event<Bundle> VIEW_CREATED = new Event<>(Type.VIEW_CREATED, Bundle.class);
+
+  /**
    * Emits {@link Fragment#onActivityCreated(Bundle)}. Emitted after super().
    */
   public static final Event<Bundle> ACTIVITY_CREATED =
@@ -171,11 +176,6 @@ public final class Event<T> {
    * Emits {@link Fragment#onDestroyView()}. Emitted before super().
    */
   public static final Event<Void> DESTROY_VIEW = new Event<>(Type.DESTROY_VIEW, Void.class);
-
-  /**
-   * Emits {@link Fragment#onViewCreated(View, Bundle)} ()}. Emitted before super().
-   */
-  public static final Event<Bundle> VIEW_CREATED = new Event<>(Type.VIEW_CREATED, Bundle.class);
 
   /**
    * Emits {@link Fragment#onDetach()}. Emitted before super().
@@ -248,10 +248,10 @@ public final class Event<T> {
     // Fragment-only
     ATTACH,
     CREATE_VIEW,
+    VIEW_CREATED,
     ACTIVITY_CREATED,
     VIEW_STATE_RESTORED,
     DESTROY_VIEW,
-    DETACH,
-    VIEW_CREATED
+    DETACH
   }
 }
