@@ -18,6 +18,8 @@ import com.trello.navi.NaviComponent;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
+import com.trello.navi.model.ViewCreated;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -178,7 +180,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    emitEvent(Event.VIEW_CREATED, savedInstanceState);
+    emitEvent(Event.VIEW_CREATED, new ViewCreated(view, savedInstanceState));
   }
 
   public void onDestroy() {
