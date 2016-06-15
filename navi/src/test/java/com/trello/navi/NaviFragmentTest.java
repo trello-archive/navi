@@ -10,6 +10,8 @@ import android.view.View;
 import com.trello.navi.internal.NaviEmitter;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.RequestPermissionsResult;
+import com.trello.navi.model.ViewCreated;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -82,16 +84,15 @@ public final class NaviFragmentTest {
   }
 
   @Test public void onViewCreatedListener() {
-    Listener<Bundle> listener = mock(Listener.class);
+    Listener<ViewCreated> listener = mock(Listener.class);
     emitter.addListener(Event.VIEW_CREATED, listener);
 
-    Bundle bundle = new Bundle();
-    View view = mock(View.class);
-    emitter.onViewCreated(view, bundle);
-    verify(listener).call(bundle);
+    ViewCreated result = mock(ViewCreated.class);
+    emitter.onViewCreated(result);
+    verify(listener).call(result);
 
     emitter.removeListener(listener);
-    emitter.onCreate(bundle);
+    emitter.onCreate(new Bundle());
     verifyNoMoreInteractions(listener);
   }
 

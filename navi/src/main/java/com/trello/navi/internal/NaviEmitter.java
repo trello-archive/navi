@@ -179,8 +179,8 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.CREATE_VIEW, savedInstanceState);
   }
 
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    emitEvent(Event.VIEW_CREATED, new ViewCreated(view, savedInstanceState));
+  public void onViewCreated(ViewCreated viewCreated) {
+    emitEvent(Event.VIEW_CREATED, viewCreated);
   }
 
   public void onDestroy() {
