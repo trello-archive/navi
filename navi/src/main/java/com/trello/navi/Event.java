@@ -8,10 +8,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import com.trello.navi.model.ActivityResult;
 import com.trello.navi.model.BundleBundle;
 import com.trello.navi.model.RequestPermissionsResult;
+import com.trello.navi.model.ViewCreated;
 
 /**
  * Represents an event that can be listened to in an Activity or Fragment.
@@ -155,6 +157,11 @@ public final class Event<T> {
   public static final Event<Bundle> CREATE_VIEW = new Event<>(Type.CREATE_VIEW, Bundle.class);
 
   /**
+   * Emits {@link Fragment#onViewCreated(View, Bundle)} ()}. Emitted before super().
+   */
+  public static final Event<ViewCreated> VIEW_CREATED = new Event<>(Type.VIEW_CREATED, ViewCreated.class);
+
+  /**
    * Emits {@link Fragment#onActivityCreated(Bundle)}. Emitted after super().
    */
   public static final Event<Bundle> ACTIVITY_CREATED =
@@ -242,6 +249,7 @@ public final class Event<T> {
     // Fragment-only
     ATTACH,
     CREATE_VIEW,
+    VIEW_CREATED,
     ACTIVITY_CREATED,
     VIEW_STATE_RESTORED,
     DESTROY_VIEW,

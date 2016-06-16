@@ -16,6 +16,7 @@ import com.trello.navi.Event;
 import com.trello.navi.Listener;
 import com.trello.navi.NaviComponent;
 import com.trello.navi.internal.NaviEmitter;
+import com.trello.navi.model.ViewCreated;
 
 public class NaviFragment extends Fragment implements NaviComponent {
 
@@ -52,6 +53,11 @@ public class NaviFragment extends Fragment implements NaviComponent {
       Bundle savedInstanceState) {
     base.onCreateView(savedInstanceState);
     return super.onCreateView(inflater, container, savedInstanceState);
+  }
+
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    base.onViewCreated(new ViewCreated(view, savedInstanceState));
+    super.onViewCreated(view, savedInstanceState);
   }
 
   @Override @CallSuper public void onActivityCreated(Bundle savedInstanceState) {
@@ -115,7 +121,7 @@ public class NaviFragment extends Fragment implements NaviComponent {
   }
 
   @Override @CallSuper public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-      @NonNull int[] grantResults) {
+                                                              @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     base.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
