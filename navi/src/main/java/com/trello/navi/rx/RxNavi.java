@@ -10,7 +10,7 @@ public final class RxNavi {
 
   @CheckResult @NonNull
   public static <T> Observable<T> observe(@NonNull NaviComponent component, @NonNull Event<T> event) {
-    return Observable.create(new NaviOnSubscribe<T>(component, event));
+    return Observable.create(new NaviOnSubscribe<>(component, event));
   }
 
   private RxNavi() {
