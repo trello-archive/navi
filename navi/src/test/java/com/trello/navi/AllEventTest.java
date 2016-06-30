@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import com.trello.navi.Event.Type;
 import com.trello.navi.internal.NaviEmitter;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -14,9 +18,20 @@ public final class AllEventTest {
 
   private final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
 
+  @Mock Listener<Type> listener;
+
+  @Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
+  }
+
+  @After
+  public void tearDown() {
+    verifyNoMoreInteractions(listener);
+  }
+
   // Test event without listener params works
   @Test public void startAllListener() {
-    Listener<Type> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     emitter.onStart();
@@ -24,12 +39,10 @@ public final class AllEventTest {
 
     emitter.removeListener(listener);
     emitter.onStart();
-    verifyNoMoreInteractions(listener);
   }
 
   // Test event with listener params works
   @Test public void createAllListener() {
-    Listener<Type> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     Bundle bundle = new Bundle();
@@ -38,12 +51,10 @@ public final class AllEventTest {
 
     emitter.removeListener(listener);
     emitter.onCreate(bundle);
-    verifyNoMoreInteractions(listener);
   }
 
   // Test persistable Activities
   @Test public void createPersistableListener() {
-    Listener<Type> listener = mock(Listener.class);
     emitter.addListener(Event.ALL, listener);
 
     Bundle bundle = new Bundle();
@@ -55,6 +66,5 @@ public final class AllEventTest {
 
     emitter.removeListener(listener);
     emitter.onCreate(bundle, persistableBundle);
-    verifyNoMoreInteractions(listener);
   }
 }

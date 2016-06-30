@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.trello.navi.Event;
 import com.trello.navi.Event.Type;
@@ -33,7 +31,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Emitter of Navi events which contains all the actual logic
  *
- * This makes it easier to port {@link com.trello.navi.NaviComponent} to Activities and Fragments
+ * This makes it easier to port {@link NaviComponent} to Activities and Fragments
  * without duplicating quite as much code.
  */
 public final class NaviEmitter implements NaviComponent {
