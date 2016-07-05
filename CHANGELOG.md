@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 (2016-07-05)
+
+* [#57](https://github.com/trello/navi/pull/57) Added `Event.VIEW_CREATED` for `Fragments`
+* [#54](https://github.com/trello/navi/pull/54) Use `final` modifier for interface implementations
+* [#53](https://github.com/trello/navi/pull/53) Add `@CallSuper` annotation on component classes
+
 ## 0.2.0 (2016-02-27)
 
 There are a few method signature and behavior changes, so upgrade carefully.
