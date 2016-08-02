@@ -56,6 +56,19 @@ public final class NaviActivityTest {
     verifyNoMoreInteractions(persistableListener);
   }
 
+  @Test public void postCreateListener() {
+    Listener<Bundle> listener = mock(Listener.class);
+    emitter.addListener(Event.POST_CREATE, listener);
+
+    Bundle bundle = new Bundle();
+    emitter.onPostCreate(bundle);
+    verify(listener).call(bundle);
+
+    emitter.removeListener(listener);
+    emitter.onPostCreate(bundle);
+    verifyNoMoreInteractions(listener);
+  }
+
   @Test public void startListener() {
     Listener<Void> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);

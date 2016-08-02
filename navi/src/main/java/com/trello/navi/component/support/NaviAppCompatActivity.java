@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.trello.navi.Event;
 import com.trello.navi.Listener;
@@ -36,6 +37,11 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
   @Override @CallSuper public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
     super.onCreate(savedInstanceState, persistentState);
     base.onCreate(savedInstanceState, persistentState);
+  }
+
+  @Override @CallSuper protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    base.onPostCreate(savedInstanceState);
   }
 
   @Override @CallSuper protected void onStart() {

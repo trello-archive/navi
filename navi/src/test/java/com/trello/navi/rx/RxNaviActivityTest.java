@@ -52,6 +52,22 @@ public final class RxNaviActivityTest {
     testSubscriber.assertUnsubscribed();
   }
 
+  @Test public void observePostCreate() {
+    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+            RxNavi.observe(emitter, Event.POST_CREATE).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    Bundle bundle = new Bundle();
+    emitter.onPostCreate(bundle);
+    subscription.unsubscribe();
+    emitter.onPostCreate(bundle);
+
+    testSubscriber.assertValue(bundle);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
   @Test public void observeStart() {
     TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);

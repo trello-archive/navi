@@ -173,6 +173,10 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.CREATE_PERSISTABLE, new BundleBundle(savedInstanceState, persistentState));
   }
 
+  public void onPostCreate(Bundle savedInstanceState) {
+    emitEvent(Event.POST_CREATE, savedInstanceState);
+  }
+
   public void onCreateView(Bundle savedInstanceState) {
     emitEvent(Event.CREATE_VIEW, savedInstanceState);
   }

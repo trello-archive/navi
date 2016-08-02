@@ -13,6 +13,7 @@ final class HandledEvents {
       Arrays.asList(
           Event.CREATE,
           Event.CREATE_PERSISTABLE,
+          Event.POST_CREATE,
           Event.START,
           Event.RESUME,
           Event.PAUSE,
