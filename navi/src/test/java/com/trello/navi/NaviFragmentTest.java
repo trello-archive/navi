@@ -276,6 +276,11 @@ public final class NaviFragmentTest {
     emitter.addListener(Event.POST_CREATE, mock(Listener.class));
   }
 
+  @Test public void postCreatePersistableListener() {
+    exception.expect(IllegalArgumentException.class);
+    emitter.addListener(Event.POST_CREATE_PERSISTABLE, mock(Listener.class));
+  }
+
   @Test public void restartListener() {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.RESTART, mock(Listener.class));

@@ -52,6 +52,20 @@ public final class RxNaviActivityTest {
     testSubscriber.assertUnsubscribed();
   }
 
+  @Test public void observeStart() {
+    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);
+    testSubscriber.assertNoValues();
+
+    emitter.onStart();
+    subscription.unsubscribe();
+    emitter.onStart();
+
+    testSubscriber.assertValue(null);
+    testSubscriber.assertNoTerminalEvent();
+    testSubscriber.assertUnsubscribed();
+  }
+
   @Test public void observePostCreate() {
     TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
@@ -68,16 +82,19 @@ public final class RxNaviActivityTest {
     testSubscriber.assertUnsubscribed();
   }
 
-  @Test public void observeStart() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);
+  @Test public void observePostCreatePersistable() {
+    TestSubscriber<BundleBundle> testSubscriber = new TestSubscriber<>();
+    Subscription subscription =
+            RxNavi.observe(emitter, Event.POST_CREATE_PERSISTABLE).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
-    emitter.onStart();
+    Bundle bundle = new Bundle();
+    PersistableBundle persistableBundle = mock(PersistableBundle.class);
+    emitter.onPostCreate(bundle, persistableBundle);
     subscription.unsubscribe();
-    emitter.onStart();
+    emitter.onPostCreate(bundle, persistableBundle);
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

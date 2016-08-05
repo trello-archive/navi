@@ -47,15 +47,21 @@ public final class Event<T> {
   public static final Event<BundleBundle> CREATE_PERSISTABLE =
       new Event<>(Type.CREATE_PERSISTABLE, BundleBundle.class);
 
-    /**
-     * Emits {@link Activity#onPostCreate(Bundle)}. Emitted after super().
-     */
-    public static final Event<Bundle> POST_CREATE = new Event<>(Type.POST_CREATE, Bundle.class);
-
   /**
    * Emits {@link Activity#onStart()} and {@link Fragment#onStart()}. Emitted after super().
    */
   public static final Event<Void> START = new Event<>(Type.START, Void.class);
+
+  /**
+   * Emits {@link Activity#onPostCreate(Bundle)}. Emitted after super().
+   */
+  public static final Event<Bundle> POST_CREATE = new Event<>(Type.POST_CREATE, Bundle.class);
+
+  /**
+   * Emits {@link Activity#onCreate(Bundle, PersistableBundle)}. Emitted after super().
+   */
+  public static final Event<BundleBundle> POST_CREATE_PERSISTABLE =
+          new Event<>(Type.POST_CREATE_PERSISTABLE, BundleBundle.class);
 
   /**
    * Emits {@link Activity#onResume()} and {@link Fragment#onResume()}. Emitted after super().
@@ -243,6 +249,7 @@ public final class Event<T> {
     // Activity-only
     CREATE_PERSISTABLE,
     POST_CREATE,
+    POST_CREATE_PERSISTABLE,
     RESTART,
     SAVE_INSTANCE_STATE_PERSISTABLE,
     RESTORE_INSTANCE_STATE,
