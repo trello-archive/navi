@@ -205,6 +205,14 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.PAUSE);
   }
 
+  public void onPostCreate(Bundle savedInstanceState) {
+    emitEvent(Event.POST_CREATE, savedInstanceState);
+  }
+
+  public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    emitEvent(Event.POST_CREATE_PERSISTABLE, new BundleBundle(savedInstanceState, persistentState));
+  }
+
   public void onRequestPermissionsResult(int requestCode, String[] permissions,
       int[] grantResults) {
     emitEvent(Event.REQUEST_PERMISSIONS_RESULT,

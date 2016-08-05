@@ -43,6 +43,16 @@ public class NaviActivity extends Activity implements NaviComponent {
     base.onStart();
   }
 
+  @Override @CallSuper protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    base.onPostCreate(savedInstanceState);
+  }
+
+  @Override @CallSuper public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    super.onPostCreate(savedInstanceState, persistentState);
+    base.onPostCreate(savedInstanceState, persistentState);
+  }
+
   @Override @CallSuper protected void onResume() {
     super.onResume();
     base.onResume();

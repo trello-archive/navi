@@ -14,6 +14,8 @@ final class HandledEvents {
           Event.CREATE,
           Event.CREATE_PERSISTABLE,
           Event.START,
+          Event.POST_CREATE,
+          Event.POST_CREATE_PERSISTABLE,
           Event.RESUME,
           Event.PAUSE,
           Event.STOP,
