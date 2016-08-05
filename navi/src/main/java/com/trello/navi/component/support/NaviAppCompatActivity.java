@@ -39,14 +39,19 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
     base.onCreate(savedInstanceState, persistentState);
   }
 
+  @Override @CallSuper protected void onStart() {
+    super.onStart();
+    base.onStart();
+  }
+
   @Override @CallSuper protected void onPostCreate(@Nullable Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     base.onPostCreate(savedInstanceState);
   }
 
-  @Override @CallSuper protected void onStart() {
-    super.onStart();
-    base.onStart();
+  @Override @CallSuper public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    super.onPostCreate(savedInstanceState, persistentState);
+    base.onPostCreate(savedInstanceState, persistentState);
   }
 
   @Override @CallSuper protected void onResume() {
