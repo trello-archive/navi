@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2 (2016-08-09)
+
+* [#62](https://github.com/trello/navi/pull/62) Added `Event.POST_CREATE` and `Event.POST_CREATE_PERSISTABLE`
+
 ## 0.2.1 (2016-07-05)
 
 * [#57](https://github.com/trello/navi/pull/57) Added `Event.VIEW_CREATED` for `Fragments`
