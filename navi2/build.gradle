@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion
+  }
+
+  lintOptions {
+    textReport true
+    textOutput 'stdout'
+  }
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile rootProject.ext.supportAnnotations
+
+  // Optional dependencies, depending on if your project uses them
+  provided rootProject.ext.rxJava2
+  provided rootProject.ext.supportAppCompat
+
+  testCompile rootProject.ext.junit
+  testCompile rootProject.ext.mockito
+}
+
+apply from: "$rootDir/gradle/artifacts.gradle"
+apply from: "$rootDir/gradle/gradle-mvn-push.gradle"
