@@ -27,3 +27,7 @@ proguard/
 
 # Ignored repo build directory
 repo/
+
+# IntelliJ files
+*.iml
+*.idea

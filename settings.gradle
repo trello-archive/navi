@@ -1,2 +1,4 @@
 include ':navi'
+include ':navi2'
 include ':sample'
+include ':sample2'
