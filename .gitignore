@@ -27,3 +27,10 @@ proguard/
 
 # Ignored repo build directory
 repo/
+
+# IntelliJ files
+*.iml
+*.idea
+
+# Mac OS
+.DS_STORE
