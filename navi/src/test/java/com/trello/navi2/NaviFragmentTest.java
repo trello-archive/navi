@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
+import android.view.View;
 import com.trello.navi2.internal.NaviEmitter;
 import com.trello.navi2.model.ActivityResult;
 import com.trello.navi2.model.RequestPermissionsResult;
 import com.trello.navi2.model.ViewCreated;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -86,9 +85,10 @@ public final class NaviFragmentTest {
     Listener<ViewCreated> listener = mock(Listener.class);
     emitter.addListener(Event.VIEW_CREATED, listener);
 
-    ViewCreated result = mock(ViewCreated.class);
-    emitter.onViewCreated(result);
-    verify(listener).call(result);
+    View view = mock(View.class);
+    Bundle bundle = new Bundle();
+    emitter.onViewCreated(view, bundle);
+    verify(listener).call(new ViewCreated(view, bundle));
 
     emitter.removeListener(listener);
     emitter.onCreate(new Bundle());
@@ -285,8 +285,7 @@ public final class NaviFragmentTest {
     emitter.addListener(Event.RESTART, mock(Listener.class));
   }
 
-  @Test
-  public void saveInstanceStatePersistableListener() {
+  @Test public void saveInstanceStatePersistableListener() {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.SAVE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
   }
@@ -296,8 +295,7 @@ public final class NaviFragmentTest {
     emitter.addListener(Event.RESTORE_INSTANCE_STATE, mock(Listener.class));
   }
 
-  @Test
-  public void restoreInstanceStatePersistableListener() {
+  @Test public void restoreInstanceStatePersistableListener() {
     exception.expect(IllegalArgumentException.class);
     emitter.addListener(Event.RESTORE_INSTANCE_STATE_PERSISTABLE, mock(Listener.class));
   }

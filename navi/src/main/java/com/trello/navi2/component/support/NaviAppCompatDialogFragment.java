@@ -16,7 +16,6 @@ import com.trello.navi2.Event;
 import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import com.trello.navi2.internal.NaviEmitter;
-import com.trello.navi2.model.ViewCreated;
 
 public class NaviAppCompatDialogFragment extends DialogFragment implements NaviComponent {
 
@@ -56,7 +55,7 @@ public class NaviAppCompatDialogFragment extends DialogFragment implements NaviC
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    base.onViewCreated(new ViewCreated(view, savedInstanceState));
+    base.onViewCreated(view, savedInstanceState);
     super.onViewCreated(view, savedInstanceState);
   }
 

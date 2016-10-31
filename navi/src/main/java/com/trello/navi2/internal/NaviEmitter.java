@@ -8,7 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-
+import android.view.View;
 import com.trello.navi2.Event;
 import com.trello.navi2.Event.Type;
 import com.trello.navi2.Listener;
@@ -17,7 +17,6 @@ import com.trello.navi2.model.ActivityResult;
 import com.trello.navi2.model.BundleBundle;
 import com.trello.navi2.model.RequestPermissionsResult;
 import com.trello.navi2.model.ViewCreated;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -177,8 +176,8 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.CREATE_VIEW, savedInstanceState);
   }
 
-  public void onViewCreated(ViewCreated viewCreated) {
-    emitEvent(Event.VIEW_CREATED, viewCreated);
+  public void onViewCreated(View view, Bundle bundle) {
+    emitEvent(Event.VIEW_CREATED, new ViewCreated(view, bundle));
   }
 
   public void onDestroy() {
