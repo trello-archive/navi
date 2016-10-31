@@ -21,11 +21,11 @@ public class NaviAppCompatActivity extends AppCompatActivity implements NaviComp
     return base.handlesEvents(events);
   }
 
-  @Override public final <T> void addListener(Event<T> event, Listener<T> listener) {
+  @Override public final <T> void addListener(@NonNull Event<T> event, @NonNull Listener<T> listener) {
     base.addListener(event, listener);
   }
 
-  @Override public final <T> void removeListener(Listener<T> listener) {
+  @Override public final <T> void removeListener(@NonNull Listener<T> listener) {
     base.removeListener(listener);
   }
 

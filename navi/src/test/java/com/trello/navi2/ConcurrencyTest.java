@@ -1,5 +1,6 @@
 package com.trello.navi2;
 
+import android.support.annotation.NonNull;
 import com.trello.navi2.Event.Type;
 import com.trello.navi2.internal.NaviEmitter;
 import org.junit.Test;
@@ -17,12 +18,12 @@ public final class ConcurrencyTest {
   // Verify that we can handle a listener removing itself due to an event occurring
   @Test public void handleInnerRemovals() {
     final Listener<Object> listener1 = spy(new Listener<Object>() {
-      @Override public void call(Object __) {
+      @Override public void call(@NonNull Object __) {
         emitter.removeListener(this);
       }
     });
     final Listener<Object> listener2 = spy(new Listener<Object>() {
-      @Override public void call(Object __) {
+      @Override public void call(@NonNull Object __) {
         emitter.removeListener(this);
       }
     });
@@ -39,7 +40,7 @@ public final class ConcurrencyTest {
   @Test public void addDuringEmit() {
     final Listener<Object> addedDuringEmit = mock(Listener.class);
     final Listener<Object> listener = spy(new Listener<Object>() {
-      @Override public void call(Object __) {
+      @Override public void call(@NonNull Object __) {
         emitter.addListener(Event.RESUME, addedDuringEmit);
       }
     });
@@ -56,7 +57,7 @@ public final class ConcurrencyTest {
   @Test public void addAllDuringEmit() {
     final Listener<Type> addedDuringEmit = mock(Listener.class);
     final Listener<Object> listener = spy(new Listener<Object>() {
-      @Override public void call(Object aVoid) {
+      @Override public void call(@NonNull Object aVoid) {
         emitter.addListener(Event.ALL, addedDuringEmit);
       }
     });
@@ -73,7 +74,7 @@ public final class ConcurrencyTest {
   @Test public void addDuringEmitAll() {
     final Listener<Object> addedDuringEmit = mock(Listener.class);
     final Listener<Type> listener = spy(new Listener<Type>() {
-      @Override public void call(Type type) {
+      @Override public void call(@NonNull Type type) {
         emitter.addListener(Event.RESUME, addedDuringEmit);
       }
     });
@@ -90,7 +91,7 @@ public final class ConcurrencyTest {
   @Test public void removeDuringEmit() {
     final Listener<Object> removedDuringEmit = mock(Listener.class);
     final Listener<Object> listener = spy(new Listener<Object>() {
-      @Override public void call(Object __) {
+      @Override public void call(@NonNull Object __) {
         emitter.removeListener(removedDuringEmit);
       }
     });
@@ -108,7 +109,7 @@ public final class ConcurrencyTest {
   @Test public void removeAllDuringEmit() {
     final Listener<Type> removedDuringEmit = mock(Listener.class);
     final Listener<Object> listener = spy(new Listener<Object>() {
-      @Override public void call(Object __) {
+      @Override public void call(@NonNull Object __) {
         emitter.removeListener(removedDuringEmit);
       }
     });
@@ -126,7 +127,7 @@ public final class ConcurrencyTest {
   @Test public void removeDuringEmitAll() {
     final Listener<Object> removedDuringEmit = mock(Listener.class);
     final Listener<Type> listener = spy(new Listener<Type>() {
-      @Override public void call(Type type) {
+      @Override public void call(@NonNull Type type) {
         emitter.removeListener(removedDuringEmit);
       }
     });

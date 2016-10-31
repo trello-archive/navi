@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,7 +201,7 @@ public final class Event<T> {
   private final Class<T> callbackType;
 
   // This is purposefully hidden so that we can control available events
-  private Event(Type eventType, Class<T> callbackType) {
+  private Event(@NonNull Type eventType, @NonNull Class<T> callbackType) {
     this.eventType = eventType;
     this.callbackType = callbackType;
   }
