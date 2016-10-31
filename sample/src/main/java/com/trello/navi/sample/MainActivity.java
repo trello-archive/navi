@@ -2,8 +2,6 @@ package com.trello.navi.sample;
 
 import android.os.Bundle;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import com.trello.navi.Event;
 import com.trello.navi.NaviComponent;
 import com.trello.navi.component.support.NaviAppCompatActivity;
@@ -25,14 +23,14 @@ public class MainActivity extends NaviAppCompatActivity {
   // to hook into its lifecycle; the NaviActivity could be provided by anyone.
   private final NaviComponent naviComponent = this;
 
-  @Bind(R.id.counter) TextView counter;
+  TextView counter;
 
   public MainActivity() {
     // Instead of using onCreate, we can use Observables
     RxNavi.observe(naviComponent, Event.CREATE).subscribe(new Action1<Bundle>() {
       @Override public void call(Bundle bundle) {
         setContentView(R.layout.main);
-        ButterKnife.bind(MainActivity.this);
+        counter = (TextView) findViewById(R.id.counter);
       }
     });
 
