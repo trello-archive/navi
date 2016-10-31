@@ -137,7 +137,8 @@ public final class NaviEmitter implements NaviComponent {
   // Events
 
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.ACTIVITY_CREATED, savedInstanceState);
+    emitEvent(Event.ACTIVITY_CREATED,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
   public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -169,7 +170,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onCreate(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.CREATE, savedInstanceState);
+    emitEvent(Event.CREATE, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
   public void onCreate(@Nullable Bundle savedInstanceState,
@@ -178,7 +179,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onCreateView(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.CREATE_VIEW, savedInstanceState);
+    emitEvent(Event.CREATE_VIEW, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
   public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
@@ -210,7 +211,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onPostCreate(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.POST_CREATE, savedInstanceState);
+    emitEvent(Event.POST_CREATE, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
   public void onPostCreate(@Nullable Bundle savedInstanceState,
@@ -230,7 +231,8 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.RESTORE_INSTANCE_STATE, savedInstanceState);
+    emitEvent(Event.RESTORE_INSTANCE_STATE,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
   public void onRestoreInstanceState(@Nullable Bundle savedInstanceState,
@@ -262,6 +264,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-    emitEvent(Event.VIEW_STATE_RESTORED, savedInstanceState);
+    emitEvent(Event.VIEW_STATE_RESTORED,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 }
