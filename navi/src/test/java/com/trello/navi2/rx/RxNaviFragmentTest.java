@@ -261,7 +261,7 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onActivityResult(requestCode, resultCode, data);
 
-    testSubscriber.assertValue(new ActivityResult(requestCode, resultCode, data));
+    testSubscriber.assertValue(ActivityResult.create(requestCode, resultCode, data));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -280,7 +280,7 @@ public final class RxNaviFragmentTest {
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     testSubscriber.assertValue(
-        new RequestPermissionsResult(requestCode, permissions, grantResults));
+        RequestPermissionsResult.create(requestCode, permissions, grantResults));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

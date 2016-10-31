@@ -47,7 +47,7 @@ public final class NaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onCreate(bundle, persistableBundle);
     verifyZeroInteractions(listener);
-    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
+    verify(persistableListener).call(BundleBundle.create(bundle, persistableBundle));
 
     emitter.removeListener(listener);
     emitter.removeListener(persistableListener);
@@ -91,7 +91,7 @@ public final class NaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onPostCreate(bundle, persistableBundle);
     verifyZeroInteractions(listener);
-    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
+    verify(persistableListener).call(BundleBundle.create(bundle, persistableBundle));
 
     emitter.removeListener(listener);
     emitter.removeListener(persistableListener);
@@ -183,7 +183,7 @@ public final class NaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onSaveInstanceState(bundle, persistableBundle);
     verifyZeroInteractions(listener);
-    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
+    verify(persistableListener).call(BundleBundle.create(bundle, persistableBundle));
 
     emitter.removeListener(listener);
     emitter.removeListener(persistableListener);
@@ -215,7 +215,7 @@ public final class NaviActivityTest {
     PersistableBundle persistableBundle = mock(PersistableBundle.class);
     emitter.onRestoreInstanceState(bundle, persistableBundle);
     verifyZeroInteractions(listener);
-    verify(persistableListener).call(new BundleBundle(bundle, persistableBundle));
+    verify(persistableListener).call(BundleBundle.create(bundle, persistableBundle));
 
     emitter.removeListener(listener);
     emitter.removeListener(persistableListener);
@@ -294,7 +294,7 @@ public final class NaviActivityTest {
     int resultCode = Activity.RESULT_OK;
     Intent data = new Intent();
     emitter.onActivityResult(requestCode, resultCode, data);
-    verify(listener).call(new ActivityResult(requestCode, resultCode, data));
+    verify(listener).call(ActivityResult.create(requestCode, resultCode, data));
 
     emitter.removeListener(listener);
     emitter.onActivityResult(requestCode, resultCode, data);
@@ -309,7 +309,7 @@ public final class NaviActivityTest {
     String[] permissions = new String[0];
     int[] grantResults = new int[0];
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
+    verify(listener).call(RequestPermissionsResult.create(requestCode, permissions, grantResults));
 
     emitter.removeListener(listener);
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
