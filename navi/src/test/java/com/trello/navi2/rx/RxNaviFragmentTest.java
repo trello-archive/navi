@@ -119,7 +119,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeStart() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -127,13 +127,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onStart();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeResume() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.RESUME).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -141,13 +141,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onResume();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observePause() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.PAUSE).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -155,13 +155,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onPause();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeStop() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.STOP).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -169,13 +169,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onStop();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeDestroyView() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.DESTROY_VIEW).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -183,13 +183,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onDestroyView();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeDestroy() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.DESTROY).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -197,13 +197,13 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onDestroy();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeDetach() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.DETACH).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -211,7 +211,7 @@ public final class RxNaviFragmentTest {
     subscription.unsubscribe();
     emitter.onDetach();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

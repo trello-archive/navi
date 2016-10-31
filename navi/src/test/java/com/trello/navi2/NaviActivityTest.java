@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -57,11 +58,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void startListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
 
     emitter.onStart();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onStart();
@@ -101,11 +102,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void resumeListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.RESUME, listener);
 
     emitter.onResume();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onResume();
@@ -113,11 +114,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void pauseListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.PAUSE, listener);
 
     emitter.onPause();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onPause();
@@ -125,11 +126,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void stopListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.STOP, listener);
 
     emitter.onStop();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onStop();
@@ -137,11 +138,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void destroyListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.DESTROY, listener);
 
     emitter.onDestroy();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onDestroy();
@@ -149,11 +150,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void restartListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.RESTART, listener);
 
     emitter.onRestart();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onRestart();
@@ -238,11 +239,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void backPressedListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.BACK_PRESSED, listener);
 
     emitter.onBackPressed();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onBackPressed();
@@ -250,11 +251,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void attachedToWindowListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.ATTACHED_TO_WINDOW, listener);
 
     emitter.onAttachedToWindow();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onAttachedToWindow();
@@ -262,11 +263,11 @@ public final class NaviActivityTest {
   }
 
   @Test public void detachedFromWindowListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.DETACHED_FROM_WINDOW, listener);
 
     emitter.onDetachedFromWindow();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onDetachedFromWindow();

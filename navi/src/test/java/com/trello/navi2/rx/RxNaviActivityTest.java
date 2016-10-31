@@ -53,7 +53,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeStart() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -61,7 +61,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onStart();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -100,7 +100,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeResume() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.RESUME).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -108,13 +108,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onResume();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observePause() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.PAUSE).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -122,13 +122,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onPause();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeStop() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.STOP).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -136,13 +136,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onStop();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeDestroy() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.DESTROY).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -150,13 +150,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onDestroy();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeRestart() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription = RxNavi.observe(emitter, Event.RESTART).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
 
@@ -164,7 +164,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onRestart();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -252,7 +252,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeBackPressed() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNavi.observe(emitter, Event.BACK_PRESSED).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
@@ -261,13 +261,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onBackPressed();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeAttachedToWindow() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNavi.observe(emitter, Event.ATTACHED_TO_WINDOW).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
@@ -276,13 +276,13 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onAttachedToWindow();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
 
   @Test public void observeDetachedFromWindow() {
-    TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
+    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
     Subscription subscription =
         RxNavi.observe(emitter, Event.DETACHED_FROM_WINDOW).subscribe(testSubscriber);
     testSubscriber.assertNoValues();
@@ -291,7 +291,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onDetachedFromWindow();
 
-    testSubscriber.assertValue(null);
+    testSubscriber.assertValueCount(1);
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

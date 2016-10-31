@@ -27,6 +27,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.trello.navi2.internal.Constants.SIGNAL;
+
 /**
  * Emitter of Navi events which contains all the actual logic
  *
@@ -100,8 +102,8 @@ public final class NaviEmitter implements NaviComponent {
     }
   }
 
-  private void emitEvent(Event<Void> event) {
-    emitEvent(event, null);
+  private void emitEvent(Event<Object> event) {
+    emitEvent(event, SIGNAL);
   }
 
   private <T> void emitEvent(Event<T> event, T data) {
