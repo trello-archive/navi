@@ -1,5 +1,7 @@
 package com.trello.navi2;
 
+import android.support.annotation.NonNull;
+
 /**
  * Represents an Android component (Activity, Fragment) that can have listeners.
  */
@@ -23,14 +25,13 @@ public interface NaviComponent {
    * @param <T> the callback type for the event
    * @throws IllegalArgumentException if this component cannot handle the event
    */
-  <T> void addListener(Event<T> event, Listener<T> listener);
+  <T> void addListener(@NonNull Event<T> event, @NonNull Listener<T> listener);
 
   /**
    * Removes a listener from this component.
    *
    * @param <T> the callback type for the event
    * @param listener the listener for that event
-   * @throws IllegalArgumentException if this component cannot handle the event
    */
-  <T> void removeListener(Listener<T> listener);
+  <T> void removeListener(@NonNull Listener<T> listener);
 }

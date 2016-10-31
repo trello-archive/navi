@@ -1,5 +1,6 @@
 package com.trello.navi2.rx;
 
+import android.support.annotation.NonNull;
 import com.trello.navi2.Event;
 import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
@@ -21,7 +22,7 @@ final class NaviOnSubscribe<T> implements Observable.OnSubscribe<T> {
 
   @Override public void call(final Subscriber<? super T> subscriber) {
     final Listener<T> listener = new Listener<T>() {
-      @Override public void call(T t) {
+      @Override public void call(@NonNull T t) {
         if (!subscriber.isUnsubscribed()) {
           subscriber.onNext(t);
         }

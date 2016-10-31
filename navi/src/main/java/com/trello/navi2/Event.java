@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,8 @@ import com.trello.navi2.model.ViewCreated;
  * are called *before* their super calls are made. Events that are neither are called *after*
  * their super calls.
  *
- * @param <T> the callback type for the event
+ * @param <T> the callback type for the event. If Object, then the value is just a signal and has
+ * no contents.
  */
 public final class Event<T> {
 
@@ -50,7 +52,7 @@ public final class Event<T> {
   /**
    * Emits {@link Activity#onStart()} and {@link Fragment#onStart()}. Emitted after super().
    */
-  public static final Event<Void> START = new Event<>(Type.START, Void.class);
+  public static final Event<Object> START = new Event<>(Type.START, Object.class);
 
   /**
    * Emits {@link Activity#onPostCreate(Bundle)}. Emitted after super().
@@ -66,22 +68,22 @@ public final class Event<T> {
   /**
    * Emits {@link Activity#onResume()} and {@link Fragment#onResume()}. Emitted after super().
    */
-  public static final Event<Void> RESUME = new Event<>(Type.RESUME, Void.class);
+  public static final Event<Object> RESUME = new Event<>(Type.RESUME, Object.class);
 
   /**
    * Emits {@link Activity#onPause()} and {@link Fragment#onPause()}. Emitted before super().
    */
-  public static final Event<Void> PAUSE = new Event<>(Type.PAUSE, Void.class);
+  public static final Event<Object> PAUSE = new Event<>(Type.PAUSE, Object.class);
 
   /**
    * Emits {@link Activity#onStop()} and {@link Fragment#onStop()}. Emitted before super().
    */
-  public static final Event<Void> STOP = new Event<>(Type.STOP, Void.class);
+  public static final Event<Object> STOP = new Event<>(Type.STOP, Object.class);
 
   /**
    * Emits {@link Activity#onDestroy()} and {@link Fragment#onDestroy()}. Emitted before super().
    */
-  public static final Event<Void> DESTROY = new Event<>(Type.DESTROY, Void.class);
+  public static final Event<Object> DESTROY = new Event<>(Type.DESTROY, Object.class);
 
   /**
    * Emits {@link Activity#onSaveInstanceState(Bundle)} and
@@ -120,7 +122,7 @@ public final class Event<T> {
   /**
    * Emits {@link Activity#onRestart()}. Emitted after super().
    */
-  public static final Event<Void> RESTART = new Event<>(Type.RESTART, Void.class);
+  public static final Event<Object> RESTART = new Event<>(Type.RESTART, Object.class);
 
   /**
    * Emits {@link Activity#onRestoreInstanceState(Bundle)}. Emitted after super().
@@ -143,19 +145,19 @@ public final class Event<T> {
   /**
    * Emits {@link Activity#onBackPressed()}. Emitted after super().
    */
-  public static final Event<Void> BACK_PRESSED = new Event<>(Type.BACK_PRESSED, Void.class);
+  public static final Event<Object> BACK_PRESSED = new Event<>(Type.BACK_PRESSED, Object.class);
 
   /**
    * Emits {@link Activity#onAttachedToWindow()}. Emitted after super().
    */
-  public static final Event<Void> ATTACHED_TO_WINDOW =
-      new Event<>(Type.ATTACHED_TO_WINDOW, Void.class);
+  public static final Event<Object> ATTACHED_TO_WINDOW =
+      new Event<>(Type.ATTACHED_TO_WINDOW, Object.class);
 
   /**
    * Emits {@link Activity#onDetachedFromWindow()}. Emitted after super().
    */
-  public static final Event<Void> DETACHED_FROM_WINDOW =
-      new Event<>(Type.DETACHED_FROM_WINDOW, Void.class);
+  public static final Event<Object> DETACHED_FROM_WINDOW =
+      new Event<>(Type.DETACHED_FROM_WINDOW, Object.class);
 
   /**
    * Emits {@link Fragment#onAttach(Context)}. Emitted after super().
@@ -187,19 +189,19 @@ public final class Event<T> {
   /**
    * Emits {@link Fragment#onDestroyView()}. Emitted before super().
    */
-  public static final Event<Void> DESTROY_VIEW = new Event<>(Type.DESTROY_VIEW, Void.class);
+  public static final Event<Object> DESTROY_VIEW = new Event<>(Type.DESTROY_VIEW, Object.class);
 
   /**
    * Emits {@link Fragment#onDetach()}. Emitted before super().
    */
-  public static final Event<Void> DETACH = new Event<>(Type.DETACH, Void.class);
+  public static final Event<Object> DETACH = new Event<>(Type.DETACH, Object.class);
 
   private final Type eventType;
 
   private final Class<T> callbackType;
 
   // This is purposefully hidden so that we can control available events
-  private Event(Type eventType, Class<T> callbackType) {
+  private Event(@NonNull Type eventType, @NonNull Class<T> callbackType) {
     this.eventType = eventType;
     this.callbackType = callbackType;
   }

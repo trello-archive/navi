@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -16,20 +17,20 @@ public class AddRemoveTest {
 
   @Test public void add() {
     NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
     emitter.onStart();
-    verify(listener).call(null);
+    verify(listener).call(any());
   }
 
   // Allowed, but idempotent
   @Test public void doubleAdd() {
     NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
     emitter.addListener(Event.START, listener);
     emitter.onStart();
-    verify(listener).call(null);
+    verify(listener).call(any());
   }
 
   // Not allowed
@@ -43,7 +44,7 @@ public class AddRemoveTest {
 
   @Test public void remove() {
     NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
     emitter.removeListener(listener);
     emitter.onStart();
@@ -53,7 +54,7 @@ public class AddRemoveTest {
   // Dumb, but allowed
   @Test public void doubleRemove() {
     NaviEmitter emitter = NaviEmitter.createActivityEmitter();
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
     emitter.removeListener(listener);
     emitter.removeListener(listener);

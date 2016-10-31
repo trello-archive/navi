@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import com.trello.navi2.Event;
 import com.trello.navi2.Event.Type;
@@ -26,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import static com.trello.navi2.internal.Constants.SIGNAL;
 
 /**
  * Emitter of Navi events which contains all the actual logic
@@ -67,7 +70,8 @@ public final class NaviEmitter implements NaviComponent {
     return true;
   }
 
-  @Override public final <T> void addListener(Event<T> event, Listener<T> listener) {
+  @Override
+  public final <T> void addListener(@NonNull Event<T> event, @NonNull Listener<T> listener) {
     if (!handlesEvents(event)) {
       throw new IllegalArgumentException("This component cannot handle event " + event);
     }
@@ -93,18 +97,18 @@ public final class NaviEmitter implements NaviComponent {
     listeners.add(listener);
   }
 
-  @Override public final <T> void removeListener(Listener<T> listener) {
+  @Override public final <T> void removeListener(@NonNull Listener<T> listener) {
     final Event event = eventMap.remove(listener);
     if (event != null && listenerMap.containsKey(event)) {
       listenerMap.get(event).remove(listener);
     }
   }
 
-  private void emitEvent(Event<Void> event) {
-    emitEvent(event, null);
+  private void emitEvent(@NonNull Event<Object> event) {
+    emitEvent(event, SIGNAL);
   }
 
-  private <T> void emitEvent(Event<T> event, T data) {
+  private <T> void emitEvent(@NonNull Event<T> event, @NonNull T data) {
     // We gather listener iterators  all at once so adding/removing listeners during emission
     // doesn't change the listener list.
     final List<Listener> listeners = listenerMap.get(event);
@@ -132,21 +136,22 @@ public final class NaviEmitter implements NaviComponent {
   ////////////////////////////////////////////////////////////////////////////
   // Events
 
-  public void onActivityCreated(Bundle savedInstanceState) {
-    emitEvent(Event.ACTIVITY_CREATED, savedInstanceState);
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.ACTIVITY_CREATED,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     emitEvent(Event.ACTIVITY_RESULT, ActivityResult.create(requestCode, resultCode, data));
   }
 
-  public void onAttach(Activity activity) {
+  public void onAttach(@NonNull Activity activity) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       emitEvent(Event.ATTACH, activity);
     }
   }
 
-  public void onAttach(Context context) {
+  public void onAttach(@NonNull Context context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       emitEvent(Event.ATTACH, context);
     }
@@ -160,23 +165,24 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.BACK_PRESSED);
   }
 
-  public void onConfigurationChanged(Configuration newConfig) {
+  public void onConfigurationChanged(@NonNull Configuration newConfig) {
     emitEvent(Event.CONFIGURATION_CHANGED, newConfig);
   }
 
-  public void onCreate(Bundle savedInstanceState) {
-    emitEvent(Event.CREATE, savedInstanceState);
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.CREATE, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
-  public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+  public void onCreate(@Nullable Bundle savedInstanceState,
+      @Nullable PersistableBundle persistentState) {
     emitEvent(Event.CREATE_PERSISTABLE, BundleBundle.create(savedInstanceState, persistentState));
   }
 
-  public void onCreateView(Bundle savedInstanceState) {
-    emitEvent(Event.CREATE_VIEW, savedInstanceState);
+  public void onCreateView(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.CREATE_VIEW, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
-  public void onViewCreated(View view, Bundle bundle) {
+  public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
     emitEvent(Event.VIEW_CREATED, ViewCreated.create(view, bundle));
   }
 
@@ -196,7 +202,7 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.DETACHED_FROM_WINDOW);
   }
 
-  public void onNewIntent(Intent intent) {
+  public void onNewIntent(@NonNull Intent intent) {
     emitEvent(Event.NEW_INTENT, intent);
   }
 
@@ -204,16 +210,18 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.PAUSE);
   }
 
-  public void onPostCreate(Bundle savedInstanceState) {
-    emitEvent(Event.POST_CREATE, savedInstanceState);
+  public void onPostCreate(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.POST_CREATE, savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
-  public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-    emitEvent(Event.POST_CREATE_PERSISTABLE, BundleBundle.create(savedInstanceState, persistentState));
+  public void onPostCreate(@Nullable Bundle savedInstanceState,
+      @Nullable PersistableBundle persistentState) {
+    emitEvent(Event.POST_CREATE_PERSISTABLE,
+        BundleBundle.create(savedInstanceState, persistentState));
   }
 
-  public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      int[] grantResults) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+      @NonNull int[] grantResults) {
     emitEvent(Event.REQUEST_PERMISSIONS_RESULT,
         RequestPermissionsResult.create(requestCode, permissions, grantResults));
   }
@@ -222,11 +230,13 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.RESTART);
   }
 
-  public void onRestoreInstanceState(Bundle savedInstanceState) {
-    emitEvent(Event.RESTORE_INSTANCE_STATE, savedInstanceState);
+  public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.RESTORE_INSTANCE_STATE,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 
-  public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+  public void onRestoreInstanceState(@Nullable Bundle savedInstanceState,
+      @Nullable PersistableBundle persistentState) {
     emitEvent(Event.RESTORE_INSTANCE_STATE_PERSISTABLE,
         BundleBundle.create(savedInstanceState, persistentState));
   }
@@ -235,11 +245,12 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.RESUME);
   }
 
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     emitEvent(Event.SAVE_INSTANCE_STATE, outState);
   }
 
-  public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+  public void onSaveInstanceState(@NonNull Bundle outState,
+      @NonNull PersistableBundle outPersistentState) {
     emitEvent(Event.SAVE_INSTANCE_STATE_PERSISTABLE,
         BundleBundle.create(outState, outPersistentState));
   }
@@ -252,7 +263,8 @@ public final class NaviEmitter implements NaviComponent {
     emitEvent(Event.STOP);
   }
 
-  public void onViewStateRestored(Bundle savedInstanceState) {
-    emitEvent(Event.VIEW_STATE_RESTORED, savedInstanceState);
+  public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+    emitEvent(Event.VIEW_STATE_RESTORED,
+        savedInstanceState != null ? savedInstanceState : new Bundle());
   }
 }

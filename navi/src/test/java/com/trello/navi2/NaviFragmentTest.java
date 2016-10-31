@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.trello.navi2.TestUtils.setSdkInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -122,11 +123,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void startListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.START, listener);
 
     emitter.onStart();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onStart();
@@ -134,11 +135,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void resumeListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.RESUME, listener);
 
     emitter.onResume();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onResume();
@@ -146,11 +147,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void pauseListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.PAUSE, listener);
 
     emitter.onPause();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onPause();
@@ -158,11 +159,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void stopListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.STOP, listener);
 
     emitter.onStop();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onStop();
@@ -170,11 +171,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void destroyViewListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.DESTROY_VIEW, listener);
 
     emitter.onDestroyView();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onDestroyView();
@@ -184,11 +185,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void destroyListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.DESTROY, listener);
 
     emitter.onDestroy();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onDestroy();
@@ -196,11 +197,11 @@ public final class NaviFragmentTest {
   }
 
   @Test public void detachListener() {
-    Listener<Void> listener = mock(Listener.class);
+    Listener<Object> listener = mock(Listener.class);
     emitter.addListener(Event.DETACH, listener);
 
     emitter.onDetach();
-    verify(listener).call(null);
+    verify(listener).call(any());
 
     emitter.removeListener(listener);
     emitter.onDetach();

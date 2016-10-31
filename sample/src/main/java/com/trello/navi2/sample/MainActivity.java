@@ -36,8 +36,8 @@ public class MainActivity extends NaviAppCompatActivity {
 
     // Counter that operates on screen only while resumed; automatically ends itself on destroy
     RxNavi.observe(naviComponent, Event.RESUME)
-        .flatMap(new Func1<Void, Observable<Long>>() {
-          @Override public Observable<Long> call(Void v) {
+        .flatMap(new Func1<Object, Observable<Long>>() {
+          @Override public Observable<Long> call(Object v) {
             return Observable.interval(1, TimeUnit.SECONDS)
                 .takeUntil(RxNavi.observe(naviComponent, Event.PAUSE));
           }
