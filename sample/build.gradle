@@ -5,7 +5,7 @@ android {
   buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
-    applicationId "com.trello.navi.sample"
+    applicationId "com.trello.navi2.sample"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion 23
     versionCode 1

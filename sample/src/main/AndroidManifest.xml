@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.trello.navi.sample"
+    package="com.trello.navi2.sample"
     >
 
   <application
@@ -12,7 +12,7 @@
       android:theme="@style/Theme.AppCompat"
       >
     <activity
-        android:name=".MainActivity"
+        android:name="com.trello.navi2.sample.MainActivity"
         android:label="@string/app_name"
         >
       <intent-filter>
