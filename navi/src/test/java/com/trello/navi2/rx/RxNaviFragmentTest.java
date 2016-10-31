@@ -9,9 +9,8 @@ import com.trello.navi2.Event;
 import com.trello.navi2.internal.NaviEmitter;
 import com.trello.navi2.model.ActivityResult;
 import com.trello.navi2.model.RequestPermissionsResult;
+import io.reactivex.observers.TestObserver;
 import org.junit.Test;
-import rx.Subscription;
-import rx.observers.TestSubscriber;
 
 import static com.trello.navi2.TestUtils.setSdkInt;
 import static org.mockito.Mockito.mock;
@@ -23,265 +22,241 @@ public final class RxNaviFragmentTest {
   @Test public void observeAttach() {
     setSdkInt(21);
 
-    TestSubscriber<Context> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.ATTACH).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Context> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.ATTACH).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Activity activity = mock(Activity.class);
     emitter.onAttach(activity);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onAttach(activity);
 
-    testSubscriber.assertValue(activity);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(activity);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeAttachApi23() {
     setSdkInt(23);
 
-    TestSubscriber<Context> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.ATTACH).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Context> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.ATTACH).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Context context = mock(Context.class);
     emitter.onAttach(context);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onAttach(context);
 
-    testSubscriber.assertValue(context);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(context);
+    testObserver.assertNotTerminated();
   }
 
-
   @Test public void observeCreate() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.CREATE).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Bundle> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.CREATE).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
     emitter.onCreate(bundle);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onCreate(bundle);
 
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(bundle);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeCreateView() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.CREATE_VIEW).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Bundle> testObserver = new TestObserver<>();
+
+    RxNavi.observe(emitter, Event.CREATE_VIEW).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
     emitter.onCreateView(bundle);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onCreateView(bundle);
 
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(bundle);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeActivityCreated() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.ACTIVITY_CREATED).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Bundle> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.ACTIVITY_CREATED).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
     emitter.onActivityCreated(bundle);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onActivityCreated(bundle);
 
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(bundle);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeViewStateRestored() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.VIEW_STATE_RESTORED).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Bundle> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.VIEW_STATE_RESTORED).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
     emitter.onViewStateRestored(bundle);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onViewStateRestored(bundle);
 
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(bundle);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeStart() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.START).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.START).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onStart();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onStart();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeResume() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.RESUME).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.RESUME).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onResume();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onResume();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observePause() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.PAUSE).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.PAUSE).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onPause();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onPause();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeStop() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.STOP).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.STOP).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onStop();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onStop();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDestroyView() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.DESTROY_VIEW).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.DESTROY_VIEW).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onDestroyView();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onDestroyView();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDestroy() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.DESTROY).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.DESTROY).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onDestroy();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onDestroy();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDetach() {
-    TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-    Subscription subscription = RxNavi.observe(emitter, Event.DETACH).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Object> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.DETACH).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     emitter.onDetach();
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onDetach();
 
-    testSubscriber.assertValueCount(1);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValueCount(1);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeSaveInstanceState() {
-    TestSubscriber<Bundle> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Bundle> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
     emitter.onSaveInstanceState(bundle);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onSaveInstanceState(bundle);
 
-    testSubscriber.assertValue(bundle);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(bundle);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeConfigurationChanged() {
-    TestSubscriber<Configuration> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<Configuration> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     Configuration configuration = mock(Configuration.class);
     emitter.onConfigurationChanged(configuration);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onConfigurationChanged(configuration);
 
-    testSubscriber.assertValue(configuration);
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(configuration);
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeActivityResult() {
-    TestSubscriber<ActivityResult> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.ACTIVITY_RESULT).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<ActivityResult> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.ACTIVITY_RESULT).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     int requestCode = 1;
     int resultCode = Activity.RESULT_OK;
     Intent data = new Intent();
     emitter.onActivityResult(requestCode, resultCode, data);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onActivityResult(requestCode, resultCode, data);
 
-    testSubscriber.assertValue(ActivityResult.create(requestCode, resultCode, data));
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertValue(ActivityResult.create(requestCode, resultCode, data));
+    testObserver.assertNotTerminated();
   }
 
   @Test public void observeRequestPermissionsResult() {
-    TestSubscriber<RequestPermissionsResult> testSubscriber = new TestSubscriber<>();
-    Subscription subscription =
-        RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).subscribe(testSubscriber);
-    testSubscriber.assertNoValues();
+    TestObserver<RequestPermissionsResult> testObserver = new TestObserver<>();
+    RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).subscribe(testObserver);
+    testObserver.assertNoValues();
 
     int requestCode = 1;
     String[] permissions = new String[0];
     int[] grantResults = new int[0];
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    subscription.unsubscribe();
+    testObserver.dispose();
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-    testSubscriber.assertValue(
+    testObserver.assertValue(
         RequestPermissionsResult.create(requestCode, permissions, grantResults));
-    testSubscriber.assertNoTerminalEvent();
-    testSubscriber.assertUnsubscribed();
+    testObserver.assertNotTerminated();
   }
 }
