@@ -137,7 +137,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    emitEvent(Event.ACTIVITY_RESULT, new ActivityResult(requestCode, resultCode, data));
+    emitEvent(Event.ACTIVITY_RESULT, ActivityResult.create(requestCode, resultCode, data));
   }
 
   public void onAttach(Activity activity) {
@@ -169,7 +169,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-    emitEvent(Event.CREATE_PERSISTABLE, new BundleBundle(savedInstanceState, persistentState));
+    emitEvent(Event.CREATE_PERSISTABLE, BundleBundle.create(savedInstanceState, persistentState));
   }
 
   public void onCreateView(Bundle savedInstanceState) {
@@ -177,7 +177,7 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onViewCreated(View view, Bundle bundle) {
-    emitEvent(Event.VIEW_CREATED, new ViewCreated(view, bundle));
+    emitEvent(Event.VIEW_CREATED, ViewCreated.create(view, bundle));
   }
 
   public void onDestroy() {
@@ -209,13 +209,13 @@ public final class NaviEmitter implements NaviComponent {
   }
 
   public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-    emitEvent(Event.POST_CREATE_PERSISTABLE, new BundleBundle(savedInstanceState, persistentState));
+    emitEvent(Event.POST_CREATE_PERSISTABLE, BundleBundle.create(savedInstanceState, persistentState));
   }
 
   public void onRequestPermissionsResult(int requestCode, String[] permissions,
       int[] grantResults) {
     emitEvent(Event.REQUEST_PERMISSIONS_RESULT,
-        new RequestPermissionsResult(requestCode, permissions, grantResults));
+        RequestPermissionsResult.create(requestCode, permissions, grantResults));
   }
 
   public void onRestart() {
@@ -228,7 +228,7 @@ public final class NaviEmitter implements NaviComponent {
 
   public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
     emitEvent(Event.RESTORE_INSTANCE_STATE_PERSISTABLE,
-        new BundleBundle(savedInstanceState, persistentState));
+        BundleBundle.create(savedInstanceState, persistentState));
   }
 
   public void onResume() {
@@ -241,7 +241,7 @@ public final class NaviEmitter implements NaviComponent {
 
   public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
     emitEvent(Event.SAVE_INSTANCE_STATE_PERSISTABLE,
-        new BundleBundle(outState, outPersistentState));
+        BundleBundle.create(outState, outPersistentState));
   }
 
   public void onStart() {

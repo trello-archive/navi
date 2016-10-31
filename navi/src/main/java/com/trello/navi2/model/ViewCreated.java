@@ -1,48 +1,18 @@
 package com.trello.navi2.model;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import com.google.auto.value.AutoValue;
 
-public class ViewCreated {
-  private final Bundle bundle;
-  private final View view;
+@AutoValue public abstract class ViewCreated {
 
-  public ViewCreated(View view, @Nullable Bundle bundle) {
-    this.view = view;
-    this.bundle = bundle;
+  public static ViewCreated create(@NonNull View view, @Nullable Bundle bundle) {
+    return new AutoValue_ViewCreated(view, bundle);
   }
 
-  public View view() {
-    return view;
-  }
+  @NonNull public abstract View view();
 
-  @Nullable
-  public Bundle bundle() {
-    return bundle;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ViewCreated that = (ViewCreated) o;
-    if (bundle != null ? !bundle.equals(that.bundle) : that.bundle != null) return false;
-    return view.equals(that.view);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = bundle != null ? bundle.hashCode() : 0;
-    result = 31 * result + view.hashCode();
-    return result;
-  }
-
-  @Override
-  public String toString() {
-    return "ViewCreated{" +
-            "bundle=" + bundle +
-            ", view=" + view +
-            '}';
-  }
+  @Nullable public abstract Bundle bundle();
 }

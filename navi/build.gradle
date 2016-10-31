@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -20,6 +21,9 @@ repositories {
 
 dependencies {
   compile rootProject.ext.supportAnnotations
+
+  apt rootProject.ext.autoValue
+  provided rootProject.ext.autoValueAnnotations
 
   // Optional dependencies, depending on if your project uses them
   provided rootProject.ext.rxJava

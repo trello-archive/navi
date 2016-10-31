@@ -47,7 +47,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onCreate(bundle, persistableBundle);
 
-    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertValue(BundleBundle.create(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -94,7 +94,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onPostCreate(bundle, persistableBundle);
 
-    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertValue(BundleBundle.create(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -197,7 +197,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onSaveInstanceState(bundle, persistableBundle);
 
-    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertValue(BundleBundle.create(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -230,7 +230,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onRestoreInstanceState(bundle, persistableBundle);
 
-    testSubscriber.assertValue(new BundleBundle(bundle, persistableBundle));
+    testSubscriber.assertValue(BundleBundle.create(bundle, persistableBundle));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -325,7 +325,7 @@ public final class RxNaviActivityTest {
     subscription.unsubscribe();
     emitter.onActivityResult(requestCode, resultCode, data);
 
-    testSubscriber.assertValue(new ActivityResult(requestCode, resultCode, data));
+    testSubscriber.assertValue(ActivityResult.create(requestCode, resultCode, data));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }
@@ -344,7 +344,7 @@ public final class RxNaviActivityTest {
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     testSubscriber.assertValue(
-        new RequestPermissionsResult(requestCode, permissions, grantResults));
+        RequestPermissionsResult.create(requestCode, permissions, grantResults));
     testSubscriber.assertNoTerminalEvent();
     testSubscriber.assertUnsubscribed();
   }

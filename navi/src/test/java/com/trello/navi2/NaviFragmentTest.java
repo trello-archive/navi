@@ -88,7 +88,7 @@ public final class NaviFragmentTest {
     View view = mock(View.class);
     Bundle bundle = new Bundle();
     emitter.onViewCreated(view, bundle);
-    verify(listener).call(new ViewCreated(view, bundle));
+    verify(listener).call(ViewCreated.create(view, bundle));
 
     emitter.removeListener(listener);
     emitter.onCreate(new Bundle());
@@ -241,7 +241,7 @@ public final class NaviFragmentTest {
     int resultCode = Activity.RESULT_OK;
     Intent data = new Intent();
     emitter.onActivityResult(requestCode, resultCode, data);
-    verify(listener).call(new ActivityResult(requestCode, resultCode, data));
+    verify(listener).call(ActivityResult.create(requestCode, resultCode, data));
 
     emitter.removeListener(listener);
     emitter.onActivityResult(requestCode, resultCode, data);
@@ -256,7 +256,7 @@ public final class NaviFragmentTest {
     String[] permissions = new String[0];
     int[] grantResults = new int[0];
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    verify(listener).call(new RequestPermissionsResult(requestCode, permissions, grantResults));
+    verify(listener).call(RequestPermissionsResult.create(requestCode, permissions, grantResults));
 
     emitter.removeListener(listener);
     emitter.onRequestPermissionsResult(requestCode, permissions, grantResults);
