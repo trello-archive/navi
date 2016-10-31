@@ -3,9 +3,12 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.0'
+    classpath 'com.android.tools.build:gradle:2.2.2'
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
   }
 }
+
+apply plugin: 'com.github.ben-manes.versions'
 
 subprojects {
   group = GROUP
@@ -19,15 +22,13 @@ ext {
   buildToolsVersion = '24.0.2'
 
   // Define all dependencies in the base project, to unify & make it easy to update
-  supportVersion = '24.2.1'
+  supportVersion = '25.0.0'
   supportAnnotations = "com.android.support:support-annotations:$supportVersion"
   supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
 
-  rxJava = 'io.reactivex:rxjava:1.1.6'
+  rxJava = 'io.reactivex:rxjava:1.2.1'
   rxAndroid = 'io.reactivex:rxandroid:1.2.1'
 
   junit = 'junit:junit:4.12'
-  mockito = 'org.mockito:mockito-core:1.10.19'
-
-  butterknife = 'com.jakewharton:butterknife:7.0.1'
+  mockito = 'org.mockito:mockito-core:2.2.9'
 }

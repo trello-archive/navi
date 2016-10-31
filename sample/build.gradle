@@ -20,7 +20,6 @@ repositories {
 dependencies {
   compile project(':navi')
   compile rootProject.ext.supportAppCompat
-  compile rootProject.ext.butterknife
   compile rootProject.ext.rxJava
   compile rootProject.ext.rxAndroid
 }
