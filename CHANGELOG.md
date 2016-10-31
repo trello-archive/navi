@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0 (2016-08-09)
+
+First and (hopefully) final release of 1.x branch!
+
+This release marks the start of maintenance mode for RxJava 1 support. Future work will be devoted
+to supporting RxJava 2. Important bugs may be squashed but new features will have to be
+extraordinarily compelling in order to be added.
+
 ## 0.2.2 (2016-08-09)
 
 * [#62](https://github.com/trello/navi/pull/62) Added `Event.POST_CREATE` and `Event.POST_CREATE_PERSISTABLE`
