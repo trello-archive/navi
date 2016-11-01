@@ -16,8 +16,7 @@ public final class RxNaviAllEventTest {
 
   // Test event without listener params works
   @Test public void observeAllStart() {
-    TestObserver<Type> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ALL).subscribe(testObserver);
+    TestObserver<Type> testObserver = RxNavi.observe(emitter, Event.ALL).test();
     testObserver.assertNoValues();
 
     emitter.onStart();
@@ -30,8 +29,7 @@ public final class RxNaviAllEventTest {
 
   // Test event with listener params works
   @Test public void observeAllCreate() {
-    TestObserver<Type> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ALL).subscribe(testObserver);
+    TestObserver<Type> testObserver = RxNavi.observe(emitter, Event.ALL).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -45,8 +43,7 @@ public final class RxNaviAllEventTest {
 
   // Test persistable Activities
   @Test public void observeAllCreatePersistable() {
-    TestObserver<Type> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ALL).subscribe(testObserver);
+    TestObserver<Type> testObserver = RxNavi.observe(emitter, Event.ALL).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();

@@ -20,8 +20,7 @@ public final class RxNaviActivityTest {
   private final NaviEmitter emitter = NaviEmitter.createActivityEmitter();
 
   @Test public void observeCreate() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.CREATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.CREATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -34,8 +33,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeCreatePersistable() {
-    TestObserver<BundleBundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.CREATE_PERSISTABLE).subscribe(testObserver);
+    TestObserver<BundleBundle> testObserver = RxNavi.observe(emitter, Event.CREATE_PERSISTABLE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -49,8 +47,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeStart() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.START).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.START).test();
     testObserver.assertNoValues();
 
     emitter.onStart();
@@ -62,8 +59,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observePostCreate() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.POST_CREATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.POST_CREATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -76,8 +72,8 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observePostCreatePersistable() {
-    TestObserver<BundleBundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.POST_CREATE_PERSISTABLE).subscribe(testObserver);
+    TestObserver<BundleBundle> testObserver =
+        RxNavi.observe(emitter, Event.POST_CREATE_PERSISTABLE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -91,8 +87,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeResume() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.RESUME).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.RESUME).test();
     testObserver.assertNoValues();
 
     emitter.onResume();
@@ -104,8 +99,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observePause() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.PAUSE).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.PAUSE).test();
     testObserver.assertNoValues();
 
     emitter.onPause();
@@ -117,8 +111,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeStop() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.STOP).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.STOP).test();
     testObserver.assertNoValues();
 
     emitter.onStop();
@@ -130,8 +123,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeDestroy() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.DESTROY).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.DESTROY).test();
     testObserver.assertNoValues();
 
     emitter.onDestroy();
@@ -143,8 +135,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeRestart() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.RESTART).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.RESTART).test();
     testObserver.assertNoValues();
 
     emitter.onRestart();
@@ -156,8 +147,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeSaveInstanceState() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -170,8 +160,8 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeSaveInstanceStatePersistable() {
-    TestObserver<BundleBundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE_PERSISTABLE).subscribe(testObserver);
+    TestObserver<BundleBundle> testObserver =
+        RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE_PERSISTABLE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -185,8 +175,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeRestoreInstanceState() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.RESTORE_INSTANCE_STATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.RESTORE_INSTANCE_STATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -199,8 +188,8 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeRestoreInstanceStatePersistable() {
-    TestObserver<BundleBundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.RESTORE_INSTANCE_STATE_PERSISTABLE).subscribe(testObserver);
+    TestObserver<BundleBundle> testObserver =
+        RxNavi.observe(emitter, Event.RESTORE_INSTANCE_STATE_PERSISTABLE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -214,8 +203,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeNewIntent() {
-    TestObserver<Intent> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.NEW_INTENT).subscribe(testObserver);
+    TestObserver<Intent> testObserver = RxNavi.observe(emitter, Event.NEW_INTENT).test();
     testObserver.assertNoValues();
 
     Intent intent = new Intent();
@@ -228,8 +216,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeBackPressed() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.BACK_PRESSED).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.BACK_PRESSED).test();
     testObserver.assertNoValues();
 
     emitter.onBackPressed();
@@ -241,8 +228,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeAttachedToWindow() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ATTACHED_TO_WINDOW).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.ATTACHED_TO_WINDOW).test();
     testObserver.assertNoValues();
 
     emitter.onAttachedToWindow();
@@ -254,8 +240,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeDetachedFromWindow() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.DETACHED_FROM_WINDOW).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.DETACHED_FROM_WINDOW).test();
     testObserver.assertNoValues();
 
     emitter.onDetachedFromWindow();
@@ -267,8 +252,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeConfigurationChanged() {
-    TestObserver<Configuration> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).subscribe(testObserver);
+    TestObserver<Configuration> testObserver = RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).test();
     testObserver.assertNoValues();
 
     Configuration configuration = mock(Configuration.class);
@@ -281,8 +265,7 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeActivityResult() {
-    TestObserver<ActivityResult> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ACTIVITY_RESULT).subscribe(testObserver);
+    TestObserver<ActivityResult> testObserver = RxNavi.observe(emitter, Event.ACTIVITY_RESULT).test();
     testObserver.assertNoValues();
 
     int requestCode = 1;
@@ -297,8 +280,8 @@ public final class RxNaviActivityTest {
   }
 
   @Test public void observeRequestPermissionsResult() {
-    TestObserver<RequestPermissionsResult> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).subscribe(testObserver);
+    TestObserver<RequestPermissionsResult> testObserver =
+        RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).test();
     testObserver.assertNoValues();
 
     int requestCode = 1;

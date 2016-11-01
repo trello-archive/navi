@@ -22,8 +22,7 @@ public final class RxNaviFragmentTest {
   @Test public void observeAttach() {
     setSdkInt(21);
 
-    TestObserver<Context> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ATTACH).subscribe(testObserver);
+    TestObserver<Context> testObserver = RxNavi.observe(emitter, Event.ATTACH).test();
     testObserver.assertNoValues();
 
     Activity activity = mock(Activity.class);
@@ -38,8 +37,7 @@ public final class RxNaviFragmentTest {
   @Test public void observeAttachApi23() {
     setSdkInt(23);
 
-    TestObserver<Context> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ATTACH).subscribe(testObserver);
+    TestObserver<Context> testObserver = RxNavi.observe(emitter, Event.ATTACH).test();
     testObserver.assertNoValues();
 
     Context context = mock(Context.class);
@@ -52,8 +50,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeCreate() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.CREATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.CREATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -66,9 +63,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeCreateView() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-
-    RxNavi.observe(emitter, Event.CREATE_VIEW).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.CREATE_VIEW).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -81,8 +76,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeActivityCreated() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ACTIVITY_CREATED).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.ACTIVITY_CREATED).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -95,8 +89,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeViewStateRestored() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.VIEW_STATE_RESTORED).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.VIEW_STATE_RESTORED).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -109,8 +102,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeStart() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.START).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.START).test();
     testObserver.assertNoValues();
 
     emitter.onStart();
@@ -122,8 +114,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeResume() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.RESUME).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.RESUME).test();
     testObserver.assertNoValues();
 
     emitter.onResume();
@@ -135,8 +126,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observePause() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.PAUSE).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.PAUSE).test();
     testObserver.assertNoValues();
 
     emitter.onPause();
@@ -148,8 +138,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeStop() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.STOP).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.STOP).test();
     testObserver.assertNoValues();
 
     emitter.onStop();
@@ -161,8 +150,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeDestroyView() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.DESTROY_VIEW).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.DESTROY_VIEW).test();
     testObserver.assertNoValues();
 
     emitter.onDestroyView();
@@ -174,8 +162,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeDestroy() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.DESTROY).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.DESTROY).test();
     testObserver.assertNoValues();
 
     emitter.onDestroy();
@@ -187,8 +174,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeDetach() {
-    TestObserver<Object> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.DETACH).subscribe(testObserver);
+    TestObserver<Object> testObserver = RxNavi.observe(emitter, Event.DETACH).test();
     testObserver.assertNoValues();
 
     emitter.onDetach();
@@ -200,8 +186,7 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeSaveInstanceState() {
-    TestObserver<Bundle> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).subscribe(testObserver);
+    TestObserver<Bundle> testObserver = RxNavi.observe(emitter, Event.SAVE_INSTANCE_STATE).test();
     testObserver.assertNoValues();
 
     Bundle bundle = new Bundle();
@@ -214,8 +199,8 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeConfigurationChanged() {
-    TestObserver<Configuration> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).subscribe(testObserver);
+    TestObserver<Configuration> testObserver =
+        RxNavi.observe(emitter, Event.CONFIGURATION_CHANGED).test();
     testObserver.assertNoValues();
 
     Configuration configuration = mock(Configuration.class);
@@ -228,8 +213,8 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeActivityResult() {
-    TestObserver<ActivityResult> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.ACTIVITY_RESULT).subscribe(testObserver);
+    TestObserver<ActivityResult> testObserver =
+        RxNavi.observe(emitter, Event.ACTIVITY_RESULT).test();
     testObserver.assertNoValues();
 
     int requestCode = 1;
@@ -244,8 +229,8 @@ public final class RxNaviFragmentTest {
   }
 
   @Test public void observeRequestPermissionsResult() {
-    TestObserver<RequestPermissionsResult> testObserver = new TestObserver<>();
-    RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).subscribe(testObserver);
+    TestObserver<RequestPermissionsResult> testObserver =
+        RxNavi.observe(emitter, Event.REQUEST_PERMISSIONS_RESULT).test();
     testObserver.assertNoValues();
 
     int requestCode = 1;
