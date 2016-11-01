@@ -45,7 +45,7 @@ RxNavi.observe(naviComponent, Event.CREATE)
 Currently, Navi 2.x will only be available in the Maven snapshots repository.
 
 ```gradle
-compile 'com.trello:navi:2.0-SNAPSHOT'
+compile 'com.trello.navi2:navi:2.0-SNAPSHOT'
 ```
 
 ## License
