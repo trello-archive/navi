@@ -4,7 +4,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import com.trello.navi2.Event;
 import com.trello.navi2.NaviComponent;
-import rx.Observable;
+import io.reactivex.Observable;
 
 public final class RxNavi {
 
