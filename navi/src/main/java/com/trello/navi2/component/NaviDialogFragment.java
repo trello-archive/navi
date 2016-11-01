@@ -17,7 +17,7 @@ import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import com.trello.navi2.internal.NaviEmitter;
 
-public class NaviDialogFragment extends DialogFragment implements NaviComponent {
+public abstract class NaviDialogFragment extends DialogFragment implements NaviComponent {
 
   private final NaviEmitter base = NaviEmitter.createFragmentEmitter();
 

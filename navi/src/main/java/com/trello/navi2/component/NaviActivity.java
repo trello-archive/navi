@@ -12,7 +12,7 @@ import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import com.trello.navi2.internal.NaviEmitter;
 
-public class NaviActivity extends Activity implements NaviComponent {
+public abstract class NaviActivity extends Activity implements NaviComponent {
 
   private final NaviEmitter base = NaviEmitter.createActivityEmitter();
 
