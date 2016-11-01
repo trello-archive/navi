@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.0 (unreleased)
+
+This major revision was made to support RxJava 2. Navi 2.0 lives in a new namespace and package
+names so that it can work side-by-side with Navi 1.0 (while transitioning).
+
+The one major behavior change to be aware of is that, since RxJava 2 does not allow nulls, Navi
+no longer emits nulls either. This means that any former `Void` types are now `Object` types
+(where the `Object` is just a signal). There were also cases of null `Bundles` that are now replaced
+by empty `Bundles`.
+
+* [#79](https://github.com/trello/navi/pull/79) Made all base `Activities`/`Fragments` abstract
+* [#77](https://github.com/trello/navi/pull/77) Switch to using RxJava 2.0
+* [#76](https://github.com/trello/navi/pull/76) Avoid using null
+* [#75](https://github.com/trello/navi/pull/75) Use AutoValue for models (which changed the method signature of `RequestPermissionsResult.permissions()`)
+* [#74](https://github.com/trello/navi/pull/74) Change signature of `NaviEmitter.onViewCreated()` to match the rest of the API
+* [#73](https://github.com/trello/navi/pull/73) Bumped version to 2.0 and use com.trello.navi2
+
 ## 1.0 (2016-08-09)
 
 First and (hopefully) final release of 1.x branch!
