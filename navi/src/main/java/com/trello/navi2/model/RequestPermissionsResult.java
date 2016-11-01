@@ -18,5 +18,6 @@ import java.util.List;
 
   @NonNull public abstract List<String> permissions();
 
+  @SuppressWarnings("mutable")
   @NonNull public abstract int[] grantResults();
 }
