@@ -20,12 +20,12 @@ final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
   }
 
   @Override public void subscribe(final ObservableEmitter<T> emitter) throws Exception {
-    EmitterListener<T> listener = new EmitterListener<>(emitter);
+    EmitterListener listener = new EmitterListener(emitter);
     emitter.setCancellable(listener);
     component.addListener(event, listener);
   }
 
-  class EmitterListener<T> implements Listener<T>, Cancellable {
+  class EmitterListener implements Listener<T>, Cancellable {
     private final ObservableEmitter<T> emitter;
 
     public EmitterListener(ObservableEmitter<T> emitter) {
