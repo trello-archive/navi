@@ -6,13 +6,14 @@ import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
+import io.reactivex.disposables.Disposable;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
 
-  private final NaviComponent component;
+  final NaviComponent component;
 
-  private final Event<T> event;
+  final Event<T> event;
 
   NaviOnSubscribe(NaviComponent component, Event<T> event) {
     this.component = component;
@@ -21,12 +22,12 @@ final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
 
   @Override public void subscribe(final ObservableEmitter<T> emitter) throws Exception {
     EmitterListener listener = new EmitterListener(emitter);
-    emitter.setCancellable(listener);
+    emitter.setDisposable(listener);
     component.addListener(event, listener);
   }
 
-  class EmitterListener implements Listener<T>, Cancellable {
-    private final ObservableEmitter<T> emitter;
+  class EmitterListener extends AtomicBoolean implements Listener<T>, Disposable {
+    final ObservableEmitter<T> emitter;
 
     public EmitterListener(ObservableEmitter<T> emitter) {
       this.emitter = emitter;
@@ -36,8 +37,14 @@ final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
       emitter.onNext(t);
     }
 
-    @Override public void cancel() throws Exception {
-      component.removeListener(this);
+    @Override public void dispose() {
+      if (compareAndSet(false, true)) {
+        component.removeListener(this);
+      }
+    }
+
+    @Override public boolean isDisposed() {
+      return get();
     }
   }
 }
