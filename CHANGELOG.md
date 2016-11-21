@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0 (unreleased)
+## 2.0 (2016-11-21)
 
 This major revision was made to support RxJava 2. Navi 2.0 lives in a new namespace and package
 names so that it can work side-by-side with Navi 1.0 (while transitioning).
