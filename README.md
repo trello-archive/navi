@@ -4,6 +4,8 @@
 
 Adds listeners for `Activity` and `Fragment`.
 
+**Looking for an RxJava 2 compatible library? Check out [the navi 2.x branch](https://github.com/trello/navi/tree/2.x).**
+
 ## Why?
 
 In a word: **composition**.
