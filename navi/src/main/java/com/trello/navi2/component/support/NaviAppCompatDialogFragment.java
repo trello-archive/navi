@@ -22,7 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +31,7 @@ import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import com.trello.navi2.internal.NaviEmitter;
 
-public abstract class NaviAppCompatDialogFragment extends DialogFragment implements NaviComponent {
+public abstract class NaviAppCompatDialogFragment extends AppCompatDialogFragment implements NaviComponent {
 
   private final NaviEmitter base = NaviEmitter.createFragmentEmitter();
 
