@@ -24,6 +24,8 @@ public final class RxNavi {
 
   @CheckResult @NonNull
   public static <T> Observable<T> observe(@NonNull NaviComponent component, @NonNull Event<T> event) {
+    if (component == null) throw new IllegalArgumentException("component == null");
+    if (event == null) throw new IllegalArgumentException("event == null");
     return Observable.create(new NaviOnSubscribe<>(component, event));
   }
 
