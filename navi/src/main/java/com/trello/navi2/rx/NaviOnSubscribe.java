@@ -34,7 +34,7 @@ final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
     this.event = event;
   }
 
-  @Override public void subscribe(final ObservableEmitter<T> emitter) throws Exception {
+  @Override public void subscribe(final ObservableEmitter<T> emitter) {
     EmitterListener listener = new EmitterListener(emitter);
     emitter.setDisposable(listener);
     component.addListener(event, listener);
