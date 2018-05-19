@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.1 (2018-05-20)
+
+* [#93](https://github.com/trello/navi/pull/93) Make NaviAppCompatDialogFragment extend from AppCompatDialogFragment
+* [#96](https://github.com/trello/navi/pull/96) Fail early on null component or event
+* [#97](https://github.com/trello/navi/pull/97) Remove unnecessary throws Exception in NaviOnSubscribe
+* [#98](https://github.com/trello/navi/pull/98) Disable BuildConfig generation
+
 ## 2.0 (2016-11-21)
 
 This major revision was made to support RxJava 2. Navi 2.0 lives in a new namespace and package
