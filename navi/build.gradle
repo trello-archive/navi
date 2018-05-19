@@ -20,21 +20,23 @@ android {
 }
 
 repositories {
+  google()
   jcenter()
 }
 
 dependencies {
-  compile rootProject.ext.supportAnnotations
+  implementation rootProject.ext.supportAnnotations
 
   annotationProcessor rootProject.ext.autoValue
-  provided rootProject.ext.autoValueAnnotations
+  compileOnly rootProject.ext.autoValueAnnotations
 
   // Optional dependencies, depending on if your project uses them
-  provided rootProject.ext.rxJava
-  provided rootProject.ext.supportAppCompat
+  compileOnly rootProject.ext.rxJava
+  compileOnly rootProject.ext.supportAppCompat
 
-  testCompile rootProject.ext.junit
-  testCompile rootProject.ext.mockito
+  testImplementation rootProject.ext.rxJava
+  testImplementation rootProject.ext.junit
+  testImplementation rootProject.ext.mockito
 }
 
 apply from: "$rootDir/gradle/artifacts.gradle"
