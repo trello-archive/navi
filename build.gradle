@@ -20,7 +20,6 @@ ext {
   minSdkVersion = 14
   compileSdkVersion = 27
   targetSdkVersion = compileSdkVersion
-  buildToolsVersion = '27.0.3'
 
   // Define all dependencies in the base project, to unify & make it easy to update
   supportVersion = '27.1.1'
