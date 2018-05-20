@@ -2,24 +2,24 @@ apply plugin: 'com.android.application'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.trello.navi2.sample"
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion 23
+    targetSdkVersion 27
     versionCode 1
     versionName "1.0"
   }
 }
 
 repositories {
+  google()
   jcenter()
 }
 
 dependencies {
-  compile project(':navi')
-  compile rootProject.ext.supportAppCompat
-  compile rootProject.ext.rxJava
-  compile rootProject.ext.rxAndroid
+  implementation project(':navi')
+  implementation rootProject.ext.supportAppCompat
+  implementation rootProject.ext.rxJava
+  implementation rootProject.ext.rxAndroid
 }
