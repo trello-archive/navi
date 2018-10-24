@@ -18,11 +18,11 @@ subprojects {
 
 ext {
   minSdkVersion = 14
-  compileSdkVersion = 27
+  compileSdkVersion = 28
   targetSdkVersion = compileSdkVersion
 
   // Define all dependencies in the base project, to unify & make it easy to update
-  supportVersion = '27.1.1'
+  supportVersion = '28.0.0'
   supportAnnotations = "com.android.support:support-annotations:$supportVersion"
   supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
 
