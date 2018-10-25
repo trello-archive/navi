@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 (2018-10-25)
+
+**Notice: As of this release, the navi library is deprecated in favor of [lifecycle-aware components](https://developer.android.com/topic/libraries/architecture/lifecycle). No more development will be taking place.**
+
+* [#103](https://github.com/trello/navi/pull/103) Switched to AndroidX libraries
+
 ## 2.0.1 (2018-05-20)
 
 * [#93](https://github.com/trello/navi/pull/93) Make NaviAppCompatDialogFragment extend from AppCompatDialogFragment
