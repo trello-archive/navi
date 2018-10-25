@@ -4,6 +4,10 @@
 
 Adds listeners for `Activity` and `Fragment`.
 
+## Deprecated
+
+The navi library is deprecated in favor of [lifecycle-aware components](https://developer.android.com/topic/libraries/architecture/lifecycle). No more development will be taking place.
+
 ## Why?
 
 In a word: **composition**.
@@ -43,12 +47,12 @@ RxNavi.observe(naviComponent, Event.CREATE)
 ## Installation
 
 ```gradle
-compile 'com.trello.navi2:navi:2.0.1'
+compile 'com.trello.navi2:navi:2.1.0'
 ```
 
 ## License
 
-    Copyright (C) 2016 Trello
+    Copyright (C) 2018 Trello
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
