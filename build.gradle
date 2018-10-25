@@ -32,6 +32,6 @@ ext {
   junit = 'junit:junit:4.12'
   mockito = 'org.mockito:mockito-core:2.18.3'
 
-  autoValue = 'com.google.auto.value:auto-value:1.6'
-  autoValueAnnotations = 'com.google.auto.value:auto-value-annotations:1.6'
+  autoValue = 'com.google.auto.value:auto-value:1.6.2'
+  autoValueAnnotations = 'com.google.auto.value:auto-value-annotations:1.6.2'
 }
