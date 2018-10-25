@@ -14,11 +14,13 @@
 
 package com.trello.navi2.model;
 
-import android.support.annotation.NonNull;
 import com.google.auto.value.AutoValue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 @AutoValue public abstract class RequestPermissionsResult {
 

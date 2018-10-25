@@ -6,7 +6,7 @@ android {
   defaultConfig {
     applicationId "com.trello.navi2.sample"
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion 27
+    targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
     versionName "1.0"
   }

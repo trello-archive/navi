@@ -15,10 +15,12 @@
 package com.trello.navi2.model;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
 import com.google.auto.value.AutoValue;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 @AutoValue public abstract class ViewCreated {
 
@@ -28,5 +30,6 @@ import com.google.auto.value.AutoValue;
 
   @NonNull public abstract View view();
 
-  @Nullable public abstract Bundle bundle();
+  @Nullable
+  public abstract Bundle bundle();
 }
