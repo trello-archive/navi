@@ -14,10 +14,12 @@
 
 package com.trello.navi2;
 
-import android.support.annotation.NonNull;
 import com.trello.navi2.Event.Type;
 import com.trello.navi2.internal.NaviEmitter;
+
 import org.junit.Test;
+
+import androidx.annotation.NonNull;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

@@ -14,7 +14,7 @@
 
 package com.trello.navi2;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Listener callback.

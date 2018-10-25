@@ -16,8 +16,10 @@ package com.trello.navi2.model;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
+
 import com.google.auto.value.AutoValue;
+
+import androidx.annotation.Nullable;
 
 @AutoValue public abstract class BundleBundle {
 

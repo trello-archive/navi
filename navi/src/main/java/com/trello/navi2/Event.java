@@ -21,14 +21,16 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.trello.navi2.model.ActivityResult;
 import com.trello.navi2.model.BundleBundle;
 import com.trello.navi2.model.RequestPermissionsResult;
 import com.trello.navi2.model.ViewCreated;
+
+import androidx.annotation.NonNull;
 
 /**
  * Represents an event that can be listened to in an Activity or Fragment.

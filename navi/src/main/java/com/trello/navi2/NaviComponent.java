@@ -14,7 +14,7 @@
 
 package com.trello.navi2;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Represents an Android component (Activity, Fragment) that can have listeners.

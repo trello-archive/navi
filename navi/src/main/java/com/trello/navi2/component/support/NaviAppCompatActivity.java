@@ -18,14 +18,16 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import com.trello.navi2.Event;
 import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
 import com.trello.navi2.internal.NaviEmitter;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class NaviAppCompatActivity extends AppCompatActivity implements NaviComponent {
 

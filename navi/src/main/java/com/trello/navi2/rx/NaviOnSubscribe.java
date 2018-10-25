@@ -14,14 +14,16 @@
 
 package com.trello.navi2.rx;
 
-import android.support.annotation.NonNull;
 import com.trello.navi2.Event;
 import com.trello.navi2.Listener;
 import com.trello.navi2.NaviComponent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import androidx.annotation.NonNull;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 final class NaviOnSubscribe<T> implements ObservableOnSubscribe<T>{
 

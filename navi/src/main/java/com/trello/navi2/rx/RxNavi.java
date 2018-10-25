@@ -14,10 +14,11 @@
 
 package com.trello.navi2.rx;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
 import com.trello.navi2.Event;
 import com.trello.navi2.NaviComponent;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 
 public final class RxNavi {
