@@ -38,7 +38,6 @@ public final class RxNaviAllEventTest {
     emitter.onStart();
 
     testObserver.assertValue(Type.START);
-    testObserver.assertNotTerminated();
   }
 
   // Test event with listener params works
@@ -52,7 +51,6 @@ public final class RxNaviAllEventTest {
     emitter.onCreate(bundle);
 
     testObserver.assertValue(Type.CREATE);
-    testObserver.assertNotTerminated();
   }
 
   // Test persistable Activities
@@ -69,6 +67,5 @@ public final class RxNaviAllEventTest {
     emitter.onCreate(bundle, persistableBundle);
 
     testObserver.assertValues(Type.CREATE, Type.CREATE_PERSISTABLE);
-    testObserver.assertNotTerminated();
   }
 }

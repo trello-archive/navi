@@ -45,7 +45,6 @@ public final class RxNaviFragmentTest {
     emitter.onAttach(activity);
 
     testObserver.assertValue(activity);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeAttachApi23() {
@@ -60,7 +59,6 @@ public final class RxNaviFragmentTest {
     emitter.onAttach(context);
 
     testObserver.assertValue(context);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeCreate() {
@@ -73,7 +71,6 @@ public final class RxNaviFragmentTest {
     emitter.onCreate(bundle);
 
     testObserver.assertValue(bundle);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeCreateView() {
@@ -86,7 +83,6 @@ public final class RxNaviFragmentTest {
     emitter.onCreateView(bundle);
 
     testObserver.assertValue(bundle);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeActivityCreated() {
@@ -99,7 +95,6 @@ public final class RxNaviFragmentTest {
     emitter.onActivityCreated(bundle);
 
     testObserver.assertValue(bundle);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeViewStateRestored() {
@@ -112,7 +107,6 @@ public final class RxNaviFragmentTest {
     emitter.onViewStateRestored(bundle);
 
     testObserver.assertValue(bundle);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeStart() {
@@ -124,7 +118,6 @@ public final class RxNaviFragmentTest {
     emitter.onStart();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeResume() {
@@ -136,7 +129,6 @@ public final class RxNaviFragmentTest {
     emitter.onResume();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observePause() {
@@ -148,7 +140,6 @@ public final class RxNaviFragmentTest {
     emitter.onPause();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeStop() {
@@ -160,7 +151,6 @@ public final class RxNaviFragmentTest {
     emitter.onStop();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDestroyView() {
@@ -172,7 +162,6 @@ public final class RxNaviFragmentTest {
     emitter.onDestroyView();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDestroy() {
@@ -184,7 +173,6 @@ public final class RxNaviFragmentTest {
     emitter.onDestroy();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeDetach() {
@@ -196,7 +184,6 @@ public final class RxNaviFragmentTest {
     emitter.onDetach();
 
     testObserver.assertValueCount(1);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeSaveInstanceState() {
@@ -209,7 +196,6 @@ public final class RxNaviFragmentTest {
     emitter.onSaveInstanceState(bundle);
 
     testObserver.assertValue(bundle);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeConfigurationChanged() {
@@ -223,7 +209,6 @@ public final class RxNaviFragmentTest {
     emitter.onConfigurationChanged(configuration);
 
     testObserver.assertValue(configuration);
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeActivityResult() {
@@ -239,7 +224,6 @@ public final class RxNaviFragmentTest {
     emitter.onActivityResult(requestCode, resultCode, data);
 
     testObserver.assertValue(ActivityResult.create(requestCode, resultCode, data));
-    testObserver.assertNotTerminated();
   }
 
   @Test public void observeRequestPermissionsResult() {
@@ -256,6 +240,5 @@ public final class RxNaviFragmentTest {
 
     testObserver.assertValue(
         RequestPermissionsResult.create(requestCode, permissions, grantResults));
-    testObserver.assertNotTerminated();
   }
 }
