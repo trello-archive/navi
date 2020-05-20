@@ -26,8 +26,8 @@ ext {
   supportAnnotations = "androidx.annotation:annotation:$supportVersion"
   supportAppCompat = "androidx.appcompat:appcompat:$supportVersion"
 
-  rxJava = 'io.reactivex.rxjava2:rxjava:2.2.3'
-  rxAndroid = 'io.reactivex.rxjava2:rxandroid:2.1.0'
+  rxJava = 'io.reactivex.rxjava3:rxjava:3.0.3'
+  rxAndroid = 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
   junit = 'junit:junit:4.12'
   mockito = 'org.mockito:mockito-core:2.23.0'

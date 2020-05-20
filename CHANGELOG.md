@@ -28,7 +28,7 @@ by empty `Bundles`.
 * [#76](https://github.com/trello/navi/pull/76) Avoid using null
 * [#75](https://github.com/trello/navi/pull/75) Use AutoValue for models (which changed the method signature of `RequestPermissionsResult.permissions()`)
 * [#74](https://github.com/trello/navi/pull/74) Change signature of `NaviEmitter.onViewCreated()` to match the rest of the API
-* [#73](https://github.com/trello/navi/pull/73) Bumped version to 2.0 and use com.trello.navi2
+* [#73](https://github.com/trello/navi/pull/73) Bumped version to 2.0 and use com.trello.navi3
 
 ## 1.0 (2016-08-09)
 
